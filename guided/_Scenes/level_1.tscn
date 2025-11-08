@@ -1,12 +1,13 @@
-[gd_scene load_steps=4 format=3 uid="uid://bt8pjayii3f46"]
+[gd_scene load_steps=5 format=3 uid="uid://bt8pjayii3f46"]
 
 [ext_resource type="PackedScene" uid="uid://d1g6kiifioiuw" path="res://_Scenes/Player.tscn" id="1_rfx65"]
+[ext_resource type="PackedScene" uid="uid://hoenuvlwji8b" path="res://_Scenes/item_double_jump.tscn" id="2_4jqxb"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_vwk1b"]
 size = Vector2(320, 14)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_rfx65"]
-size = Vector2(320, 20)
+size = Vector2(69, 14)
 
 [node name="Level1" type="Node2D"]
 
@@ -23,16 +24,19 @@ position = Vector2(160, 100)
 shape = SubResource("RectangleShape2D_vwk1b")
 
 [node name="Player" parent="." instance=ExtResource("1_rfx65")]
-position = Vector2(113, 40)
+position = Vector2(24, 55)
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
 
 [node name="ColorRect" type="ColorRect" parent="StaticBody2D"]
 offset_left = 251.0
 offset_top = 96.0
-offset_right = 571.0
+offset_right = 320.0
 offset_bottom = 110.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
-position = Vector2(411, 106)
+position = Vector2(285.5, 103)
 shape = SubResource("RectangleShape2D_rfx65")
+
+[node name="DoubleJumpItem" parent="." instance=ExtResource("2_4jqxb")]
+position = Vector2(167, 132)

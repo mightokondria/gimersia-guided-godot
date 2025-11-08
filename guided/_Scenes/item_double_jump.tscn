@@ -1,0 +1,23 @@
+[gd_scene load_steps=4 format=3 uid="uid://hoenuvlwji8b"]
+
+[ext_resource type="Texture2D" uid="uid://bpm2kepiije14" path="res://Art/Environment/coin.png" id="1_6v1kc"]
+[ext_resource type="Script" uid="uid://cwo1rybya4hpu" path="res://_Scripts/item_double_jump.gd" id="1_bd5s4"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_bd5s4"]
+size = Vector2(12, 12)
+
+[node name="DoubleJumpItem" type="Area2D"]
+script = ExtResource("1_bd5s4")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(10, 10)
+scale = Vector2(1.25, 1.25)
+texture = ExtResource("1_6v1kc")
+region_enabled = true
+region_rect = Rect2(0, 0, 16, 16)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(10, 10)
+shape = SubResource("RectangleShape2D_bd5s4")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
