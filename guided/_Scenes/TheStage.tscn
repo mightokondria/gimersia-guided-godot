@@ -1,9 +1,9 @@
 [gd_scene load_steps=10 format=3 uid="uid://bt8pjayii3f46"]
 
-[ext_resource type="PackedScene" uid="uid://d1g6kiifioiuw" path="res://_Scenes/Player.tscn" id="1_rfx65"]
-[ext_resource type="PackedScene" uid="uid://hoenuvlwji8b" path="res://_Scenes/item_double_jump.tscn" id="2_4jqxb"]
-[ext_resource type="PackedScene" uid="uid://dnqy5qp18ibvg" path="res://_Scenes/WallGrabItem.tscn" id="2_x6l5f"]
-[ext_resource type="PackedScene" uid="uid://iyvyfmls3d04" path="res://_Scenes/DashItem.tscn" id="3_nnjwi"]
+[ext_resource type="PackedScene" uid="uid://d1g6kiifioiuw" path="res://_Scenes/Player.tscn" id="1_kchhv"]
+[ext_resource type="PackedScene" uid="uid://dnqy5qp18ibvg" path="res://_Scenes/WallGrabItem.tscn" id="2_b6ajn"]
+[ext_resource type="PackedScene" uid="uid://hoenuvlwji8b" path="res://_Scenes/DoubleJumpItem.tscn" id="3_2d4v4"]
+[ext_resource type="PackedScene" uid="uid://iyvyfmls3d04" path="res://_Scenes/DashItem.tscn" id="4_c3oyc"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_vwk1b"]
 size = Vector2(320, 14)
@@ -34,7 +34,7 @@ offset_bottom = 107.0
 position = Vector2(160, 100)
 shape = SubResource("RectangleShape2D_vwk1b")
 
-[node name="Player" parent="." instance=ExtResource("1_rfx65")]
+[node name="Player" parent="." instance=ExtResource("1_kchhv")]
 position = Vector2(24, 55)
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
@@ -61,11 +61,11 @@ shape = SubResource("RectangleShape2D_x6l5f")
 position = Vector2(-36, 24)
 shape = SubResource("RectangleShape2D_7017n")
 
-[node name="WallGrabItem" parent="StaticBody2D" instance=ExtResource("2_x6l5f")]
+[node name="WallGrabItem" parent="StaticBody2D" instance=ExtResource("2_b6ajn")]
 position = Vector2(285, 70)
 
-[node name="DoubleJumpItem" parent="." instance=ExtResource("2_4jqxb")]
+[node name="DoubleJumpItem" parent="." instance=ExtResource("3_2d4v4")]
 position = Vector2(96, 132)
 
-[node name="DashItem" parent="." instance=ExtResource("3_nnjwi")]
+[node name="DashItem" parent="." instance=ExtResource("4_c3oyc")]
 position = Vector2(220, 134)

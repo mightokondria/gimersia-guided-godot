@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://hoenuvlwji8b"]
 
-[ext_resource type="Script" uid="uid://cwo1rybya4hpu" path="res://_Scripts/item_double_jump.gd" id="1_bd5s4"]
+[ext_resource type="Script" uid="uid://cwo1rybya4hpu" path="res://_Scripts/DoubleJumpItem.gd" id="1_bd5s4"]
 [ext_resource type="Texture2D" uid="uid://coy3ug2xpnt8h" path="res://Art/Environment/world_tileset.png" id="2_bd5s4"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_bd5s4"]

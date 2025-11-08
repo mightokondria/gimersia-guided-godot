@@ -18,8 +18,8 @@ var can_dash = false  # <--- KUNCI: Mulai sebagai 'false'
 # --- POWER-UP: WALL GRAB ---
 var can_wall_grab = false           # Kunci skill, awal = false
 const WALL_SLIDE_GRAVITY = 0.0      # Gravitasi saat nempel (0 = diam total)
-const MAX_STAMINA = 10.0             # Durasi maksimal nempel (detik)
-const CLIMB_SPEED = 150.0           # Kecepatan naik/turun di dinding
+const MAX_STAMINA = 2.50            # Durasi maksimal nempel (detik)
+const CLIMB_SPEED = 75.0           # Kecepatan naik/turun di dinding
 const WALL_JUMP_PUSHBACK = 500.0    # Kekuatan dorongan menjauh dari dinding saat wall jump
 
 var current_stamina = MAX_STAMINA
