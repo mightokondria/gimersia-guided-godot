@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://d1g6kiifioiuw"]
 
-[ext_resource type="Script" uid="uid://ckxdrxrxv7fsv" path="res://_Scripts/CharacterMovement.gd" id="1_bg8v1"]
+[ext_resource type="Script" uid="uid://ckxdrxrxv7fsv" path="res://_Scripts/player.gd" id="1_bg8v1"]
 [ext_resource type="Texture2D" uid="uid://dpkjig67mfhxm" path="res://icon.svg" id="1_l1efl"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_bg8v1"]
@@ -14,3 +14,7 @@ texture = ExtResource("1_l1efl")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CapsuleShape2D_bg8v1")
+
+[node name="CoyoteTimer" type="Timer" parent="."]
+wait_time = 0.15
+one_shot = true
