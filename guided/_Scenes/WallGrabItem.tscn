@@ -1,0 +1,23 @@
+[gd_scene load_steps=4 format=3 uid="uid://dnqy5qp18ibvg"]
+
+[ext_resource type="Script" uid="uid://bwirjt32ar0jo" path="res://_Scripts/WallGrabItem.gd" id="1_65r4k"]
+[ext_resource type="Texture2D" uid="uid://c87418p7bpgav" path="res://Art/platformer_metroidvania asset pack v1.01/hud elements/hearts_hud.png" id="2_65r4k"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_bd5s4"]
+size = Vector2(20, 19)
+
+[node name="WallGrabItem" type="Area2D"]
+script = ExtResource("1_65r4k")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(10, 10)
+scale = Vector2(1.25, 1.25)
+texture = ExtResource("2_65r4k")
+region_enabled = true
+region_rect = Rect2(0, 0, 16, 16)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(10, 10.5)
+shape = SubResource("RectangleShape2D_bd5s4")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

@@ -1,13 +1,24 @@
-[gd_scene load_steps=5 format=3 uid="uid://bt8pjayii3f46"]
+[gd_scene load_steps=10 format=3 uid="uid://bt8pjayii3f46"]
 
 [ext_resource type="PackedScene" uid="uid://d1g6kiifioiuw" path="res://_Scenes/Player.tscn" id="1_rfx65"]
 [ext_resource type="PackedScene" uid="uid://hoenuvlwji8b" path="res://_Scenes/item_double_jump.tscn" id="2_4jqxb"]
+[ext_resource type="PackedScene" uid="uid://dnqy5qp18ibvg" path="res://_Scenes/WallGrabItem.tscn" id="2_x6l5f"]
+[ext_resource type="PackedScene" uid="uid://iyvyfmls3d04" path="res://_Scenes/DashItem.tscn" id="3_nnjwi"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_vwk1b"]
 size = Vector2(320, 14)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_rfx65"]
 size = Vector2(69, 14)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_nnjwi"]
+size = Vector2(348.5, 14)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_x6l5f"]
+size = Vector2(69.75, 306)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7017n"]
+size = Vector2(69.75, 308)
 
 [node name="Level1" type="Node2D"]
 
@@ -38,5 +49,23 @@ offset_bottom = 110.0
 position = Vector2(285.5, 103)
 shape = SubResource("RectangleShape2D_rfx65")
 
+[node name="CollisionShape2D4" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(155.25, -65)
+shape = SubResource("RectangleShape2D_nnjwi")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(354.75, 25)
+shape = SubResource("RectangleShape2D_x6l5f")
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(-36, 24)
+shape = SubResource("RectangleShape2D_7017n")
+
+[node name="WallGrabItem" parent="StaticBody2D" instance=ExtResource("2_x6l5f")]
+position = Vector2(285, 70)
+
 [node name="DoubleJumpItem" parent="." instance=ExtResource("2_4jqxb")]
-position = Vector2(167, 132)
+position = Vector2(96, 132)
+
+[node name="DashItem" parent="." instance=ExtResource("3_nnjwi")]
+position = Vector2(220, 134)
