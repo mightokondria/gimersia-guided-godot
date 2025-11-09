@@ -3,7 +3,7 @@ extends Camera2D
 @export var player: Node2D
 @export var follow_speed: float = 5.0
 
-@export var max_shake: float = 1.0
+@export var max_shake: float = 4.0
 @export var shake_fade: float = 0.0
 
 var _shake_strength: float = 0.0

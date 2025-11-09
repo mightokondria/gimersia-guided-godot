@@ -1,6 +1,6 @@
 [gd_scene load_steps=24 format=3 uid="uid://d1g6kiifioiuw"]
 
-[ext_resource type="Script" uid="uid://ghhqiqo1rwne" path="res://_Scripts/Player.gd" id="1_bg8v1"]
+[ext_resource type="Script" uid="uid://b4010do3636d1" path="res://_Scripts/Player.gd" id="1_bg8v1"]
 [ext_resource type="Texture2D" uid="uid://dgvyooac0kjn5" path="res://Art/platformer_metroidvania asset pack v1.01/herochar sprites(new)/herochar_idle_anim_strip_4.png" id="2_k40lu"]
 [ext_resource type="Texture2D" uid="uid://3qi8gl0kb7f" path="res://Art/platformer_metroidvania asset pack v1.01/herochar sprites(new)/herochar_jump_down_anim_strip_3.png" id="2_uc1x7"]
 [ext_resource type="Texture2D" uid="uid://dvphe8o7svh5r" path="res://Art/platformer_metroidvania asset pack v1.01/herochar sprites(new)/herochar_jump_up_anim_strip_3.png" id="3_wured"]

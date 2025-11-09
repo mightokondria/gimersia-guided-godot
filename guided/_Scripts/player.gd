@@ -1,13 +1,15 @@
 extends CharacterBody2D
 
 # --- KONSTANTA GERAKAN DASAR ---
-const MAX_SPEED = 150.0
-const JUMP_VELOCITY = -400.0
-const ACCELERATION = 2000.0
-const FRICTION = 900.0
+const MAX_SPEED = 800.0
+const JUMP_VELOCITY = -1000.0
+const ACCELERATION = 8000.0
+const AIR_ACCELERATION = -800.0 
+const FRICTION = 8000.0
+const AIR_FRICTION = 500.0
 
 # --- KONSTANTA DASH ---
-const DASH_SPEED = 600.0
+const DASH_SPEED = 3000.0
 const DASH_DURATION = 0.15
 var is_dashing = false
 var dash_time_left = 0.0
@@ -98,7 +100,11 @@ func _physics_process(delta):
 	else:
 		is_wall_sliding = false
 		# Terapkan gravitasi HANYA jika TIDAK sedang wall grab
-		velocity.y += gravity * delta
+		var gravity_multiplier = 1.0
+		if velocity.y > 0: # Jika sedang jatuh ke bawah
+			gravity_multiplier = 1.5 # Jatuh 1.5x lebih cepat
+			
+		velocity.y += gravity * gravity_multiplier * delta
 
 	# =========================================
 	# 3. LOGIKA LOMPAT
@@ -125,6 +131,14 @@ func _physics_process(delta):
 	# =========================================
 	# Hanya boleh gerak kiri/kanan jika TIDAK sedang wall sliding
 	if not is_wall_sliding:
+		# Tentukan nilai akselerasi & friksi yang dipakai saat ini
+		var current_accel = ACCELERATION
+		var current_friction = FRICTION
+		
+		if not is_on_floor():
+			current_accel = AIR_ACCELERATION
+			current_friction = AIR_FRICTION
+		
 		if input_dir:
 			velocity.x = move_toward(velocity.x, input_dir * MAX_SPEED, ACCELERATION * delta)
 		else:
