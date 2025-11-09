@@ -1,9 +1,10 @@
-[gd_scene load_steps=10 format=3 uid="uid://bt8pjayii3f46"]
+[gd_scene load_steps=11 format=3 uid="uid://bt8pjayii3f46"]
 
 [ext_resource type="PackedScene" uid="uid://d1g6kiifioiuw" path="res://_Scenes/Player.tscn" id="1_kchhv"]
 [ext_resource type="PackedScene" uid="uid://dnqy5qp18ibvg" path="res://_Scenes/WallGrabItem.tscn" id="2_b6ajn"]
 [ext_resource type="PackedScene" uid="uid://hoenuvlwji8b" path="res://_Scenes/DoubleJumpItem.tscn" id="3_2d4v4"]
 [ext_resource type="PackedScene" uid="uid://iyvyfmls3d04" path="res://_Scenes/DashItem.tscn" id="4_c3oyc"]
+[ext_resource type="Script" uid="uid://djka36bc42uqr" path="res://_Scripts/SmartCamera.gd" id="5_b6ajn"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_vwk1b"]
 size = Vector2(320, 14)
@@ -23,7 +24,7 @@ size = Vector2(69.75, 308)
 [node name="Level1" type="Node2D"]
 
 [node name="Floor" type="StaticBody2D" parent="."]
-position = Vector2(0, 71)
+position = Vector2(-160, -17)
 
 [node name="ColorRect" type="ColorRect" parent="Floor"]
 offset_top = 93.0
@@ -35,9 +36,10 @@ position = Vector2(160, 100)
 shape = SubResource("RectangleShape2D_vwk1b")
 
 [node name="Player" parent="." instance=ExtResource("1_kchhv")]
-position = Vector2(24, 55)
+position = Vector2(-136, -33)
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
+position = Vector2(-160, -88)
 
 [node name="ColorRect" type="ColorRect" parent="StaticBody2D"]
 offset_left = 251.0
@@ -65,7 +67,11 @@ shape = SubResource("RectangleShape2D_7017n")
 position = Vector2(285, 70)
 
 [node name="DoubleJumpItem" parent="." instance=ExtResource("3_2d4v4")]
-position = Vector2(96, 132)
+position = Vector2(-64, 44)
 
 [node name="DashItem" parent="." instance=ExtResource("4_c3oyc")]
-position = Vector2(220, 134)
+position = Vector2(60, 46)
+
+[node name="SmartCamera" type="Camera2D" parent="." node_paths=PackedStringArray("player")]
+script = ExtResource("5_b6ajn")
+player = NodePath("../Player")
