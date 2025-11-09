@@ -2,22 +2,22 @@ extends CharacterBody2D
 
 # --- KONSTANTA GERAKAN DASAR ---
 const MAX_SPEED = 800.0
-const JUMP_VELOCITY = -1000.0
+const JUMP_VELOCITY = -1400.0
 const ACCELERATION = 8000.0
-const AIR_ACCELERATION = -800.0 
-const FRICTION = 8000.0
-const AIR_FRICTION = 500.0
+const AIR_ACCELERATION = 6000.0 
+const FRICTION = 5000.0
+const AIR_FRICTION = 1000.0
 
 # --- KONSTANTA DASH ---
-const DASH_SPEED = 3000.0
+const DASH_SPEED = 2500.0
 const DASH_DURATION = 0.15
 var is_dashing = false
 var dash_time_left = 0.0
 
 # --- KONSTANTA WALL GRAB ---
-const MAX_STAMINA = 2.50
-const CLIMB_SPEED = 75.0
-const WALL_JUMP_PUSHBACK = 500.0
+const MAX_STAMINA = 3.0
+const CLIMB_SPEED = 300.0
+const WALL_JUMP_PUSHBACK = 1500.0
 var current_stamina = MAX_STAMINA
 var is_wall_sliding = false
 
