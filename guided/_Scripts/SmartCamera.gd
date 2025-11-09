@@ -38,7 +38,7 @@ func _ready():
 		shake_noise.noise_type = FastNoiseLite.TYPE_SIMPLEX # Tipe noise yang bagus untuk getaran
 		shake_noise.frequency = 0.1 # Frekuensi rendah = getaran lebih 'berat'
 
-func _process(delta):
+func _physics_process(delta):
 	if player == null: return
 
 	# --- [BAGIAN 3] HITUNG POSISI IDEAL ---
@@ -59,8 +59,9 @@ func _process(delta):
 		# A. Kurangi kekuatan getaran pelan-pelan (decay)
 		shake_strength = move_toward(shake_strength, 0, shake_decay * delta)
 		
+		
 		# B. Majukan "waktu" noise agar dapat angka acak baru
-		noise_i += delta * 30.0 # Angka 30.0 ini kecepatan getarnya
+		noise_i += delta * 10.0 # Angka 30.0 ini kecepatan getarnya
 		
 		# C. Ambil angka acak dari noise (-1 s/d 1), lalu kalikan dengan kekuatan
 		offset_x = shake_noise.get_noise_2d(noise_i, 0.0) * shake_strength

@@ -51,7 +51,7 @@ func _physics_process(delta):
 			is_dashing = false
 			velocity.x = 0
 		else:
-			velocity.y = 0 # Abaikan gravitasi saat dash
+			#velocity.y = 0 # Abaikan gravitasi saat dash
 			move_and_slide()
 			return # STOP: Jangan jalankan logika lain saat dashing
 
@@ -63,8 +63,28 @@ func _physics_process(delta):
 		# --- TAMBAHAN BARU: PANGGIL SHAKE ---
 		if camera and camera.has_method("start_shake"):
 			# intensity=5.0, decay=15.0 (getaran cepat & tajam)
-			camera.start_shake(5.0, 15.0) 
+			camera.start_shake(8.0, 15.0) 
 			# ------------------------------------
+			
+		# --- [LOGIKA BARU DASH 8 ARAH] ---
+		# 1. Dapatkan input arah X dan Y saat ini
+		var input_dir_x = Input.get_axis("ui_left", "ui_right")
+		var input_dir_y = Input.get_axis("ui_accept", "ui_down")
+		
+		# 2. Buat vektor arah dari input tersebut
+		var dash_vector = Vector2(input_dir_x, input_dir_y)
+		
+		# 3. Jika tidak ada input arah sama sekali, dash ke arah hadap sprite (default)
+		if dash_vector == Vector2.ZERO:
+			dash_vector.x = -1.0 if sprite.flip_h else 1.0
+		
+		# 4. Normalisasi vektor agar panjangnya selalu 1 (penting untuk diagonal!)
+		# Jika tidak dinormalisasi, dash diagonal akan lebih cepat (karena panjangnya akar 2)
+		dash_vector = dash_vector.normalized()
+		
+		# 5. Terapkan kecepatan dash ke kedua sumbu
+		velocity = dash_vector * DASH_SPEED
+		# ---------------------------------
 		
 		# Dash ke arah hadap sprite
 		var dash_dir = -1.0 if sprite.flip_h else 1.0

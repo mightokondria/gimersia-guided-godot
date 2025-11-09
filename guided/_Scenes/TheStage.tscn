@@ -74,5 +74,7 @@ position = Vector2(-64, 44)
 position = Vector2(60, 46)
 
 [node name="SmartCamera" type="Camera2D" parent="." node_paths=PackedStringArray("player")]
+position_smoothing_enabled = true
+rotation_smoothing_enabled = true
 script = ExtResource("5_b6ajn")
 player = NodePath("../Player")
