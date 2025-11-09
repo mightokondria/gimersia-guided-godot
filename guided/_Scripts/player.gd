@@ -19,6 +19,8 @@ const WALL_JUMP_PUSHBACK = 500.0
 var current_stamina = MAX_STAMINA
 var is_wall_sliding = false
 
+
+
 # --- VARIABEL POWER-UP (KUNCI SKILL) ---
 var max_jumps = 1
 var can_dash = false
@@ -32,6 +34,9 @@ var was_on_floor = true
 @onready var coyote_timer = $CoyoteTimer
 @onready var dash_cooldown_timer = $DashCooldownTimer
 @onready var sprite = $Sprite2D
+
+# --- VARIABEL KAMERA ---
+@export var camera : Camera2D
 
 # Ambil nilai gravitasi dari Project Settings
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
@@ -55,6 +60,12 @@ func _physics_process(delta):
 		is_dashing = true
 		dash_time_left = DASH_DURATION
 		dash_cooldown_timer.start()
+		# --- TAMBAHAN BARU: PANGGIL SHAKE ---
+		if camera and camera.has_method("start_shake"):
+			# intensity=5.0, decay=15.0 (getaran cepat & tajam)
+			camera.start_shake(5.0, 15.0) 
+			# ------------------------------------
+		
 		# Dash ke arah hadap sprite
 		var dash_dir = -1.0 if sprite.flip_h else 1.0
 		velocity.x = dash_dir * DASH_SPEED

@@ -35,8 +35,9 @@ offset_bottom = 107.0
 position = Vector2(160, 100)
 shape = SubResource("RectangleShape2D_vwk1b")
 
-[node name="Player" parent="." instance=ExtResource("1_kchhv")]
+[node name="Player" parent="." node_paths=PackedStringArray("camera") instance=ExtResource("1_kchhv")]
 position = Vector2(-136, -33)
+camera = NodePath("../SmartCamera")
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
 position = Vector2(-160, -88)
