@@ -72,6 +72,6 @@ position = Vector2(-64, 44)
 [node name="DashItem" parent="." instance=ExtResource("4_c3oyc")]
 position = Vector2(60, 46)
 
-[node name="SmartCamera" type="Camera2D" parent="." node_paths=PackedStringArray("player")]
+[node name="SmartCamera" type="Camera2D" parent="." node_paths=PackedStringArray("player") groups=["Camera"]]
 script = ExtResource("5_b6ajn")
 player = NodePath("../Player")

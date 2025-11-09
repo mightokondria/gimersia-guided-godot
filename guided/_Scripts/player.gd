@@ -32,6 +32,7 @@ var was_on_floor = true
 @onready var coyote_timer = $CoyoteTimer
 @onready var dash_cooldown_timer = $DashCooldownTimer
 @onready var sprite = $Sprite2D
+@onready var camera: Camera2D = get_tree().get_first_node_in_group("Camera")
 
 # Ambil nilai gravitasi dari Project Settings
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
@@ -58,6 +59,9 @@ func _physics_process(delta):
 		# Dash ke arah hadap sprite
 		var dash_dir = -1.0 if sprite.flip_h else 1.0
 		velocity.x = dash_dir * DASH_SPEED
+		#triggershake
+		camera.trigger_shake(150.0)
+		
 		return # Mulai dash frame ini juga
 
 	# =========================================
