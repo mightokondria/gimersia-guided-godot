@@ -117,6 +117,7 @@ shape = SubResource("RectangleShape2D_vwk1b")
 [node name="Player" parent="SubViewportContainer" instance=ExtResource("1_kchhv")]
 position = Vector2(183, 476.00003)
 scale = Vector2(7.5999975, 7.5999975)
+is_cutscene = true
 
 [node name="StaticBody2D" type="StaticBody2D" parent="SubViewportContainer"]
 position = Vector2(798, 462)

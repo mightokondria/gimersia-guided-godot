@@ -7,19 +7,13 @@ extends AnimationPlayer
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	player.set_cutscene_state(true)
-	textbox.queue_text("Halo, selamat datang di latihan pertamamu.")
-	textbox.queue_text("Tugasmu mudah: capai bendera di ujung sana.")
-	textbox.queue_text("Hati-hati jangan sampai jatuh ya!")
-	
+	textbox.queue_text("Halo, selamat datang di latihan pertamamu.", "sensei_happy")
+	textbox.queue_text("Tugasmu mudah: capai bendera di ujung sana.", "player_happy")
+	textbox.queue_text("Hati-hati jangan sampai jatuh ya!", "sensei_happy")
 	await textbox.finished
 	print("Dialog selesai, lanjut ke aksi berikutnya!")
-	
-	# Misal: Sensei mulai berjalan mencontohkan
-	#play("SenseiWalkDemo")
-	#await animation_finished
-	
-	#Kembalikan kontrol ke pemain
 	player.set_cutscene_state(false)
+	
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta: float) -> void:
