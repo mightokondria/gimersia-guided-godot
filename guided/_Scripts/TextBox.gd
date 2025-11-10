@@ -19,10 +19,10 @@ var tween: Tween  # <-- HANYA DEKLARASI, JANGAN create_tween() DI SINI
 func _ready() -> void:
 	print("Starting State: State.READY")
 	hide_textbox()
-	queue_text("satu cukimay")
-	queue_text("dua cukimay")
-	queue_text("tiga cukimay")
-	queue_text("eempat cukimay")
+	#queue_text("satu cukimay")
+	#queue_text("dua cukimay")
+	#queue_text("tiga cukimay")
+	#queue_text("eempat cukimay")
 
 func _process(_delta: float) -> void:
 	match currrent_state:
