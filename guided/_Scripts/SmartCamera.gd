@@ -27,6 +27,7 @@ func _ready():
 	var half_height = viewport_height / 2.0
 	var trigger_zone_percentage = 0.20 
 	trigger_y_local = -half_height + (viewport_height * trigger_zone_percentage)
+	
 
 func _process(delta):
 	if player == null: return

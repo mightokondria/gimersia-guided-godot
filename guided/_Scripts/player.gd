@@ -38,8 +38,26 @@ var was_on_floor = true
 
 # Ambil nilai gravitasi dari Project Settings
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
+@export var is_cutscene = false
 
 func _physics_process(delta):
+	
+	# --- [TAMBAHAN PENTING DI PALING ATAS] ---
+	if is_cutscene:
+		# Jika cutscene, player hanya kena gravitasi agar tidak melayang
+		if not is_on_floor():
+			velocity.y += gravity * delta
+		else:
+			velocity.y = 0
+			
+		# Nol-kan kecepatan horizontal agar diam
+		velocity.x = move_toward(velocity.x, 0, FRICTION * delta)
+		
+		move_and_slide()
+		_update_animation()
+		return # STOP: Jangan proses input apapun di bawah ini!
+	# -----------------------------------------
+	
 	# =========================================
 	# 0. LOGIKA DASH (Prioritas Tertinggi)
 	# =========================================
@@ -73,12 +91,12 @@ func _physics_process(delta):
 	var input_dir = Input.get_axis("ui_left", "ui_right")
 	var climb_dir = Input.get_axis("ui_up", "ui_down")
 	
-	var is_pushing_wall = false
+	var _is_pushing_wall = false
 	if is_on_wall():
 		var normal = get_wall_normal()
 		# Cek apakah menekan tombol KE ARAH dinding
 		if (normal.x < 0 and input_dir > 0) or (normal.x > 0 and input_dir < 0):
-			is_pushing_wall = true
+			_is_pushing_wall = true
 
 	# =========================================
 	# 2. LOGIKA WALL GRAB & STAMINA
@@ -144,12 +162,12 @@ func _physics_process(delta):
 	# Hanya boleh gerak kiri/kanan jika TIDAK sedang wall sliding
 	if not is_wall_sliding:
 		# Tentukan nilai akselerasi & friksi yang dipakai saat ini
-		var current_accel = ACCELERATION
-		var current_friction = FRICTION
+		var _current_accel = ACCELERATION
+		var _current_friction = FRICTION
 		
 		if not is_on_floor():
-			current_accel = AIR_ACCELERATION
-			current_friction = AIR_FRICTION
+			_current_accel = AIR_ACCELERATION
+			_current_friction = AIR_FRICTION
 		
 		if input_dir:
 			velocity.x = move_toward(velocity.x, input_dir * MAX_SPEED, ACCELERATION * delta)
@@ -212,3 +230,8 @@ func enable_wall_grab():
 	if not can_wall_grab:
 		can_wall_grab = true
 		print("WALL GRAB AKTIF!")
+		
+		
+# Fungsi untuk dipanggil oleh AnimationPlayer
+func set_cutscene_state(state: bool):
+	is_cutscene = state
