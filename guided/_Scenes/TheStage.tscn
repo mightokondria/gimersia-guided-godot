@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://bt8pjayii3f46"]
+[gd_scene load_steps=18 format=3 uid="uid://bt8pjayii3f46"]
 
 [ext_resource type="PackedScene" uid="uid://d1g6kiifioiuw" path="res://_Scenes/Player.tscn" id="1_kchhv"]
 [ext_resource type="PackedScene" uid="uid://dnqy5qp18ibvg" path="res://_Scenes/WallGrabItem.tscn" id="2_b6ajn"]
@@ -6,7 +6,8 @@
 [ext_resource type="PackedScene" uid="uid://iyvyfmls3d04" path="res://_Scenes/DashItem.tscn" id="4_c3oyc"]
 [ext_resource type="Script" uid="uid://djka36bc42uqr" path="res://_Scripts/SmartCamera.gd" id="5_b6ajn"]
 [ext_resource type="Texture2D" uid="uid://d2k6egmhw4abh" path="res://cuki.jpg" id="6_2d4v4"]
-[ext_resource type="Script" uid="uid://7yeoj2w0dtnw" path="res://_Scripts/AnimationPlayer.gd" id="7_c3oyc"]
+[ext_resource type="Script" uid="uid://7yeoj2w0dtnw" path="res://_Scripts/AnimationController.gd" id="7_c3oyc"]
+[ext_resource type="PackedScene" uid="uid://bu6jp2trauwtc" path="res://_Scenes/Sensei.tscn" id="8_mrcx1"]
 
 [sub_resource type="Animation" id="Animation_2d4v4"]
 resource_name = "LetterBoxAnimation"
@@ -264,3 +265,7 @@ offset_right = 1216.0
 offset_bottom = 699.0004
 grow_horizontal = 2
 color = Color(0, 0, 0, 1)
+
+[node name="Sensei" parent="." instance=ExtResource("8_mrcx1")]
+position = Vector2(-564, 204)
+scale = Vector2(7.133529, 7.133529)
