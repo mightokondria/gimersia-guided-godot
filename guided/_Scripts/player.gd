@@ -87,10 +87,18 @@ func _physics_process(delta):
 		current_stamina = MAX_STAMINA
 		jumps_made = 0
 		is_wall_sliding = false
+		
+		
+	# [UBAH BAGIAN INI]
+	# (Kita asumsikan Anda ingin grab pakai tombol "grab" khusus, bukan otomatis)
+	var is_holding_grab_key = Input.is_action_pressed("grip")
 
-	# Syarat Wall Grab: Punya skill + Tekan arah dinding + Di udara + Ada stamina
-	if can_wall_grab and is_pushing_wall and not is_on_floor() and current_stamina > 0:
+	# Syarat: Punya skill + DI DINDING + TEKAN GRAB + DI UDARA + Punya stamina
+	if can_wall_grab and is_on_wall() and is_holding_grab_key and not is_on_floor() and current_stamina > 0:
 		is_wall_sliding = true
+		# Reset jatah lompatan saat berhasil nempel
+		jumps_made = 0
+		
 		if climb_dir != 0:
 			velocity.y = climb_dir * CLIMB_SPEED
 			current_stamina -= delta * 1.5 # Gerak lebih boros
@@ -120,7 +128,11 @@ func _physics_process(delta):
 		elif is_wall_sliding:
 			velocity.y = JUMP_VELOCITY
 			velocity.x = get_wall_normal().x * WALL_JUMP_PUSHBACK
-			current_stamina -= 1.0 # Kuras stamina instan
+			current_stamina -= 1.0
+			
+			# [UBAH] Anggap wall jump sebagai lompatan PERTAMA (jumps_made = 1)
+			# Ini mengizinkan kita melakukan double jump (jumps_made = 2) nanti
+			jumps_made = 1
 		# C. Double Jump
 		elif jumps_made < max_jumps:
 			velocity.y = JUMP_VELOCITY * 0.8 # Sedikit lebih lemah
