@@ -1,10 +1,14 @@
 extends CanvasLayer
 
+signal finished()
+
 @onready var textbox_container: MarginContainer = $TexBoxContainer
 @onready var label: Label = $TexBoxContainer/Panel/MarginContainer/HBoxContainer/Label
 @onready var start_symbol: Label = $TexBoxContainer/Panel/MarginContainer/HBoxContainer/Start
 @onready var end_symbol: Label = $TexBoxContainer/Panel/MarginContainer/HBoxContainer/End
 @onready var portrait: TextureRect = $TexBoxContainer/Panel/MarginContainer/HBoxContainer/Portrait
+
+
 
 enum State { READY, READING, FINISHED }
 
@@ -34,8 +38,13 @@ func _process(_delta: float) -> void:
 				change_state(State.FINISHED)
 		State.FINISHED:
 			if Input.is_action_just_pressed("ui_accept"):
-				change_state(State.READY)
-				hide_textbox()
+				if text_queue.is_empty():
+					change_state(State.READY)
+					hide_textbox()
+					finished.emit()
+				else:
+					change_state(State.READY)
+					#display_text()
 
 func queue_text(next_text):
 	text_queue.push_back(next_text)

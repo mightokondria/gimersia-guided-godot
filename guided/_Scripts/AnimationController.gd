@@ -1,16 +1,10 @@
 extends AnimationPlayer
 @onready var sensei: CharacterBody2D = $"../Sensei"
-@onready var dialog_label: Label = $"../DialogLabel"
-@onready var portrait: TextureRect = $TexBoxContainer/Panel/MarginContainer/HBoxContainer/Portrait
-
+@onready var player: CharacterBody2D = $"../SubViewportContainer/Player"
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	play("LetterBoxAnimation")
-	await animation_finished
-	sensei.play("idle")
-	
-	$"../DialogLabel".text = "Halo, selamat datang di level ini!"
+	player.set_cutscene_state(true)
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
