@@ -1,28 +1,6 @@
-[gd_scene load_steps=3 format=3 uid="uid://bmcho5ibaftn"]
+[gd_scene load_steps=2 format=3 uid="uid://bmcho5ibaftn"]
 
-[ext_resource type="Script" uid="uid://7h0d7k7bfnt5" path="res://_Scripts/TexBox.gd" id="1_rs5rr"]
-
-[sub_resource type="FontFile" id="FontFile_3gv7s"]
-cache/0/16/0/ascent = 0.0
-cache/0/16/0/descent = 0.0
-cache/0/16/0/underline_position = 0.0
-cache/0/16/0/underline_thickness = 0.0
-cache/0/16/0/scale = 1.0
-cache/0/36/0/ascent = 0.0
-cache/0/36/0/descent = 0.0
-cache/0/36/0/underline_position = 0.0
-cache/0/36/0/underline_thickness = 0.0
-cache/0/36/0/scale = 1.0
-cache/0/46/0/ascent = 0.0
-cache/0/46/0/descent = 0.0
-cache/0/46/0/underline_position = 0.0
-cache/0/46/0/underline_thickness = 0.0
-cache/0/46/0/scale = 1.0
-cache/0/56/0/ascent = 0.0
-cache/0/56/0/descent = 0.0
-cache/0/56/0/underline_position = 0.0
-cache/0/56/0/underline_thickness = 0.0
-cache/0/56/0/scale = 1.0
+[ext_resource type="Script" uid="uid://7h0d7k7bfnt5" path="res://_Scripts/TextBox.gd" id="1_rs5rr"]
 
 [node name="TextBox" type="CanvasLayer"]
 script = ExtResource("1_rs5rr")
@@ -53,16 +31,27 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="Panel" type="Panel" parent="TexBoxContainer/Panel/MarginContainer"]
+visible = false
 layout_mode = 2
 
 [node name="HBoxContainer" type="HBoxContainer" parent="TexBoxContainer/Panel/MarginContainer"]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="TexBoxContainer/Panel/MarginContainer/HBoxContainer"]
-custom_minimum_size = Vector2(1820, 0)
+[node name="Start" type="Label" parent="TexBoxContainer/Panel/MarginContainer/HBoxContainer"]
 layout_mode = 2
-theme_override_fonts/font = SubResource("FontFile_3gv7s")
+size_flags_vertical = 0
 theme_override_font_sizes/font_size = 56
-text = "sdnfkjfsdjfajsdhfkasdhfjhsdjkhfjsdhjfhjsdfjhjsdfhjhsdfhdfhsdfh"
-autowrap_mode = 1
-uppercase = true
+text = "*"
+
+[node name="Label" type="Label" parent="TexBoxContainer/Panel/MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 0
+theme_override_font_sizes/font_size = 66
+text = "Text!"
+
+[node name="End" type="Label" parent="TexBoxContainer/Panel/MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 8
+theme_override_font_sizes/font_size = 56
+text = "v"
