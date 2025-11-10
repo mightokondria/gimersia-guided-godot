@@ -81,6 +81,8 @@ func _physics_process(delta):
 		velocity.x = dash_dir * DASH_SPEED
 		#triggershake
 		camera.trigger_shake(150.0)
+		#Vibration effect
+		Input.start_joy_vibration(0,0.5,1.0,0.3)
 		
 		return # Mulai dash frame ini juga
 
