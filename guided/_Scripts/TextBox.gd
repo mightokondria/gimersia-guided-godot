@@ -4,6 +4,7 @@ extends CanvasLayer
 @onready var label: Label = $TexBoxContainer/Panel/MarginContainer/HBoxContainer/Label
 @onready var start_symbol: Label = $TexBoxContainer/Panel/MarginContainer/HBoxContainer/Start
 @onready var end_symbol: Label = $TexBoxContainer/Panel/MarginContainer/HBoxContainer/End
+@onready var portrait: TextureRect = $TexBoxContainer/Panel/MarginContainer/HBoxContainer/Portrait
 
 enum State { READY, READING, FINISHED }
 
@@ -54,6 +55,7 @@ func display_text():
 	label.text = next_text
 	change_state(State.READING)
 	show_textbox()
+	update_portrait("sensei_happy")
 	
 	label.visible_ratio = 0.0
 	var duration = label.text.length() * 0.05
@@ -76,3 +78,15 @@ func _on_tween_finished():
 func change_state(next_state):
 	currrent_state = next_state
 	# ... (print debug Anda)
+	
+	
+# Di fungsi yang menampilkan teks (misal show_next_line atau queue_text tadi):
+func update_portrait(character_name):
+	# Contoh logika sederhana:
+	var portrait_path = "res://Art/Portraits/" + character_name + ".png"
+	if ResourceLoader.exists(portrait_path):
+		portrait.texture = load(portrait_path)
+		portrait.show()
+	else:
+		# Sembunyikan jika tidak ada gambar agar teks melebar penuh
+		portrait.hide()

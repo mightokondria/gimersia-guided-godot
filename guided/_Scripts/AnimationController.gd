@@ -1,6 +1,7 @@
 extends AnimationPlayer
 @onready var sensei: CharacterBody2D = $"../Sensei"
 @onready var dialog_label: Label = $"../DialogLabel"
+@onready var portrait: TextureRect = $TexBoxContainer/Panel/MarginContainer/HBoxContainer/Portrait
 
 
 # Called when the node enters the scene tree for the first time.

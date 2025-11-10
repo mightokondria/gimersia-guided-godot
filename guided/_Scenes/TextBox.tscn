@@ -55,3 +55,8 @@ layout_mode = 2
 size_flags_vertical = 8
 theme_override_font_sizes/font_size = 56
 text = "v"
+
+[node name="Portrait" type="TextureRect" parent="TexBoxContainer/Panel/MarginContainer/HBoxContainer"]
+layout_mode = 2
+expand_mode = 3
+stretch_mode = 4
