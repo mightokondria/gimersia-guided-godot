@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://bt8pjayii3f46"]
+[gd_scene load_steps=19 format=3 uid="uid://bt8pjayii3f46"]
 
 [ext_resource type="PackedScene" uid="uid://d1g6kiifioiuw" path="res://_Scenes/Player.tscn" id="1_kchhv"]
 [ext_resource type="PackedScene" uid="uid://dnqy5qp18ibvg" path="res://_Scenes/WallGrabItem.tscn" id="2_b6ajn"]
@@ -11,7 +11,7 @@
 
 [sub_resource type="Animation" id="Animation_2d4v4"]
 resource_name = "LetterBoxAnimation"
-length = 2.0
+length = 30.0
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -135,6 +135,8 @@ size = Vector2(69.75, 1379)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_7017n"]
 size = Vector2(69.75, 1386)
+
+[sub_resource type="LabelSettings" id="LabelSettings_mrcx1"]
 
 [node name="Level1" type="Node2D"]
 
@@ -262,10 +264,17 @@ anchor_right = 0.5
 offset_left = -1241.0
 offset_top = 549.0
 offset_right = 1216.0
-offset_bottom = 699.0004
+offset_bottom = 699.0
 grow_horizontal = 2
 color = Color(0, 0, 0, 1)
 
+[node name="DialogLabel" type="Label" parent="."]
+offset_right = 84.0
+offset_bottom = 23.0
+scale = Vector2(4.239997, 4.239997)
+text = "cusfnjsd"
+label_settings = SubResource("LabelSettings_mrcx1")
+
 [node name="Sensei" parent="." instance=ExtResource("8_mrcx1")]
-position = Vector2(-564, 204)
-scale = Vector2(7.133529, 7.133529)
+position = Vector2(-546, 347)
+scale = Vector2(6.880004, 6.880004)
