@@ -1,150 +1,146 @@
-extends Node2D # Atau tipe node root Anda
+extends Node2D
 
 # --- Referensi Node (Isi di Inspector) ---
 @export var player: CharacterBody2D
 @export var sensei: CharacterBody2D
 @export var sensei_anim_player: AnimationPlayer
-@export var dialog_box: CanvasLayer # Script TextBox Anda
-@export var camera: Camera2D # Script SmartCamera Anda
+@export var dialog_box: CanvasLayer
+@export var camera: Camera2D
 @export var stage1_spawn: Marker2D
 @export var stage1_finish_line: Area2D
-@export var stage2_spawn: Marker2D # Untuk nanti
-
+@export var stage2_spawn: Marker2D
 @onready var info: CanvasLayer = $Info
 
-
 # --- Variabel Status Game ---
-
 var current_stage = 1
+var stage_1_attempt = 1 # 1 = Percobaan pertama, 2 = Percobaan kedua (dgn Dash)
 var player_won_race = false
 var race_in_progress = false
 
 func _ready():
 	info.visible = false
-	# Hubungkan sinyal garis finis ke skrip ini
 	stage1_finish_line.body_entered.connect(_on_finish_line_entered)
 	
-	# Mulai alur game
-	start_cutscene_1()
+	# Mulai alur game dengan percobaan pertama
+	start_stage_1_attempt_1()
 
-# --- ALUR UTAMA (Sesuai Poin Anda) ---
-
-# Poin 1 & 2: Player mengikuti, Sensei menang
-func start_cutscene_1():
-	player.set_cutscene_state(true) # Matikan kontrol player
-	
-	# (Opsional) Tampilkan dialog awal
-	dialog_box.queue_text("Sensei", "Halo, selamat datang di latihan pertamamu.", "sensei_happy")
-	dialog_box.queue_text("cuki", "may", "sensei_happy")
-	await dialog_box.finished
-	# Sensei menang, player di-reset
-	player.global_position = stage1_spawn.global_position
-	sensei.global_position = stage1_spawn.global_position
-	sensei_anim_player.play("SenseiWalk")
+# --- TAHAP 1: PERCOBAAN PERTAMA (PASTI KALAH) ---
+func start_stage_1_attempt_1():
+	# Matikan kontrol player
 	player.set_cutscene_state(true)
-	start_race()
-
-# Memulai balapan yang sesungguhnya
-func start_race():
 	
-	# Reset posisi & status
-	player_won_race = false
-	race_in_progress = true
+	# Reset posisi
 	player.global_position = stage1_spawn.global_position
 	sensei.global_position = stage1_spawn.global_position
 	
-	# Mulai balapan!
-	sensei_anim_player.play("SenseiWalk") # Pakai animasi yg bisa dikalahkan
-	player.set_cutscene_state(false) # Hidupkan kontrol player
+	# Dialog awal
+	dialog_box.queue_text("Sensei", "Perhatikan aku baik-baik. Kejar jika bisa!", "sensei_happy")
+	await dialog_box.finished
+	
+	# Poin 1: Mulai balapan pertama (Sensei cepat, tidak bisa dikalahkan)
+	race_in_progress = true
+	sensei_anim_player.play("SenseiWalk") # <--- Animasi SENSEI CEPAT
+	player.set_cutscene_state(false) # Player boleh main
+	
+	#... Kita tunggu player/sensei menyentuh garis finis ...
+	#... Sensei PASTI akan menang ...
 
-# --- Poin 4 & 5: Deteksi Pemenang ---
+# --- TAHAP 2: PERCOBAAN KEDUA (SETELAH DAPAT DASH) ---
+func start_stage_1_attempt_2():
+	# Reset posisi
+	player.global_position = stage1_spawn.global_position
+	sensei.global_position = stage1_spawn.global_position
+
+	# Dialog sebelum balapan ulang
+	dialog_box.queue_text("Sensei", "Sekarang, coba lagi! Kalahkan aku!", "player_happy")
+	await dialog_box.finished
+	
+	# Poin 3: Mulai balapan kedua (Sensei lebih lambat, bisa dikalahkan)
+	race_in_progress = true
+	sensei_anim_player.play("SenseiWalk") # <--- Animasi SENSEI LEBIH LAMBAT
+	player.set_cutscene_state(false) # Player boleh main
+
+# --- FUNGSI DETEKSI GARIS FINIS ---
 func _on_finish_line_entered(body):
-	# Jika balapan tidak sedang berjalan, abaikan
 	if not race_in_progress:
 		return
 		
-	# Cek siapa yang masuk garis finis
 	if body.name == "Player":
+		# Player menang
 		player_won_race = true
 		race_in_progress = false
-		sensei_anim_player.stop() # Hentikan Sensei, Player menang!
+		sensei_anim_player.stop() # Hentikan Sensei
 		_evaluate_race_result()
 		
 	elif body.name == "Sensei":
+		# Sensei menang
 		player_won_race = false
 		race_in_progress = false
-		player.set_cutscene_state(true) # Kunci Player, Sensei menang!
+		player.set_cutscene_state(true) # Kunci Player
 		_evaluate_race_result()
 
-# --- Poin 4 & 5: Evaluasi Hasil ---
+# --- FUNGSI EVALUASI HASIL BALAPAN ---
 func _evaluate_race_result():
 	# Matikan kontrol player sementara
 	player.set_cutscene_state(true)
 
 	if player_won_race:
-		# Poin 5: Player MENANG, lanjut ke stage 2
-		dialog_box.queue_text("Sensei", "Gokil", "player_happy")
+		# Poin 4: PLAYER MENANG
+		dialog_box.queue_text("Sensei", "Bagus! Kamu berhasil!", "sensei_happy")
 		await dialog_box.finished
 		
-		# Panggil fungsi pindah kamera (dijelaskan di bawah)
+		# Poin 5: Pindah ke stage 2
 		move_camera_to_stage(2)
 		
 	else:
-		#kalah
-		dialog_box.queue_text("Sensei", "PAYAH!", "sensei_happy")
-		dialog_box.queue_text("Sensei", "nih DASH!", "player_happy")
-		await dialog_box.finished
-		
-		player.enable_dash()
-		
-		# 1. Munculkan info bar
-		info.visible = true
-		
-		# --- [PERBAIKAN KUNCI] ---
-		# Paksa Godot untuk menunggu 1 frame agar info bar sempat tergambar di layar
-		await get_tree().process_frame
-		# --------------------------
-		
-		# 2. SEKARANG baru kita tunggu input
-		await wait_for_input("ui_accept")
-		
-		# 3. Sembunyikan lagi info bar-nya
-		info.visible = false
-		
-		# 4. Mulai balapan
-		start_race()
+		# PLAYER KALAH
+		if stage_1_attempt == 1:
+			# Poin 2: Kalah di percobaan PERTAMA -> Dapat Dash
+			dialog_box.queue_text("Sensei", "PAYAH! Aku terlalu cepat untukmu.", "sensei_smirk")
+			dialog_box.queue_text("Sensei", "Coba pakai ini. Tekan [M] untuk meluncur!", "sensei_happy")
+			await dialog_box.finished
+			
+			player.enable_dash() # Berikan ability
+			
+			# Tampilkan info bar "Tekan Spasi untuk lanjut"
+			info.visible = true
+			await get_tree().process_frame # Tunggu 1 frame agar info muncul
+			await wait_for_input("ui_accept")
+			info.visible = false
+			
+			# Ubah status percobaan & mulai balapan lagi
+			stage_1_attempt = 2
+			start_stage_1_attempt_2()
+			
+		else:
+			# Poin 4 (Loop): Kalah lagi di percobaan KEDUA -> Ulangi
+			dialog_box.queue_text("Sensei", "Masih terlalu lambat! Gunakan Dash-mu lebih baik!", "sensei_serious")
+			dialog_box.queue_text("Sensei", "Kita ulangi!", "player_happy")
+			await dialog_box.finished
+			
+			# Mulai balapan ulang (percobaan kedua lagi)
+			start_stage_1_attempt_2()
 
 # --- Poin 5: Pindah Stage & Kamera ---
 func move_camera_to_stage(stage_num):
-	var target_pos: Vector2
-	
 	if stage_num == 2:
-		target_pos = stage2_spawn.global_position
-	# (tambahkan 'elif stage_num == 3' dst. nanti)
+		# Ini adalah placeholder yang Anda minta
+		print("KAMERA BERGESER KE STAGE 2")
+		
+		# (Nanti, kode asli akan memindahkan kamera,
+		# menunggu kamera sampai, lalu memanggil start_stage_2())
+		
+		# Kita panggil saja langsung untuk tes
+		start_stage_2()
 
-	# Beritahu kamera untuk bergerak
-	if camera and camera.has_method("move_to_position"):
-		# Kita perlu tambah fungsi 'move_to_position' di SmartCamera.gd
-		camera.move_to_position(target_pos)
-		await camera.move_finished # Tunggu kamera selesai gerak
-	
-	# Setelah kamera pindah, reset player & mulai cutscene stage 2
-	player.global_position = target_pos
-	start_cutscene_2() # <--- Buat fungsi baru untuk stage 2
-
-func start_cutscene_2():
+func start_stage_2():
 	# Poin 5: Dialog baru, lalu balapan baru
-	var dialog_stage_2 = [
-		{"name": "Sensei", "text": "Di sini, kamu butuh lompatan lebih...", "portrait": "sensei_serious"}
-	]
-	dialog_box.queue_text(dialog_stage_2)
+	dialog_box.queue_text("Sensei", "Selamat datang di Stage 2. Tantangannya beda lagi!", "sensei_happy")
 	await dialog_box.finished
 	
 	# ... (lakukan logika balapan lagi, tapi di akhir berikan player.enable_double_jump()) ...
 
-# --- Fungsi Pembantu (Pastikan ini ada di script TheStage.gd) ---
+# --- Fungsi Pembantu (Sangat Penting) ---
 func wait_for_input(action_name: String) -> void:
-	# Loop ini akan terus berjalan setiap frame...
 	while not Input.is_action_just_pressed(action_name):
-		# ...dan 'await' membuat script 'tertidur' 1 frame, lalu cek lagi.
 		await get_tree().process_frame
