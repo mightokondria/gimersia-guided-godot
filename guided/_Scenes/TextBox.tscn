@@ -43,7 +43,18 @@ size_flags_vertical = 0
 theme_override_font_sizes/font_size = 56
 text = "*"
 
-[node name="Label" type="Label" parent="TexBoxContainer/Panel/MarginContainer/HBoxContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="TexBoxContainer/Panel/MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Nama" type="Label" parent="TexBoxContainer/Panel/MarginContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 0
+theme_override_font_sizes/font_size = 46
+text = "Text!"
+
+[node name="Label" type="Label" parent="TexBoxContainer/Panel/MarginContainer/HBoxContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 0

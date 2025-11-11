@@ -1,11 +1,10 @@
 [gd_scene load_steps=33 format=3 uid="uid://d1g6kiifioiuw"]
 
-[ext_resource type="Script" uid="uid://5jn7qdq27lhd" path="res://_Scripts/Player.gd" id="1_bg8v1"]
-[ext_resource type="Texture2D" uid="uid://cy0sn2yqn4evu" path="res://Art/Character_Fix/COPYCAT_DOUBLEJUMP.png" id="2_y6kcb"]
-[ext_resource type="Texture2D" uid="uid://scvo5xsg6w4p" path="res://Art/Character_Fix/COPYCAT_FALL.png" id="3_trv1g"]
-[ext_resource type="Texture2D" uid="uid://qetjk32ascpu" path="res://Art/Character_Fix/COPYCAT_IDLE.png" id="3_uc1x7"]
-[ext_resource type="Texture2D" uid="uid://cus7jwdoin2jk" path="res://Art/Character_Fix/COPYCAT_JUMP.png" id="5_ij7sn"]
-[ext_resource type="Texture2D" uid="uid://dfsojomew7pyt" path="res://Art/Character_Fix/COPYCAT_RUN.png" id="6_7vg7s"]
+[ext_resource type="Script" uid="uid://2acvbq8gfjdi" path="res://_Scripts/Player.gd" id="1_bg8v1"]
+[ext_resource type="Texture2D" uid="uid://dgvyooac0kjn5" path="res://Art/platformer_metroidvania asset pack v1.01/herochar sprites(new)/herochar_idle_anim_strip_4.png" id="2_k40lu"]
+[ext_resource type="Texture2D" uid="uid://3qi8gl0kb7f" path="res://Art/platformer_metroidvania asset pack v1.01/herochar sprites(new)/herochar_jump_down_anim_strip_3.png" id="2_uc1x7"]
+[ext_resource type="Texture2D" uid="uid://dvphe8o7svh5r" path="res://Art/platformer_metroidvania asset pack v1.01/herochar sprites(new)/herochar_jump_up_anim_strip_3.png" id="3_wured"]
+[ext_resource type="Texture2D" uid="uid://dro6dwc7p1hg7" path="res://Art/platformer_metroidvania asset pack v1.01/herochar sprites(new)/herochar_run_anim_strip_6.png" id="4_uc1x7"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_k2xvr"]
 atlas = ExtResource("2_y6kcb")
@@ -212,8 +211,6 @@ script = ExtResource("1_bg8v1")
 [node name="Sprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_lljbj")
 animation = &"idle"
-frame = 6
-frame_progress = 0.89974886
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(1, 6)

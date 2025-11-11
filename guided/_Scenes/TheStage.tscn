@@ -1,5 +1,6 @@
 [gd_scene load_steps=18 format=3 uid="uid://bt8pjayii3f46"]
 
+[ext_resource type="Script" uid="uid://by3yf12ty5gjr" path="res://_Scripts/GameManager.gd" id="1_2g5u6"]
 [ext_resource type="PackedScene" uid="uid://d1g6kiifioiuw" path="res://_Scenes/Player.tscn" id="1_kchhv"]
 [ext_resource type="PackedScene" uid="uid://bmcho5ibaftn" path="res://_Scenes/TextBox.tscn" id="2_2g5u6"]
 [ext_resource type="PackedScene" uid="uid://dnqy5qp18ibvg" path="res://_Scenes/WallGrabItem.tscn" id="2_b6ajn"]
@@ -64,7 +65,8 @@ size = Vector2(69.75, 1379)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_7017n"]
 size = Vector2(69.75, 1386)
 
-[node name="Level1" type="Node2D"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_mrcx1"]
+size = Vector2(13.278687, 284.4263)
 
 [node name="TextBox" parent="." instance=ExtResource("2_2g5u6")]
 offset = Vector2(80, -685.031)
