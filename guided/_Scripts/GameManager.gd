@@ -142,14 +142,58 @@ func _evaluate_race_result():
 
 # --- TRANSISI STAGE ---
 func move_camera_to_stage(stage_num: int):
-	print("KAMERA BERGESER KE STAGE ", stage_num)
+	if camera == null:
+		push_warning("⚠️ Kamera belum diisi — tidak bisa geser ke stage %d" % stage_num)
+		return
+
+	# 1️⃣ Nonaktifkan follow kamera supaya tidak “snap balik”
+	camera.set_follow_enabled(false)
+	
+	# 2️⃣ Tween geser kamera ke kanan 1920 px
+	var target_position = camera.global_position + Vector2(1920, 0)
+	var tween = create_tween()
+	tween.tween_property(camera, "global_position", target_position, 1.5).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
+	
+	player.set_cutscene_state(true)
+	sensei.set_physics_process(false)
+	
+	await tween.finished
+	print("🎥 Kamera selesai geser ke stage ", stage_num)
+	
+	# Update base_x_position kamera agar tidak snap balik
+	if camera.has_method("set_base_x_position"):
+		camera.set_base_x_position(camera.global_position.x)
+	
+	current_stage = stage_num
+	
+	# Reposisi karakter
+	var spawn = stages.get(stage_num, {}).get("spawn")
+	if spawn != null:
+		player.global_position = spawn.global_position + Vector2(100, 0)
+		sensei.global_position = spawn.global_position + Vector2(-100, 0)
+	else:
+		push_warning("⚠️ Spawn untuk stage %d belum diatur." % stage_num)
+	
+	# 3️⃣ Setelah reposisi, aktifkan kembali follow kamera
+	camera.set_follow_enabled(true)
+	sensei.set_physics_process(true)
 	await start_stage(stage_num)
 
 # --- STAGE 2 ---
 func start_stage_2():
-	await show_dialogs(stages[2]["intro_dialog"])
-	# Tambah logika Stage 2 (misalnya sensei lebih cepat, player dapat double jump)
+	print("Memulai Stage 2...")
+	await show_dialogs(stages.get(2, {}).get("intro_dialog", []))
+	
+	# Contoh: player dapat kemampuan baru setelah dialog
 	player.enable_double_jump()
+	
+	# Sensei mulai animasi jalan pelan (misal)
+	if sensei_anim_player:
+		sensei_anim_player.play("SenseiWalk_2")
+	
+	# Player sekarang bisa bergerak lagi
+	player.set_cutscene_state(false)
+	race_in_progress = true
 
 # --- HELPER ---
 func wait_for_input(action_name: String) -> void:
