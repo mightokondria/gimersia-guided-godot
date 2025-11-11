@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://bt8pjayii3f46"]
+[gd_scene load_steps=19 format=3 uid="uid://bt8pjayii3f46"]
 
 [ext_resource type="Script" uid="uid://by3yf12ty5gjr" path="res://_Scripts/GameManager.gd" id="1_2g5u6"]
 [ext_resource type="PackedScene" uid="uid://d1g6kiifioiuw" path="res://_Scenes/Player.tscn" id="1_kchhv"]
@@ -126,11 +126,69 @@ tracks/2/keys = {
 "values": [true, false]
 }
 
+[sub_resource type="Animation" id="Animation_2d4v4"]
+resource_name = "SenseiWalk_3"
+length = 4.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("SubViewportContainer/Sensei/PathTrail:emitting")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 2.1666667),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("SubViewportContainer/Sensei:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1.7666667),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(2330, 902), Vector2(3910, 902)]
+}
+
+[sub_resource type="Animation" id="Animation_4d8gl"]
+resource_name = "SenseiWalk_4"
+length = 4.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("SubViewportContainer/Sensei/PathTrail:emitting")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 2.1666667),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("SubViewportContainer/Sensei:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1.7666667),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(4360, 902), Vector2(5830, 902)]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_mrcx1"]
 _data = {
 &"RESET": SubResource("Animation_c3oyc"),
 &"SenseiWalk": SubResource("Animation_mrcx1"),
-&"SenseiWalk_2": SubResource("Animation_2g5u6")
+&"SenseiWalk_2": SubResource("Animation_2g5u6"),
+&"SenseiWalk_3": SubResource("Animation_2d4v4"),
+&"SenseiWalk_4": SubResource("Animation_4d8gl")
 }
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_vwk1b"]
@@ -158,12 +216,12 @@ sensei = NodePath("SubViewportContainer/Sensei")
 sensei_anim_player = NodePath("AnimationPlayer")
 dialog_box = NodePath("TextBox")
 camera = NodePath("SmartCamera")
-stage1_spawn = NodePath("Stage1_Spawn")
-stage1_finish_line = NodePath("Stage1_FinishLine")
-stage2_spawn = NodePath("Stage2_Spawn")
-stage2_finish_line = NodePath("Stage2_FinishLine")
-stage3_spawn = NodePath("Stage3_Spawn")
-stage3_finish_line = NodePath("Stage3_FinishLine")
+stage1_spawn = NodePath("SubViewportContainer/Stage1_Spawn")
+stage1_finish_line = NodePath("SubViewportContainer/Stage1_FinishLine")
+stage2_spawn = NodePath("SubViewportContainer/Stage2_Spawn")
+stage2_finish_line = NodePath("SubViewportContainer/Stage2_FinishLine")
+stage3_spawn = NodePath("SubViewportContainer/Stage3_Spawn")
+stage3_finish_line = NodePath("SubViewportContainer/Stage3_FinishLine")
 
 [node name="TextBox" parent="." instance=ExtResource("2_2g5u6")]
 offset = Vector2(80, -685.031)
@@ -256,50 +314,52 @@ shape = SubResource("RectangleShape2D_nnjwi")
 position = Vector2(-835, -64)
 shape = SubResource("RectangleShape2D_7017n")
 
+[node name="Stage1_Spawn" type="Marker2D" parent="SubViewportContainer"]
+position = Vector2(282, 885)
+scale = Vector2(2, 2)
+
+[node name="Stage2_Spawn" type="Marker2D" parent="SubViewportContainer"]
+position = Vector2(2315, 885)
+scale = Vector2(2, 2)
+
+[node name="Stage3_Spawn" type="Marker2D" parent="SubViewportContainer"]
+position = Vector2(4361, 848)
+scale = Vector2(2, 2)
+
+[node name="Stage1_FinishLine" type="Area2D" parent="SubViewportContainer"]
+position = Vector2(12, -133)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SubViewportContainer/Stage1_FinishLine"]
+position = Vector2(1938.6, 533)
+scale = Vector2(4.8799987, 4.8799987)
+shape = SubResource("RectangleShape2D_mrcx1")
+debug_color = Color(0.68085706, 0.29902464, 1, 0.41960785)
+
+[node name="Stage2_FinishLine" type="Area2D" parent="SubViewportContainer"]
+position = Vector2(1947, -133)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SubViewportContainer/Stage2_FinishLine"]
+position = Vector2(1938.6, 533)
+scale = Vector2(4.8799987, 4.8799987)
+shape = SubResource("RectangleShape2D_mrcx1")
+debug_color = Color(0.68085706, 0.29902464, 1, 0.41960785)
+
+[node name="Stage3_FinishLine" type="Area2D" parent="SubViewportContainer"]
+position = Vector2(3871, -133)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SubViewportContainer/Stage3_FinishLine"]
+position = Vector2(1938.6, 533)
+scale = Vector2(4.8799987, 4.8799987)
+shape = SubResource("RectangleShape2D_mrcx1")
+debug_color = Color(0.68085706, 0.29902464, 1, 0.41960785)
+
 [node name="SmartCamera" type="Camera2D" parent="." node_paths=PackedStringArray("player") groups=["Camera"]]
 position = Vector2(943, 541)
+zoom = Vector2(0.5, 0.5)
 position_smoothing_enabled = true
 rotation_smoothing_enabled = true
 script = ExtResource("5_b6ajn")
 player = NodePath("../SubViewportContainer/Player")
-
-[node name="Stage1_Spawn" type="Marker2D" parent="."]
-position = Vector2(270, 1018)
-scale = Vector2(2, 2)
-
-[node name="Stage2_Spawn" type="Marker2D" parent="."]
-position = Vector2(2303, 1018)
-scale = Vector2(2, 2)
-
-[node name="Stage3_Spawn" type="Marker2D" parent="."]
-position = Vector2(4349, 981)
-scale = Vector2(2, 2)
-
-[node name="Stage1_FinishLine" type="Area2D" parent="."]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Stage1_FinishLine"]
-position = Vector2(1938.6, 533)
-scale = Vector2(4.8799987, 4.8799987)
-shape = SubResource("RectangleShape2D_mrcx1")
-debug_color = Color(0.68085706, 0.29902464, 1, 0.41960785)
-
-[node name="Stage2_FinishLine" type="Area2D" parent="."]
-position = Vector2(1935, 0)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Stage2_FinishLine"]
-position = Vector2(1938.6, 533)
-scale = Vector2(4.8799987, 4.8799987)
-shape = SubResource("RectangleShape2D_mrcx1")
-debug_color = Color(0.68085706, 0.29902464, 1, 0.41960785)
-
-[node name="Stage3_FinishLine" type="Area2D" parent="."]
-position = Vector2(3859, 0)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Stage3_FinishLine"]
-position = Vector2(1938.6, 533)
-scale = Vector2(4.8799987, 4.8799987)
-shape = SubResource("RectangleShape2D_mrcx1")
-debug_color = Color(0.68085706, 0.29902464, 1, 0.41960785)
 
 [node name="Info" type="CanvasLayer" parent="."]
 visible = false
