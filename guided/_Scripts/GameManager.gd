@@ -164,7 +164,7 @@ func move_camera_to_stage(stage_num: int):
 
 	await start_stage(stage_num)
 
-# --- STAGE 2 ---
+# --- STAGE 2 ----
 func start_stage_2():
 	print("Memulai Stage 2...")
 	await show_dialogs(stages.get(2, {}).get("intro_dialog", []))
