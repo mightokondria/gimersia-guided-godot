@@ -3,9 +3,13 @@ extends CanvasLayer
 signal finished()
 
 @onready var textbox_container: MarginContainer = $TexBoxContainer
-@onready var label: Label = $TexBoxContainer/Panel/MarginContainer/HBoxContainer/Label
+@onready var label: Label = $TexBoxContainer/Panel/MarginContainer/HBoxContainer/VBoxContainer/Label
+@onready var nama: Label = $TexBoxContainer/Panel/MarginContainer/HBoxContainer/VBoxContainer/Nama
+
 @onready var start_symbol: Label = $TexBoxContainer/Panel/MarginContainer/HBoxContainer/Start
 @onready var end_symbol: Label = $TexBoxContainer/Panel/MarginContainer/HBoxContainer/End
+
+
 # Referensi baru untuk potret
 @onready var portrait: TextureRect = $TexBoxContainer/Panel/MarginContainer/HBoxContainer/Portrait
 
@@ -52,8 +56,8 @@ func _process(_delta: float) -> void:
 				hide_textbox()
 
 # Modifikasi queue_text untuk menerima nama potret opsional
-func queue_text(next_text, portrait_name = ""):
-	text_queue.push_back({ "text": next_text, "portrait": portrait_name })
+func queue_text(next_name, next_text, portrait_name = ""):
+	text_queue.push_back({ "name": next_name, "text": next_text, "portrait": portrait_name })
 
 func hide_textbox():
 	start_symbol.text = ""
@@ -71,15 +75,18 @@ func display_text():
 	var next_data = text_queue.pop_front()
 	# Menangani data teks yang mungkin berupa string lama atau objek baru
 	var next_text = ""
+	var next_name = ""
 	var portrait_name = ""
 	
 	if typeof(next_data) == TYPE_DICTIONARY:
 		next_text = next_data["text"]
 		portrait_name = next_data["portrait"]
+		next_name = next_data["name"]
 	else:
 		next_text = next_data
 	
 	label.text = next_text
+	nama.text = next_name
 	
 	# Update potret
 	if portrait_name != "":
