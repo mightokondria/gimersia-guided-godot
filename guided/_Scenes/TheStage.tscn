@@ -1,11 +1,8 @@
-[gd_scene load_steps=20 format=3 uid="uid://bt8pjayii3f46"]
+[gd_scene load_steps=17 format=3 uid="uid://bt8pjayii3f46"]
 
 [ext_resource type="Script" uid="uid://by3yf12ty5gjr" path="res://_Scripts/GameManager.gd" id="1_2g5u6"]
 [ext_resource type="PackedScene" uid="uid://d1g6kiifioiuw" path="res://_Scenes/Player.tscn" id="1_kchhv"]
 [ext_resource type="PackedScene" uid="uid://bmcho5ibaftn" path="res://_Scenes/TextBox.tscn" id="2_2g5u6"]
-[ext_resource type="PackedScene" uid="uid://dnqy5qp18ibvg" path="res://_Scenes/WallGrabItem.tscn" id="2_b6ajn"]
-[ext_resource type="PackedScene" uid="uid://hoenuvlwji8b" path="res://_Scenes/DoubleJumpItem.tscn" id="3_2d4v4"]
-[ext_resource type="PackedScene" uid="uid://iyvyfmls3d04" path="res://_Scenes/DashItem.tscn" id="4_c3oyc"]
 [ext_resource type="Script" uid="uid://djka36bc42uqr" path="res://_Scripts/SmartCamera.gd" id="5_b6ajn"]
 [ext_resource type="Script" uid="uid://7yeoj2w0dtnw" path="res://_Scripts/AnimationPlayer.gd" id="7_c3oyc"]
 [ext_resource type="PackedScene" uid="uid://bu6jp2trauwtc" path="res://_Scenes/Sensei.tscn" id="8_mrcx1"]
@@ -137,7 +134,7 @@ _data = {
 }
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_vwk1b"]
-size = Vector2(5264, 149)
+size = Vector2(5889, 149)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_rfx65"]
 size = Vector2(777, 74)
@@ -154,7 +151,7 @@ size = Vector2(69.75, 1386)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_mrcx1"]
 size = Vector2(13.278687, 284.4263)
 
-[node name="TheStage" type="Node2D" node_paths=PackedStringArray("player", "sensei", "sensei_anim_player", "dialog_box", "camera", "stage1_spawn", "stage1_finish_line", "stage2_spawn")]
+[node name="TheStage" type="Node2D" node_paths=PackedStringArray("player", "sensei", "sensei_anim_player", "dialog_box", "camera", "stage1_spawn", "stage1_finish_line", "stage2_spawn", "stage2_finish_line", "stage3_spawn", "stage3_finish_line")]
 script = ExtResource("1_2g5u6")
 player = NodePath("SubViewportContainer/Player")
 sensei = NodePath("SubViewportContainer/Sensei")
@@ -163,7 +160,10 @@ dialog_box = NodePath("TextBox")
 camera = NodePath("SmartCamera")
 stage1_spawn = NodePath("Stage1_Spawn")
 stage1_finish_line = NodePath("Stage1_FinishLine")
-stage2_spawn = NodePath("Stage1_Spawn2")
+stage2_spawn = NodePath("Stage2_Spawn")
+stage2_finish_line = NodePath("Stage2_FinishLine")
+stage3_spawn = NodePath("Stage3_Spawn")
+stage3_finish_line = NodePath("Stage3_FinishLine")
 
 [node name="TextBox" parent="." instance=ExtResource("2_2g5u6")]
 offset = Vector2(80, -685.031)
@@ -202,7 +202,7 @@ anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -799.99994
 offset_top = 409.0
-offset_right = 973.98676
+offset_right = 1173.6489
 offset_bottom = 558.0
 grow_horizontal = 2
 grow_vertical = 2
@@ -210,7 +210,7 @@ scale = Vector2(2.9599996, 1)
 size_flags_horizontal = 4
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="SubViewportContainer/Floor"]
-position = Vector2(1832, 483.5)
+position = Vector2(2144.5, 483.5)
 shape = SubResource("RectangleShape2D_vwk1b")
 
 [node name="Player" parent="SubViewportContainer" instance=ExtResource("1_kchhv")]
@@ -256,20 +256,8 @@ shape = SubResource("RectangleShape2D_nnjwi")
 position = Vector2(-835, -64)
 shape = SubResource("RectangleShape2D_7017n")
 
-[node name="DoubleJumpItem" parent="SubViewportContainer" instance=ExtResource("3_2d4v4")]
-position = Vector2(502.99997, 772)
-scale = Vector2(6.4, 6.4)
-
-[node name="WallGrabItem" parent="SubViewportContainer" instance=ExtResource("2_b6ajn")]
-position = Vector2(1528, 431)
-scale = Vector2(4.2800007, 4.2800007)
-
-[node name="DashItem" parent="SubViewportContainer" instance=ExtResource("4_c3oyc")]
-position = Vector2(1011, 789)
-scale = Vector2(6.2, 6.2)
-
 [node name="SmartCamera" type="Camera2D" parent="." node_paths=PackedStringArray("player") groups=["Camera"]]
-position = Vector2(945, 541)
+position = Vector2(943, 541)
 position_smoothing_enabled = true
 rotation_smoothing_enabled = true
 script = ExtResource("5_b6ajn")
@@ -279,8 +267,12 @@ player = NodePath("../SubViewportContainer/Player")
 position = Vector2(270, 1018)
 scale = Vector2(2, 2)
 
-[node name="Stage1_Spawn2" type="Marker2D" parent="."]
+[node name="Stage2_Spawn" type="Marker2D" parent="."]
 position = Vector2(2303, 1018)
+scale = Vector2(2, 2)
+
+[node name="Stage3_Spawn" type="Marker2D" parent="."]
+position = Vector2(4349, 981)
 scale = Vector2(2, 2)
 
 [node name="Stage1_FinishLine" type="Area2D" parent="."]
@@ -291,7 +283,26 @@ scale = Vector2(4.8799987, 4.8799987)
 shape = SubResource("RectangleShape2D_mrcx1")
 debug_color = Color(0.68085706, 0.29902464, 1, 0.41960785)
 
+[node name="Stage2_FinishLine" type="Area2D" parent="."]
+position = Vector2(1935, 0)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Stage2_FinishLine"]
+position = Vector2(1938.6, 533)
+scale = Vector2(4.8799987, 4.8799987)
+shape = SubResource("RectangleShape2D_mrcx1")
+debug_color = Color(0.68085706, 0.29902464, 1, 0.41960785)
+
+[node name="Stage3_FinishLine" type="Area2D" parent="."]
+position = Vector2(3859, 0)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Stage3_FinishLine"]
+position = Vector2(1938.6, 533)
+scale = Vector2(4.8799987, 4.8799987)
+shape = SubResource("RectangleShape2D_mrcx1")
+debug_color = Color(0.68085706, 0.29902464, 1, 0.41960785)
+
 [node name="Info" type="CanvasLayer" parent="."]
+visible = false
 
 [node name="Panel" type="Panel" parent="Info"]
 offset_left = 432.0

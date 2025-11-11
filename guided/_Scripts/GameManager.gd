@@ -9,6 +9,10 @@ extends Node2D
 @export var stage1_spawn: Marker2D
 @export var stage1_finish_line: Area2D
 @export var stage2_spawn: Marker2D
+@export var stage2_finish_line: Area2D
+@export var stage3_spawn: Marker2D
+@export var stage3_finish_line: Area2D
+
 @onready var info: CanvasLayer = $Info
 
 # --- Variabel Status Game ---
