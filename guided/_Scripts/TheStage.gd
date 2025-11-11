@@ -20,6 +20,9 @@ var race_in_progress = false
 func _ready():
 	info.visible = false
 	stage1_finish_line.body_entered.connect(_on_finish_line_entered)
+	# Reset posisi
+	player.global_position = stage1_spawn.global_position
+	sensei.global_position = stage1_spawn.global_position
 	
 	# Mulai alur game dengan percobaan pertama
 	start_stage_1_attempt_1()
@@ -29,9 +32,7 @@ func start_stage_1_attempt_1():
 	# Matikan kontrol player
 	player.set_cutscene_state(true)
 	
-	# Reset posisi
-	player.global_position = stage1_spawn.global_position
-	sensei.global_position = stage1_spawn.global_position
+	
 	
 	# Dialog awal
 	dialog_box.queue_text("Sensei", "Perhatikan aku baik-baik. Kejar jika bisa!", "sensei_happy")
@@ -96,7 +97,7 @@ func _evaluate_race_result():
 		# PLAYER KALAH
 		if stage_1_attempt == 1:
 			# Poin 2: Kalah di percobaan PERTAMA -> Dapat Dash
-			dialog_box.queue_text("Sensei", "PAYAH! Aku terlalu cepat untukmu.", "sensei_smirk")
+			dialog_box.queue_text("Sensei", "PAYAH! Aku terlalu cepat untukmu.", "player_happy")
 			dialog_box.queue_text("Sensei", "Coba pakai ini. Tekan [M] untuk meluncur!", "sensei_happy")
 			await dialog_box.finished
 			
@@ -114,7 +115,7 @@ func _evaluate_race_result():
 			
 		else:
 			# Poin 4 (Loop): Kalah lagi di percobaan KEDUA -> Ulangi
-			dialog_box.queue_text("Sensei", "Masih terlalu lambat! Gunakan Dash-mu lebih baik!", "sensei_serious")
+			dialog_box.queue_text("Sensei", "Masih terlalu lambat! Gunakan Dash-mu lebih baik!", "sensei_happy")
 			dialog_box.queue_text("Sensei", "Kita ulangi!", "player_happy")
 			await dialog_box.finished
 			

@@ -90,7 +90,7 @@ func display_text():
 	
 	# Update potret
 	if portrait_name != "":
-		var portrait_path = "res://art/portraits/" + portrait_name + ".png"
+		var portrait_path = "res://Art/Portraits/" + portrait_name + ".png"
 		if ResourceLoader.exists(portrait_path):
 			portrait.texture = load(portrait_path)
 			portrait.show()
