@@ -1,21 +1,23 @@
 extends CharacterBody2D
 
 # --- KONSTANTA GERAKAN DASAR ---
-const MAX_SPEED = 150.0
-const JUMP_VELOCITY = -400.0
-const ACCELERATION = 2000.0
-const FRICTION = 900.0
+const MAX_SPEED = 800.0
+const JUMP_VELOCITY = -1400.0
+const ACCELERATION = 8000.0
+const AIR_ACCELERATION = 6000.0 
+const FRICTION = 5000.0
+const AIR_FRICTION = 1000.0
 
 # --- KONSTANTA DASH ---
-const DASH_SPEED = 600.0
+const DASH_SPEED = 2500.0
 const DASH_DURATION = 0.15
 var is_dashing = false
 var dash_time_left = 0.0
 
 # --- KONSTANTA WALL GRAB ---
-const MAX_STAMINA = 2.50
-const CLIMB_SPEED = 75.0
-const WALL_JUMP_PUSHBACK = 500.0
+const MAX_STAMINA = 3.0
+const CLIMB_SPEED = 300.0
+const WALL_JUMP_PUSHBACK = 1500.0
 var current_stamina = MAX_STAMINA
 var is_wall_sliding = false
 
@@ -34,14 +36,42 @@ var was_on_floor = true
 @onready var coyote_timer = $CoyoteTimer
 @onready var dash_cooldown_timer = $DashCooldownTimer
 @onready var sprite = $Sprite2D
+@onready var camera: Camera2D = get_tree().get_first_node_in_group("Camera")
 
 # --- VARIABEL KAMERA ---
 @export var camera : Camera2D
 
 # Ambil nilai gravitasi dari Project Settings
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
+@export var is_cutscene = false
 
 func _physics_process(delta):
+	
+	# --- [TAMBAHAN PENTING DI PALING ATAS] ---
+	if is_cutscene:
+		# Jika cutscene, player hanya kena gravitasi agar tidak melayang
+		if not is_on_floor():
+			velocity.y += gravity * delta
+		else:
+			velocity.y = 0
+			
+		# Nol-kan kecepatan horizontal agar diam
+		velocity.x = move_toward(velocity.x, 0, FRICTION * delta)
+		
+		move_and_slide()
+		
+		# --- [PERBAIKAN DI SINI] ---
+		# Daripada memanggil _update_animation() yang rumit,
+		# kita paksa animasinya secara manual di sini.
+		if is_on_floor():
+			sprite.play("idle")
+		else:
+			sprite.play("fall")
+		# --------------------------
+		
+		return # STOP: Jangan proses input apapun di bawah ini!
+	# -----------------------------------------
+	
 	# =========================================
 	# 0. LOGIKA DASH (Prioritas Tertinggi)
 	# =========================================
@@ -89,6 +119,11 @@ func _physics_process(delta):
 		# Dash ke arah hadap sprite
 		var dash_dir = -1.0 if sprite.flip_h else 1.0
 		velocity.x = dash_dir * DASH_SPEED
+		#triggershake
+		camera.trigger_shake(150.0)
+		#Vibration effect
+		Input.start_joy_vibration(0,0.5,1.0,0.3)
+		
 		return # Mulai dash frame ini juga
 
 	# =========================================
@@ -98,12 +133,12 @@ func _physics_process(delta):
 	var input_dir = Input.get_axis("ui_left", "ui_right")
 	var climb_dir = Input.get_axis("ui_up", "ui_down")
 	
-	var is_pushing_wall = false
+	var _is_pushing_wall = false
 	if is_on_wall():
 		var normal = get_wall_normal()
 		# Cek apakah menekan tombol KE ARAH dinding
 		if (normal.x < 0 and input_dir > 0) or (normal.x > 0 and input_dir < 0):
-			is_pushing_wall = true
+			_is_pushing_wall = true
 
 	# =========================================
 	# 2. LOGIKA WALL GRAB & STAMINA
@@ -112,10 +147,18 @@ func _physics_process(delta):
 		current_stamina = MAX_STAMINA
 		jumps_made = 0
 		is_wall_sliding = false
+		
+		
+	# [UBAH BAGIAN INI]
+	# (Kita asumsikan Anda ingin grab pakai tombol "grab" khusus, bukan otomatis)
+	var is_holding_grab_key = Input.is_action_pressed("grip")
 
-	# Syarat Wall Grab: Punya skill + Tekan arah dinding + Di udara + Ada stamina
-	if can_wall_grab and is_pushing_wall and not is_on_floor() and current_stamina > 0:
+	# Syarat: Punya skill + DI DINDING + TEKAN GRAB + DI UDARA + Punya stamina
+	if can_wall_grab and is_on_wall() and is_holding_grab_key and not is_on_floor() and current_stamina > 0:
 		is_wall_sliding = true
+		# Reset jatah lompatan saat berhasil nempel
+		jumps_made = 0
+		
 		if climb_dir != 0:
 			velocity.y = climb_dir * CLIMB_SPEED
 			current_stamina -= delta * 1.5 # Gerak lebih boros
@@ -125,7 +168,11 @@ func _physics_process(delta):
 	else:
 		is_wall_sliding = false
 		# Terapkan gravitasi HANYA jika TIDAK sedang wall grab
-		velocity.y += gravity * delta
+		var gravity_multiplier = 1.0
+		if velocity.y > 0: # Jika sedang jatuh ke bawah
+			gravity_multiplier = 1.5 # Jatuh 1.5x lebih cepat
+			
+		velocity.y += gravity * gravity_multiplier * delta
 
 	# =========================================
 	# 3. LOGIKA LOMPAT
@@ -141,7 +188,11 @@ func _physics_process(delta):
 		elif is_wall_sliding:
 			velocity.y = JUMP_VELOCITY
 			velocity.x = get_wall_normal().x * WALL_JUMP_PUSHBACK
-			current_stamina -= 1.0 # Kuras stamina instan
+			current_stamina -= 1.0
+			
+			# [UBAH] Anggap wall jump sebagai lompatan PERTAMA (jumps_made = 1)
+			# Ini mengizinkan kita melakukan double jump (jumps_made = 2) nanti
+			jumps_made = 1
 		# C. Double Jump
 		elif jumps_made < max_jumps:
 			velocity.y = JUMP_VELOCITY * 0.8 # Sedikit lebih lemah
@@ -152,6 +203,14 @@ func _physics_process(delta):
 	# =========================================
 	# Hanya boleh gerak kiri/kanan jika TIDAK sedang wall sliding
 	if not is_wall_sliding:
+		# Tentukan nilai akselerasi & friksi yang dipakai saat ini
+		var _current_accel = ACCELERATION
+		var _current_friction = FRICTION
+		
+		if not is_on_floor():
+			_current_accel = AIR_ACCELERATION
+			_current_friction = AIR_FRICTION
+		
 		if input_dir:
 			velocity.x = move_toward(velocity.x, input_dir * MAX_SPEED, ACCELERATION * delta)
 		else:
@@ -213,3 +272,8 @@ func enable_wall_grab():
 	if not can_wall_grab:
 		can_wall_grab = true
 		print("WALL GRAB AKTIF!")
+		
+		
+# Fungsi untuk dipanggil oleh AnimationPlayer
+func set_cutscene_state(state: bool):
+	is_cutscene = state

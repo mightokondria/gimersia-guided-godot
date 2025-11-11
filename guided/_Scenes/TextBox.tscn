@@ -1,0 +1,73 @@
+[gd_scene load_steps=2 format=3 uid="uid://bmcho5ibaftn"]
+
+[ext_resource type="Script" uid="uid://7h0d7k7bfnt5" path="res://_Scripts/TextBox.gd" id="1_rs5rr"]
+
+[node name="TextBox" type="CanvasLayer"]
+script = ExtResource("1_rs5rr")
+
+[node name="TexBoxContainer" type="MarginContainer" parent="."]
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -280.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="Panel" type="Panel" parent="TexBoxContainer"]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="TexBoxContainer/Panel"]
+layout_mode = 1
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = 48.0
+offset_top = -103.0
+offset_right = -48.0
+offset_bottom = 103.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Panel" type="Panel" parent="TexBoxContainer/Panel/MarginContainer"]
+visible = false
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="TexBoxContainer/Panel/MarginContainer"]
+layout_mode = 2
+
+[node name="Start" type="Label" parent="TexBoxContainer/Panel/MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 0
+theme_override_font_sizes/font_size = 56
+text = "*"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="TexBoxContainer/Panel/MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Nama" type="Label" parent="TexBoxContainer/Panel/MarginContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 0
+theme_override_font_sizes/font_size = 46
+text = "Text!"
+
+[node name="Label" type="Label" parent="TexBoxContainer/Panel/MarginContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 0
+theme_override_font_sizes/font_size = 66
+text = "Text!"
+
+[node name="End" type="Label" parent="TexBoxContainer/Panel/MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 8
+theme_override_font_sizes/font_size = 56
+text = "v"
+
+[node name="Portrait" type="TextureRect" parent="TexBoxContainer/Panel/MarginContainer/HBoxContainer"]
+layout_mode = 2
+expand_mode = 3
+stretch_mode = 4

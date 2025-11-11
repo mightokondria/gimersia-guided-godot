@@ -1,80 +1,307 @@
-[gd_scene load_steps=11 format=3 uid="uid://bt8pjayii3f46"]
+[gd_scene load_steps=20 format=3 uid="uid://bt8pjayii3f46"]
 
+[ext_resource type="Script" uid="uid://by3yf12ty5gjr" path="res://_Scripts/GameManager.gd" id="1_2g5u6"]
 [ext_resource type="PackedScene" uid="uid://d1g6kiifioiuw" path="res://_Scenes/Player.tscn" id="1_kchhv"]
+[ext_resource type="PackedScene" uid="uid://bmcho5ibaftn" path="res://_Scenes/TextBox.tscn" id="2_2g5u6"]
 [ext_resource type="PackedScene" uid="uid://dnqy5qp18ibvg" path="res://_Scenes/WallGrabItem.tscn" id="2_b6ajn"]
 [ext_resource type="PackedScene" uid="uid://hoenuvlwji8b" path="res://_Scenes/DoubleJumpItem.tscn" id="3_2d4v4"]
 [ext_resource type="PackedScene" uid="uid://iyvyfmls3d04" path="res://_Scenes/DashItem.tscn" id="4_c3oyc"]
 [ext_resource type="Script" uid="uid://djka36bc42uqr" path="res://_Scripts/SmartCamera.gd" id="5_b6ajn"]
+[ext_resource type="Script" uid="uid://7yeoj2w0dtnw" path="res://_Scripts/AnimationPlayer.gd" id="7_c3oyc"]
+[ext_resource type="PackedScene" uid="uid://bu6jp2trauwtc" path="res://_Scenes/Sensei.tscn" id="8_mrcx1"]
+
+[sub_resource type="Animation" id="Animation_c3oyc"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("SubViewportContainer/Player:is_cutscene")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("SubViewportContainer/Sensei:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(380, 1022)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("SubViewportContainer/Sensei/PathTrail:emitting")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_mrcx1"]
+resource_name = "SenseiTalk"
+length = 4.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("SubViewportContainer/Sensei:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1.5, 2.1666667),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(390, 1022), Vector2(1310, 1022), Vector2(2020, 1022)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("SubViewportContainer/Sensei:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1.1333333, 1.4333333, 1.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(400, 902), Vector2(390, 902), Vector2(390, 552), Vector2(390, 601)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("SubViewportContainer/Sensei/PathTrail:emitting")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 2.1666667),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+
+[sub_resource type="Animation" id="Animation_2g5u6"]
+resource_name = "SenseiWalk_2"
+length = 4.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("SubViewportContainer/Sensei:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1.8666667, 2.9),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(390, 1022), Vector2(1310, 1022), Vector2(2020, 1022)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("SubViewportContainer/Sensei:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1.5, 1.8, 1.9666667),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(400, 902), Vector2(390, 902), Vector2(390, 552), Vector2(390, 601)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("SubViewportContainer/Sensei/PathTrail:emitting")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 2.1666667),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_mrcx1"]
+_data = {
+&"RESET": SubResource("Animation_c3oyc"),
+&"SenseiWalk": SubResource("Animation_mrcx1"),
+&"SenseiWalk_2": SubResource("Animation_2g5u6")
+}
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_vwk1b"]
-size = Vector2(320, 14)
+size = Vector2(3187, 149)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_rfx65"]
-size = Vector2(69, 14)
+size = Vector2(935, 74)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2d4v4"]
+size = Vector2(178, 74)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_nnjwi"]
-size = Vector2(348.5, 14)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_x6l5f"]
-size = Vector2(69.75, 306)
+size = Vector2(2058.25, 52)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_7017n"]
-size = Vector2(69.75, 308)
+size = Vector2(69.75, 1386)
 
-[node name="Level1" type="Node2D"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_mrcx1"]
+size = Vector2(13.278687, 284.4263)
 
-[node name="Floor" type="StaticBody2D" parent="."]
-position = Vector2(-160, -17)
+[node name="TheStage" type="Node2D" node_paths=PackedStringArray("player", "sensei", "sensei_anim_player", "dialog_box", "camera", "stage1_spawn", "stage1_finish_line")]
+script = ExtResource("1_2g5u6")
+player = NodePath("SubViewportContainer/Player")
+sensei = NodePath("SubViewportContainer/Sensei")
+sensei_anim_player = NodePath("AnimationPlayer")
+dialog_box = NodePath("TextBox")
+camera = NodePath("SubViewportContainer/SmartCamera")
+stage1_spawn = NodePath("Stage1_Spawn")
+stage1_finish_line = NodePath("Stage1_FinishLine")
 
-[node name="ColorRect" type="ColorRect" parent="Floor"]
-offset_top = 93.0
-offset_right = 320.0
-offset_bottom = 107.0
+[node name="TextBox" parent="." instance=ExtResource("2_2g5u6")]
+offset = Vector2(80, -685.031)
+scale = Vector2(0.9, 0.9)
+transform = Transform2D(0.9, 0, 0, 0.9, 80, -685.031)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Floor"]
-position = Vector2(160, 100)
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_mrcx1")
+}
+script = ExtResource("7_c3oyc")
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="."]
+offset_left = -12.0
+offset_top = 133.0
+offset_right = 1908.0
+offset_bottom = 1213.0
+stretch = true
+stretch_shrink = 6
+metadata/_edit_use_anchors_ = true
+
+[node name="SubViewport" type="SubViewport" parent="SubViewportContainer"]
+transparent_bg = true
+handle_input_locally = false
+size = Vector2i(320, 180)
+render_target_update_mode = 4
+
+[node name="Floor" type="StaticBody2D" parent="SubViewportContainer"]
+position = Vector2(798, 533)
+
+[node name="ColorRect" type="ColorRect" parent="SubViewportContainer/Floor"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -799.99994
+offset_top = 409.0
+offset_right = -151.3512
+offset_bottom = 558.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(2.9599996, 1)
+size_flags_horizontal = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SubViewportContainer/Floor"]
+position = Vector2(793.5, 483.5)
 shape = SubResource("RectangleShape2D_vwk1b")
 
 [node name="Player" parent="." node_paths=PackedStringArray("camera") instance=ExtResource("1_kchhv")]
 position = Vector2(-136, -33)
 camera = NodePath("../SmartCamera")
 
-[node name="StaticBody2D" type="StaticBody2D" parent="."]
-position = Vector2(-160, -88)
+[node name="Player" parent="SubViewportContainer" instance=ExtResource("1_kchhv")]
+position = Vector2(143, 883)
+scale = Vector2(7.5999975, 7.5999975)
+is_cutscene = true
 
-[node name="ColorRect" type="ColorRect" parent="StaticBody2D"]
-offset_left = 251.0
-offset_top = 96.0
-offset_right = 320.0
-offset_bottom = 110.0
+[node name="CollisionShape2D" parent="SubViewportContainer/Player" index="1"]
+visible = false
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
-position = Vector2(285.5, 103)
+[node name="StaticBody2D" type="StaticBody2D" parent="SubViewportContainer"]
+position = Vector2(798, 462)
+
+[node name="ColorRect" type="ColorRect" parent="SubViewportContainer/StaticBody2D"]
+offset_left = 496.0
+offset_top = 181.0
+offset_right = 1118.0
+offset_bottom = 254.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SubViewportContainer/StaticBody2D"]
+position = Vector2(963.5, 218)
 shape = SubResource("RectangleShape2D_rfx65")
 
-[node name="CollisionShape2D4" type="CollisionShape2D" parent="StaticBody2D"]
-position = Vector2(155.25, -65)
+[node name="ColorRect2" type="ColorRect" parent="SubViewportContainer/StaticBody2D"]
+offset_left = 158.0
+offset_top = -155.0
+offset_right = 336.0
+offset_bottom = -82.0
+
+[node name="CollisionShape2D5" type="CollisionShape2D" parent="SubViewportContainer/StaticBody2D"]
+position = Vector2(247, -118)
+shape = SubResource("RectangleShape2D_2d4v4")
+
+[node name="CollisionShape2D4" type="CollisionShape2D" parent="SubViewportContainer/StaticBody2D"]
+position = Vector2(158, -729)
 shape = SubResource("RectangleShape2D_nnjwi")
 
-[node name="CollisionShape2D2" type="CollisionShape2D" parent="StaticBody2D"]
-position = Vector2(354.75, 25)
-shape = SubResource("RectangleShape2D_x6l5f")
-
-[node name="CollisionShape2D3" type="CollisionShape2D" parent="StaticBody2D"]
-position = Vector2(-36, 24)
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="SubViewportContainer/StaticBody2D"]
+position = Vector2(-835, -64)
 shape = SubResource("RectangleShape2D_7017n")
 
-[node name="WallGrabItem" parent="StaticBody2D" instance=ExtResource("2_b6ajn")]
-position = Vector2(285, 70)
+[node name="DoubleJumpItem" parent="SubViewportContainer" instance=ExtResource("3_2d4v4")]
+position = Vector2(502.99997, 772)
+scale = Vector2(6.4, 6.4)
 
-[node name="DoubleJumpItem" parent="." instance=ExtResource("3_2d4v4")]
-position = Vector2(-64, 44)
+[node name="WallGrabItem" parent="SubViewportContainer" instance=ExtResource("2_b6ajn")]
+position = Vector2(1528, 431)
+scale = Vector2(4.2800007, 4.2800007)
 
-[node name="DashItem" parent="." instance=ExtResource("4_c3oyc")]
-position = Vector2(60, 46)
+[node name="DashItem" parent="SubViewportContainer" instance=ExtResource("4_c3oyc")]
+position = Vector2(1011, 789)
+scale = Vector2(6.2, 6.2)
 
 [node name="SmartCamera" type="Camera2D" parent="." node_paths=PackedStringArray("player")]
 position_smoothing_enabled = true
 rotation_smoothing_enabled = true
 script = ExtResource("5_b6ajn")
 player = NodePath("../Player")
+
+[node name="Stage1_Spawn" type="Marker2D" parent="."]
+position = Vector2(270, 1018)
+scale = Vector2(2, 2)
+
+[node name="Stage1_FinishLine" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Stage1_FinishLine"]
+position = Vector2(1938.6, 533)
+scale = Vector2(4.8799987, 4.8799987)
+shape = SubResource("RectangleShape2D_mrcx1")
+debug_color = Color(0.68085706, 0.29902464, 1, 0.41960785)
+
+[node name="Info" type="CanvasLayer" parent="."]
+
+[node name="Panel" type="Panel" parent="Info"]
+offset_left = 432.0
+offset_top = 385.0
+offset_right = 472.0
+offset_bottom = 425.0
+scale = Vector2(25.039999, 12.4)
+
+[node name="Label" type="Label" parent="Info"]
+offset_left = 744.99994
+offset_top = 583.99994
+offset_right = 834.99994
+offset_bottom = 606.99994
+scale = Vector2(4.6400003, 4.6400003)
+text = "fskldjfksjldf"
+
+[editable path="TextBox"]
+[editable path="SubViewportContainer/Sensei"]
+[editable path="SubViewportContainer/Player"]

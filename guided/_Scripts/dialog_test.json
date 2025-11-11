@@ -1,0 +1,17 @@
+[
+  {
+    "name": "Sensei",
+    "portrait": "sensei_happy",
+    "text": "Halo! Selamat datang di tutorial ini."
+  },
+  {
+    "name": "Sensei",
+    "portrait": "sensei_serious",
+    "text": "Jalan di depan sangat berbahaya, kamu harus hati-hati."
+  },
+  {
+    "name": "Player",
+    "portrait": "player_confused",
+    "text": "Eh? Berbahaya kenapa, Sensei?"
+  }
+]

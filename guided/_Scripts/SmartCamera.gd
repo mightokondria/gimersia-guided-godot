@@ -1,7 +1,15 @@
 extends Camera2D
 
 @export var player: Node2D
-@export var follow_speed: float = 5.0
+@export var follow_speed: float = 10.0
+
+@export var max_shake: float = 4.0
+@export var shake_fade: float = 0.0
+
+var _shake_strength: float = 0.0
+
+var follow_enabled: bool = true
+
 
 # --- [BAGIAN 1] VARIABEL SCREEN SHAKE ---
 # FastNoiseLite adalah alat bawaan Godot untuk membuat angka acak yang 'mulus'.
@@ -22,6 +30,9 @@ var noise_i: float = 0.0
 var base_y_position: float
 var base_x_position: float
 var trigger_y_local: float
+
+func set_follow_enabled(active: bool):
+	follow_enabled = active
 
 func _ready():
 	if player == null: print("ERROR KAMERA: Player belum di-assign!")
