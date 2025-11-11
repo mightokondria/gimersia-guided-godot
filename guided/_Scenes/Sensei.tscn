@@ -160,4 +160,6 @@ material = SubResource("CanvasItemMaterial_1xln8")
 emitting = false
 amount = 100
 texture = ExtResource("4_1xln8")
+lifetime = 8.7
+trail_lifetime = 5.0
 process_material = SubResource("ParticleProcessMaterial_gb1xm")

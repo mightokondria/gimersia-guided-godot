@@ -19,7 +19,7 @@ enum State {
 	FINISHED
 }
 
-var currrent_state = State.READY
+var current_state = State.READY
 var text_queue = []
 var tween: Tween
 
@@ -31,7 +31,7 @@ func _ready() -> void:
 	# queue_text("Dan ini murid saya.", "player_neutral")
 
 func _process(_delta: float) -> void:
-	match currrent_state:
+	match current_state:
 		State.READY:
 			if !text_queue.is_empty():
 				display_text()
@@ -116,5 +116,5 @@ func _on_tween_finished():
 	change_state(State.FINISHED)
 
 func change_state(next_state):
-	currrent_state = next_state
+	current_state = next_state
 	# ... (print debug Anda)
