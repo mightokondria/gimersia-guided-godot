@@ -210,18 +210,21 @@ size = Vector2(69.75, 1386)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_mrcx1"]
 size = Vector2(13.278687, 284.4263)
 
-[node name="TheStage" type="Node2D" node_paths=PackedStringArray("player", "sensei", "sensei_anim_player", "dialog_box", "camera", "stage1_spawn", "stage1_finish_line", "stage2_spawn", "stage2_finish_line", "stage3_spawn", "stage3_finish_line")]
+[node name="TheStage" type="Node2D" node_paths=PackedStringArray("player", "sensei", "sensei_anim_player", "dialog_box", "camera", "stage1_player_spawn", "stage1_sensei_spawn", "stage1_finish_line", "stage2_player_spawn", "stage2_sensei_spawn", "stage2_finish_line", "stage3_player_spawn", "stage3_sensei_spawn", "stage3_finish_line")]
 script = ExtResource("1_2g5u6")
 player = NodePath("SubViewportContainer/Player")
 sensei = NodePath("SubViewportContainer/Sensei")
 sensei_anim_player = NodePath("AnimationPlayer")
 dialog_box = NodePath("TextBox")
 camera = NodePath("SmartCamera")
-stage1_spawn = NodePath("SubViewportContainer/Stage1_Spawn")
+stage1_player_spawn = NodePath("SubViewportContainer/Stage1_Player_Spawn")
+stage1_sensei_spawn = NodePath("SubViewportContainer/Stage1_Sensei_Spawn")
 stage1_finish_line = NodePath("SubViewportContainer/Stage1_FinishLine")
-stage2_spawn = NodePath("SubViewportContainer/Stage2_Spawn")
+stage2_player_spawn = NodePath("SubViewportContainer/Stage2_Player_Spawn")
+stage2_sensei_spawn = NodePath("SubViewportContainer/Stage2_Sensei_Spawn")
 stage2_finish_line = NodePath("SubViewportContainer/Stage2_FinishLine")
-stage3_spawn = NodePath("SubViewportContainer/Stage3_Spawn")
+stage3_player_spawn = NodePath("SubViewportContainer/Stage3_Player_Spawn")
+stage3_sensei_spawn = NodePath("SubViewportContainer/Stage3_Sensei_Spawn")
 stage3_finish_line = NodePath("SubViewportContainer/Stage3_FinishLine")
 
 [node name="TextBox" parent="." instance=ExtResource("2_2g5u6")]
@@ -315,15 +318,27 @@ shape = SubResource("RectangleShape2D_nnjwi")
 position = Vector2(-835, -64)
 shape = SubResource("RectangleShape2D_7017n")
 
-[node name="Stage1_Spawn" type="Marker2D" parent="SubViewportContainer"]
+[node name="Stage1_Player_Spawn" type="Marker2D" parent="SubViewportContainer"]
+position = Vector2(141, 885)
+scale = Vector2(2, 2)
+
+[node name="Stage2_Player_Spawn" type="Marker2D" parent="SubViewportContainer"]
+position = Vector2(2164, 885)
+scale = Vector2(2, 2)
+
+[node name="Stage3_Player_Spawn" type="Marker2D" parent="SubViewportContainer"]
+position = Vector2(4169, 848)
+scale = Vector2(2, 2)
+
+[node name="Stage1_Sensei_Spawn" type="Marker2D" parent="SubViewportContainer"]
 position = Vector2(282, 885)
 scale = Vector2(2, 2)
 
-[node name="Stage2_Spawn" type="Marker2D" parent="SubViewportContainer"]
+[node name="Stage2_Sensei_Spawn" type="Marker2D" parent="SubViewportContainer"]
 position = Vector2(2315, 885)
 scale = Vector2(2, 2)
 
-[node name="Stage3_Spawn" type="Marker2D" parent="SubViewportContainer"]
+[node name="Stage3_Sensei_Spawn" type="Marker2D" parent="SubViewportContainer"]
 position = Vector2(4361, 848)
 scale = Vector2(2, 2)
 
