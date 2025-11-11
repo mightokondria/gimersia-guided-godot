@@ -1,6 +1,6 @@
 extends AnimationPlayer
-@onready var sensei: CharacterBody2D = $"../Sensei"
-@onready var player: CharacterBody2D = $"../SubViewportContainer/Player"
+#@onready var sensei: CharacterBody2D = $"../SubViewportContainer/SubViewport/Sensei"
+#@onready var player: CharacterBody2D = $"../SubViewportContainer/SubViewport//Player"
 @onready var textbox: CanvasLayer = $"../TextBox"
 
 

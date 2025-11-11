@@ -54,7 +54,16 @@ func _physics_process(delta):
 		velocity.x = move_toward(velocity.x, 0, FRICTION * delta)
 		
 		move_and_slide()
-		_update_animation()
+		
+		# --- [PERBAIKAN DI SINI] ---
+		# Daripada memanggil _update_animation() yang rumit,
+		# kita paksa animasinya secara manual di sini.
+		if is_on_floor():
+			sprite.play("idle")
+		else:
+			sprite.play("fall")
+		# --------------------------
+		
 		return # STOP: Jangan proses input apapun di bawah ini!
 	# -----------------------------------------
 	

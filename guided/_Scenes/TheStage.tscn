@@ -1,6 +1,6 @@
-[gd_scene load_steps=21 format=3 uid="uid://bt8pjayii3f46"]
+[gd_scene load_steps=20 format=3 uid="uid://bt8pjayii3f46"]
 
-[ext_resource type="Script" uid="uid://by3yf12ty5gjr" path="res://_Scripts/TheStage.gd" id="1_2g5u6"]
+[ext_resource type="Script" uid="uid://by3yf12ty5gjr" path="res://_Scripts/GameManager.gd" id="1_2g5u6"]
 [ext_resource type="PackedScene" uid="uid://d1g6kiifioiuw" path="res://_Scenes/Player.tscn" id="1_kchhv"]
 [ext_resource type="PackedScene" uid="uid://bmcho5ibaftn" path="res://_Scenes/TextBox.tscn" id="2_2g5u6"]
 [ext_resource type="PackedScene" uid="uid://dnqy5qp18ibvg" path="res://_Scenes/WallGrabItem.tscn" id="2_b6ajn"]
@@ -9,22 +9,6 @@
 [ext_resource type="Script" uid="uid://djka36bc42uqr" path="res://_Scripts/SmartCamera.gd" id="5_b6ajn"]
 [ext_resource type="Script" uid="uid://7yeoj2w0dtnw" path="res://_Scripts/AnimationPlayer.gd" id="7_c3oyc"]
 [ext_resource type="PackedScene" uid="uid://bu6jp2trauwtc" path="res://_Scenes/Sensei.tscn" id="8_mrcx1"]
-
-[sub_resource type="Animation" id="Animation_2d4v4"]
-resource_name = "LetterBoxAnimation"
-length = 30.0
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("SubViewportContainer/Player:is_cutscene")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0.033333335, 2),
-"transitions": PackedFloat32Array(1, 1),
-"update": 1,
-"values": [true, false]
-}
 
 [sub_resource type="Animation" id="Animation_c3oyc"]
 length = 0.001
@@ -43,7 +27,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Sensei:position")
+tracks/1/path = NodePath("SubViewportContainer/Sensei:position")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -55,7 +39,7 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("Sensei/PathTrail:emitting")
+tracks/2/path = NodePath("SubViewportContainer/Sensei/PathTrail:emitting")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -71,35 +55,35 @@ length = 4.0
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Sensei:position")
+tracks/0/path = NodePath("SubViewportContainer/Sensei:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0.033333335, 1.5, 2.1666667),
+"times": PackedFloat32Array(0, 1.5, 2.1666667),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
-"values": [Vector2(390, 1022), Vector2(1310, 1022), Vector2(1940, 1022)]
+"values": [Vector2(390, 1022), Vector2(1310, 1022), Vector2(2020, 1022)]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Sensei:position")
+tracks/1/path = NodePath("SubViewportContainer/Sensei:position")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(1.1333333, 1.4333333, 1.6),
-"transitions": PackedFloat32Array(1, 1, 1),
+"times": PackedFloat32Array(0, 1.1333333, 1.4333333, 1.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 0,
-"values": [Vector2(390, 1032), Vector2(390, 672), Vector2(390, 734)]
+"values": [Vector2(400, 902), Vector2(390, 902), Vector2(390, 552), Vector2(390, 601)]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("Sensei/PathTrail:emitting")
+tracks/2/path = NodePath("SubViewportContainer/Sensei/PathTrail:emitting")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(0.033333335, 2.1666667),
+"times": PackedFloat32Array(0, 2.1666667),
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
 "values": [true, false]
@@ -111,35 +95,35 @@ length = 4.0
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Sensei:position")
+tracks/0/path = NodePath("SubViewportContainer/Sensei:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0.033333335, 2.2666667, 3.2333333),
+"times": PackedFloat32Array(0, 1.8666667, 2.9),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
-"values": [Vector2(390, 1022), Vector2(1310, 1022), Vector2(1940, 1022)]
+"values": [Vector2(390, 1022), Vector2(1310, 1022), Vector2(2020, 1022)]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Sensei:position")
+tracks/1/path = NodePath("SubViewportContainer/Sensei:position")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(1.8, 2.1, 2.2666667),
-"transitions": PackedFloat32Array(1, 1, 1),
+"times": PackedFloat32Array(0, 1.5, 1.8, 1.9666667),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 0,
-"values": [Vector2(390, 1032), Vector2(390, 672), Vector2(390, 734)]
+"values": [Vector2(400, 902), Vector2(390, 902), Vector2(390, 552), Vector2(390, 601)]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("Sensei/PathTrail:emitting")
+tracks/2/path = NodePath("SubViewportContainer/Sensei/PathTrail:emitting")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(0.033333335, 3.5666666),
+"times": PackedFloat32Array(0, 2.1666667),
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
 "values": [true, false]
@@ -147,7 +131,6 @@ tracks/2/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_mrcx1"]
 _data = {
-&"LetterBoxAnimation": SubResource("Animation_2d4v4"),
 &"RESET": SubResource("Animation_c3oyc"),
 &"SenseiWalk": SubResource("Animation_mrcx1"),
 &"SenseiWalk_2": SubResource("Animation_2g5u6")
@@ -174,7 +157,7 @@ size = Vector2(13.278687, 284.4263)
 [node name="TheStage" type="Node2D" node_paths=PackedStringArray("player", "sensei", "sensei_anim_player", "dialog_box", "camera", "stage1_spawn", "stage1_finish_line")]
 script = ExtResource("1_2g5u6")
 player = NodePath("SubViewportContainer/Player")
-sensei = NodePath("Sensei")
+sensei = NodePath("SubViewportContainer/Sensei")
 sensei_anim_player = NodePath("AnimationPlayer")
 dialog_box = NodePath("TextBox")
 camera = NodePath("SubViewportContainer/SmartCamera")
@@ -191,10 +174,6 @@ libraries = {
 &"": SubResource("AnimationLibrary_mrcx1")
 }
 script = ExtResource("7_c3oyc")
-
-[node name="Sensei" parent="." instance=ExtResource("8_mrcx1")]
-position = Vector2(380, 1022)
-scale = Vector2(6.880004, 6.880004)
 
 [node name="SubViewportContainer" type="SubViewportContainer" parent="."]
 offset_left = -12.0
@@ -233,10 +212,20 @@ size_flags_horizontal = 4
 position = Vector2(793.5, 483.5)
 shape = SubResource("RectangleShape2D_vwk1b")
 
+[node name="Sensei" parent="SubViewportContainer" instance=ExtResource("8_mrcx1")]
+position = Vector2(380, 1022)
+scale = Vector2(6.880004, 6.880004)
+
+[node name="CollisionShape2D" parent="SubViewportContainer/Sensei" index="1"]
+visible = false
+
 [node name="Player" parent="SubViewportContainer" instance=ExtResource("1_kchhv")]
-position = Vector2(183, 476.00003)
+position = Vector2(143, 883)
 scale = Vector2(7.5999975, 7.5999975)
 is_cutscene = true
+
+[node name="CollisionShape2D" parent="SubViewportContainer/Player" index="1"]
+visible = false
 
 [node name="StaticBody2D" type="StaticBody2D" parent="SubViewportContainer"]
 position = Vector2(798, 462)
@@ -287,7 +276,7 @@ script = ExtResource("5_b6ajn")
 player = NodePath("../Player")
 
 [node name="Stage1_Spawn" type="Marker2D" parent="."]
-position = Vector2(87, 986)
+position = Vector2(270, 1018)
 scale = Vector2(2, 2)
 
 [node name="Stage1_FinishLine" type="Area2D" parent="."]
@@ -316,4 +305,5 @@ scale = Vector2(4.6400003, 4.6400003)
 text = "fskldjfksjldf"
 
 [editable path="TextBox"]
-[editable path="Sensei"]
+[editable path="SubViewportContainer/Sensei"]
+[editable path="SubViewportContainer/Player"]
