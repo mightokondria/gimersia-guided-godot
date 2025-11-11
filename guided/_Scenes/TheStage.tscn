@@ -212,12 +212,9 @@ size_flags_horizontal = 4
 position = Vector2(793.5, 483.5)
 shape = SubResource("RectangleShape2D_vwk1b")
 
-[node name="Sensei" parent="SubViewportContainer" instance=ExtResource("8_mrcx1")]
-position = Vector2(380, 1022)
-scale = Vector2(6.880004, 6.880004)
-
-[node name="CollisionShape2D" parent="SubViewportContainer/Sensei" index="1"]
-visible = false
+[node name="Player" parent="." node_paths=PackedStringArray("camera") instance=ExtResource("1_kchhv")]
+position = Vector2(-136, -33)
+camera = NodePath("../SmartCamera")
 
 [node name="Player" parent="SubViewportContainer" instance=ExtResource("1_kchhv")]
 position = Vector2(143, 883)
@@ -270,8 +267,9 @@ scale = Vector2(4.2800007, 4.2800007)
 position = Vector2(1011, 789)
 scale = Vector2(6.2, 6.2)
 
-[node name="SmartCamera" type="Camera2D" parent="SubViewportContainer" node_paths=PackedStringArray("player") groups=["Camera"]]
-position = Vector2(958, 550)
+[node name="SmartCamera" type="Camera2D" parent="." node_paths=PackedStringArray("player")]
+position_smoothing_enabled = true
+rotation_smoothing_enabled = true
 script = ExtResource("5_b6ajn")
 player = NodePath("../Player")
 
