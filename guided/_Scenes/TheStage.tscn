@@ -1,10 +1,11 @@
-[gd_scene load_steps=19 format=3 uid="uid://bt8pjayii3f46"]
+[gd_scene load_steps=20 format=3 uid="uid://bt8pjayii3f46"]
 
 [ext_resource type="Script" uid="uid://by3yf12ty5gjr" path="res://_Scripts/GameManager.gd" id="1_2g5u6"]
 [ext_resource type="PackedScene" uid="uid://d1g6kiifioiuw" path="res://_Scenes/Player.tscn" id="1_kchhv"]
 [ext_resource type="PackedScene" uid="uid://bmcho5ibaftn" path="res://_Scenes/TextBox.tscn" id="2_2g5u6"]
 [ext_resource type="Script" uid="uid://djka36bc42uqr" path="res://_Scripts/SmartCamera.gd" id="5_b6ajn"]
 [ext_resource type="Script" uid="uid://7yeoj2w0dtnw" path="res://_Scripts/AnimationPlayer.gd" id="7_c3oyc"]
+[ext_resource type="Script" uid="uid://biss50m0vv8gx" path="res://SkillPopup.gd" id="7_mrcx1"]
 [ext_resource type="PackedScene" uid="uid://bu6jp2trauwtc" path="res://_Scenes/Sensei.tscn" id="8_mrcx1"]
 
 [sub_resource type="Animation" id="Animation_c3oyc"]
@@ -361,17 +362,24 @@ rotation_smoothing_enabled = true
 script = ExtResource("5_b6ajn")
 player = NodePath("../SubViewportContainer/Player")
 
-[node name="Info" type="CanvasLayer" parent="."]
-visible = false
+[node name="SkillPopup" type="CanvasLayer" parent="."]
+script = ExtResource("7_mrcx1")
 
-[node name="Panel" type="Panel" parent="Info"]
-offset_left = 432.0
-offset_top = 385.0
-offset_right = 472.0
-offset_bottom = 425.0
-scale = Vector2(25.039999, 12.4)
+[node name="ColorRect" type="ColorRect" parent="SkillPopup"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -531.0
+offset_top = -164.0
+offset_right = 485.0
+offset_bottom = 345.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.64705884)
 
-[node name="Label" type="Label" parent="Info"]
+[node name="Message" type="Label" parent="SkillPopup"]
 offset_left = 744.99994
 offset_top = 583.99994
 offset_right = 834.99994
