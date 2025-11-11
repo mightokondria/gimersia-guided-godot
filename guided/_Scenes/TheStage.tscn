@@ -137,10 +137,10 @@ _data = {
 }
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_vwk1b"]
-size = Vector2(3187, 149)
+size = Vector2(5264, 149)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_rfx65"]
-size = Vector2(935, 74)
+size = Vector2(777, 74)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_2d4v4"]
 size = Vector2(178, 74)
@@ -154,15 +154,16 @@ size = Vector2(69.75, 1386)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_mrcx1"]
 size = Vector2(13.278687, 284.4263)
 
-[node name="TheStage" type="Node2D" node_paths=PackedStringArray("player", "sensei", "sensei_anim_player", "dialog_box", "camera", "stage1_spawn", "stage1_finish_line")]
+[node name="TheStage" type="Node2D" node_paths=PackedStringArray("player", "sensei", "sensei_anim_player", "dialog_box", "camera", "stage1_spawn", "stage1_finish_line", "stage2_spawn")]
 script = ExtResource("1_2g5u6")
 player = NodePath("SubViewportContainer/Player")
 sensei = NodePath("SubViewportContainer/Sensei")
 sensei_anim_player = NodePath("AnimationPlayer")
 dialog_box = NodePath("TextBox")
-camera = NodePath("SubViewportContainer/SmartCamera")
+camera = NodePath("SmartCamera")
 stage1_spawn = NodePath("Stage1_Spawn")
 stage1_finish_line = NodePath("Stage1_FinishLine")
+stage2_spawn = NodePath("Stage1_Spawn2")
 
 [node name="TextBox" parent="." instance=ExtResource("2_2g5u6")]
 offset = Vector2(80, -685.031)
@@ -201,7 +202,7 @@ anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -799.99994
 offset_top = 409.0
-offset_right = -151.3512
+offset_right = 973.98676
 offset_bottom = 558.0
 grow_horizontal = 2
 grow_vertical = 2
@@ -209,12 +210,8 @@ scale = Vector2(2.9599996, 1)
 size_flags_horizontal = 4
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="SubViewportContainer/Floor"]
-position = Vector2(793.5, 483.5)
+position = Vector2(1832, 483.5)
 shape = SubResource("RectangleShape2D_vwk1b")
-
-[node name="Player" parent="." node_paths=PackedStringArray("camera") instance=ExtResource("1_kchhv")]
-position = Vector2(-136, -33)
-camera = NodePath("../SmartCamera")
 
 [node name="Player" parent="SubViewportContainer" instance=ExtResource("1_kchhv")]
 position = Vector2(143, 883)
@@ -224,17 +221,21 @@ is_cutscene = true
 [node name="CollisionShape2D" parent="SubViewportContainer/Player" index="1"]
 visible = false
 
+[node name="Sensei" parent="SubViewportContainer" instance=ExtResource("8_mrcx1")]
+position = Vector2(380, 1022)
+scale = Vector2(6.6799994, 6.6799994)
+
 [node name="StaticBody2D" type="StaticBody2D" parent="SubViewportContainer"]
 position = Vector2(798, 462)
 
 [node name="ColorRect" type="ColorRect" parent="SubViewportContainer/StaticBody2D"]
 offset_left = 496.0
 offset_top = 181.0
-offset_right = 1118.0
+offset_right = 1275.0
 offset_bottom = 254.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="SubViewportContainer/StaticBody2D"]
-position = Vector2(963.5, 218)
+position = Vector2(884.5, 218)
 shape = SubResource("RectangleShape2D_rfx65")
 
 [node name="ColorRect2" type="ColorRect" parent="SubViewportContainer/StaticBody2D"]
@@ -267,14 +268,19 @@ scale = Vector2(4.2800007, 4.2800007)
 position = Vector2(1011, 789)
 scale = Vector2(6.2, 6.2)
 
-[node name="SmartCamera" type="Camera2D" parent="." node_paths=PackedStringArray("player")]
+[node name="SmartCamera" type="Camera2D" parent="." node_paths=PackedStringArray("player") groups=["Camera"]]
+position = Vector2(945, 541)
 position_smoothing_enabled = true
 rotation_smoothing_enabled = true
 script = ExtResource("5_b6ajn")
-player = NodePath("../Player")
+player = NodePath("../SubViewportContainer/Player")
 
 [node name="Stage1_Spawn" type="Marker2D" parent="."]
 position = Vector2(270, 1018)
+scale = Vector2(2, 2)
+
+[node name="Stage1_Spawn2" type="Marker2D" parent="."]
+position = Vector2(2303, 1018)
 scale = Vector2(2, 2)
 
 [node name="Stage1_FinishLine" type="Area2D" parent="."]
@@ -303,5 +309,4 @@ scale = Vector2(4.6400003, 4.6400003)
 text = "fskldjfksjldf"
 
 [editable path="TextBox"]
-[editable path="SubViewportContainer/Sensei"]
 [editable path="SubViewportContainer/Player"]

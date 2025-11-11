@@ -39,7 +39,6 @@ var was_on_floor = true
 @onready var camera: Camera2D = get_tree().get_first_node_in_group("Camera")
 
 # --- VARIABEL KAMERA ---
-@export var camera : Camera2D
 
 # Ambil nilai gravitasi dari Project Settings
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
@@ -120,7 +119,7 @@ func _physics_process(delta):
 		var dash_dir = -1.0 if sprite.flip_h else 1.0
 		velocity.x = dash_dir * DASH_SPEED
 		#triggershake
-		camera.trigger_shake(150.0)
+		camera.start_shake(8.0, 15.0)
 		#Vibration effect
 		Input.start_joy_vibration(0,0.5,1.0,0.3)
 		

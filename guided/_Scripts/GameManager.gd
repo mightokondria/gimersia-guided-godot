@@ -142,41 +142,26 @@ func _evaluate_race_result():
 
 # --- TRANSISI STAGE ---
 func move_camera_to_stage(stage_num: int):
-	if camera == null:
-		push_warning("⚠️ Kamera belum diisi — tidak bisa geser ke stage %d" % stage_num)
-		return
-
-	# 1️⃣ Nonaktifkan follow kamera supaya tidak “snap balik”
 	camera.set_follow_enabled(false)
-	
-	# 2️⃣ Tween geser kamera ke kanan 1920 px
-	var target_position = camera.global_position + Vector2(1920, 0)
+
+	var target = camera.global_position + Vector2(1920, 0)
 	var tween = create_tween()
-	tween.tween_property(camera, "global_position", target_position, 1.5).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
-	
-	player.set_cutscene_state(true)
-	sensei.set_physics_process(false)
-	
+	tween.tween_property(camera, "global_position", target, 1.5).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
+
 	await tween.finished
-	print("🎥 Kamera selesai geser ke stage ", stage_num)
-	
-	# Update base_x_position kamera agar tidak snap balik
-	if camera.has_method("set_base_x_position"):
-		camera.set_base_x_position(camera.global_position.x)
-	
-	current_stage = stage_num
-	
-	# Reposisi karakter
-	var spawn = stages.get(stage_num, {}).get("spawn")
-	if spawn != null:
-		player.global_position = spawn.global_position + Vector2(100, 0)
-		sensei.global_position = spawn.global_position + Vector2(-100, 0)
-	else:
-		push_warning("⚠️ Spawn untuk stage %d belum diatur." % stage_num)
-	
-	# 3️⃣ Setelah reposisi, aktifkan kembali follow kamera
+
+	# ✅ BARIS PALING PENTING
+	camera.update_base_position()   # <--- ini yang mencegah kamera balik ke stage 1
+
+	# baru aktifkan follow lagi
 	camera.set_follow_enabled(true)
-	sensei.set_physics_process(true)
+
+	# lanjut logika reposition player
+	current_stage = stage_num
+	var spawn = stages[stage_num]["spawn"]
+	player.global_position = spawn.global_position + Vector2(100, 0)
+	sensei.global_position = spawn.global_position + Vector2(-100, 0)
+
 	await start_stage(stage_num)
 
 # --- STAGE 2 ---
