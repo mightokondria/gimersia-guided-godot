@@ -1,8 +1,9 @@
-[gd_scene load_steps=18 format=3 uid="uid://bu6jp2trauwtc"]
+[gd_scene load_steps=25 format=3 uid="uid://bu6jp2trauwtc"]
 
 [ext_resource type="Script" uid="uid://cipbviyoelhrb" path="res://_Scripts/Sensei.gd" id="1_jnw5l"]
 [ext_resource type="Texture2D" uid="uid://cfh1vd64732u4" path="res://Art/platformer_metroidvania asset pack v1.01/enemies sprites/goblin/goblin_idle_anim_strip_4.png" id="2_6ngeu"]
 [ext_resource type="Texture2D" uid="uid://cn58fhalin4ag" path="res://Art/platformer_metroidvania asset pack v1.01/enemies sprites/goblin/goblin_run_anim_strip_6.png" id="3_1xln8"]
+[ext_resource type="Texture2D" uid="uid://bss8j7gp6dawe" path="res://Art/platformer_metroidvania asset pack v1.01/hud elements/coins_hud.png" id="4_1xln8"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_jnw5l"]
 atlas = ExtResource("2_6ngeu")
@@ -110,6 +111,31 @@ animations = [{
 radius = 5.0
 height = 16.0
 
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_1xln8"]
+
+[sub_resource type="Gradient" id="Gradient_jnw5l"]
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_67kmr"]
+gradient = SubResource("Gradient_jnw5l")
+
+[sub_resource type="Curve" id="Curve_j0f87"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_clhc1"]
+curve = SubResource("Curve_j0f87")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_gb1xm"]
+particle_flag_disable_z = true
+initial_velocity_min = 5.0
+initial_velocity_max = 10.0
+gravity = Vector3(0, 0, 0)
+damping_min = 1.0
+damping_max = 3.0000002
+scale_curve = SubResource("CurveTexture_clhc1")
+color_initial_ramp = SubResource("GradientTexture1D_67kmr")
+
 [node name="Sensei" type="CharacterBody2D"]
 script = ExtResource("1_jnw5l")
 
@@ -128,3 +154,10 @@ one_shot = true
 
 [node name="DashCooldownTimer" type="Timer" parent="."]
 one_shot = true
+
+[node name="PathTrail" type="GPUParticles2D" parent="."]
+material = SubResource("CanvasItemMaterial_1xln8")
+emitting = false
+amount = 100
+texture = ExtResource("4_1xln8")
+process_material = SubResource("ParticleProcessMaterial_gb1xm")
