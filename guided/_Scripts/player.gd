@@ -2,14 +2,14 @@ extends CharacterBody2D
 
 # --- KONSTANTA GERAKAN DASAR ---
 const MAX_SPEED = 500.0
-const JUMP_VELOCITY = -1200.0
+const JUMP_VELOCITY = -1250.0
 const ACCELERATION = 8000.0
 const AIR_ACCELERATION = 6000.0 
 const FRICTION = 5000.0
 const AIR_FRICTION = 1000.0
 
 # --- KONSTANTA DASH ---
-const DASH_SPEED = 2500.0
+const DASH_SPEED = 2000.0
 const DASH_DURATION = 0.15
 var is_dashing = false
 var dash_time_left = 0.0
@@ -94,7 +94,7 @@ func _physics_process(delta):
 		# --- TAMBAHAN BARU: PANGGIL SHAKE ---
 		if camera and camera.has_method("start_shake"):
 			# intensity=5.0, decay=15.0 (getaran cepat & tajam)
-			camera.start_shake(8.0, 15.0) 
+			camera.start_shake(80.0, 150.0) 
 			# ------------------------------------
 			
 		# --- [LOGIKA BARU DASH 8 ARAH] ---
@@ -121,7 +121,7 @@ func _physics_process(delta):
 		var dash_dir = -1.0 if sprite.flip_h else 1.0
 		velocity.x = dash_dir * DASH_SPEED
 		#triggershake
-		camera.start_shake(8.0, 15.0)
+		camera.start_shake(18.0, 20.0)
 		#Vibration effect
 		Input.start_joy_vibration(0,0.5,1.0,0.3)
 		
