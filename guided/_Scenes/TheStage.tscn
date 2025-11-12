@@ -1,15 +1,32 @@
-[gd_scene load_steps=24 format=4 uid="uid://bt8pjayii3f46"]
+[gd_scene load_steps=41 format=4 uid="uid://bt8pjayii3f46"]
 
 [ext_resource type="Script" uid="uid://by3yf12ty5gjr" path="res://_Scripts/GameManager.gd" id="1_2g5u6"]
 [ext_resource type="PackedScene" uid="uid://d1g6kiifioiuw" path="res://_Scenes/Player.tscn" id="1_kchhv"]
 [ext_resource type="PackedScene" uid="uid://bmcho5ibaftn" path="res://_Scenes/TextBox.tscn" id="2_2g5u6"]
+[ext_resource type="Texture2D" uid="uid://o8tje4umh53x" path="res://Art/falah/background/dojo ext.png" id="4_4d8gl"]
+[ext_resource type="Texture2D" uid="uid://bes50xyag03il" path="res://Art/falah/background/clouds/sky.png" id="4_ded6d"]
 [ext_resource type="Texture2D" uid="uid://dll6txabnxajo" path="res://Art/Environment/background/dojo wall.png" id="4_mrcx1"]
+[ext_resource type="Texture2D" uid="uid://b51wut2mlj08v" path="res://Art/falah/background/clouds/cloud 2.png" id="5_0k8vr"]
+[ext_resource type="Texture2D" uid="uid://ce4y63jttc65c" path="res://Art/falah/background/rock_/rock L 1.png" id="5_6wu0f"]
 [ext_resource type="Script" uid="uid://djka36bc42uqr" path="res://_Scripts/SmartCamera.gd" id="5_b6ajn"]
-[ext_resource type="Texture2D" uid="uid://chjpcx20i1w1m" path="res://Art/Environment/background/red gate left.png" id="6_4d8gl"]
+[ext_resource type="Texture2D" uid="uid://djhdqr2vaf3s3" path="res://Art/falah/background/trees/sakura tree 1.png" id="5_kyc6h"]
+[ext_resource type="Texture2D" uid="uid://bqcxgfbvbecjk" path="res://Art/falah/background/rock_/rock far 2.png" id="6_6yi6t"]
+[ext_resource type="Texture2D" uid="uid://c0o10qb6hr4ge" path="res://Art/falah/background/prop dojo 1.png" id="6_b4wrp"]
+[ext_resource type="Texture2D" uid="uid://cqohqlk7jw6od" path="res://Art/falah/background/clouds/cloud 3.png" id="6_ww4uj"]
 [ext_resource type="TileSet" uid="uid://07xwbwnxbe7y" path="res://Art/Environment/TheStage.tres" id="7_4d8gl"]
 [ext_resource type="Script" uid="uid://7yeoj2w0dtnw" path="res://_Scripts/AnimationPlayer.gd" id="7_c3oyc"]
 [ext_resource type="Script" uid="uid://biss50m0vv8gx" path="res://SkillPopup.gd" id="7_mrcx1"]
+[ext_resource type="Texture2D" uid="uid://24aevbgu6a7s" path="res://Art/falah/background/clouds/cloud 4.png" id="7_vm1nx"]
+[ext_resource type="Texture2D" uid="uid://vjegbutysms6" path="res://Art/falah/background/prop paint 1.png" id="7_vvkh1"]
+[ext_resource type="Texture2D" uid="uid://crgj153c8b6y6" path="res://Art/falah/background/prop paint 2.png" id="8_ded6d"]
 [ext_resource type="PackedScene" uid="uid://bu6jp2trauwtc" path="res://_Scenes/Sensei.tscn" id="8_mrcx1"]
+[ext_resource type="Texture2D" uid="uid://crbsxrb4038jg" path="res://Art/falah/background/clouds/cloud 1.png" id="8_tshs5"]
+[ext_resource type="Texture2D" uid="uid://dg3w8s7ouo3vr" path="res://Art/falah/background/clouds/mist.png" id="10_2rorf"]
+[ext_resource type="Texture2D" uid="uid://bi40xre7vxgoq" path="res://Art/falah/background/shoji screen.png" id="10_4eqhd"]
+[ext_resource type="Texture2D" uid="uid://c03m18l73wuxr" path="res://Art/falah/background/trees/tree far 2.png" id="13_ahskk"]
+[ext_resource type="Texture2D" uid="uid://c65hke1pwnehj" path="res://Art/falah/background/trees/sakura tree 2.png" id="14_yubga"]
+[ext_resource type="Texture2D" uid="uid://cnv1hj1r35xa1" path="res://Art/falah/background/trees/trees far 1.png" id="15_cxeia"]
+[ext_resource type="Texture2D" uid="uid://qto76l3mry0l" path="res://Art/falah/background/rock_/rock small.png" id="16_vgert"]
 
 [sub_resource type="Animation" id="Animation_gpv2w"]
 resource_name = "CUKI"
@@ -344,24 +361,167 @@ handle_input_locally = false
 size = Vector2i(320, 180)
 render_target_update_mode = 4
 
-[node name="ParallaxBackground2" type="ParallaxBackground" parent="SubViewportContainer"]
+[node name="SKY" type="ParallaxBackground" parent="SubViewportContainer"]
 
-[node name="ParallaxLayer" type="ParallaxLayer" parent="SubViewportContainer/ParallaxBackground2"]
-motion_scale = Vector2(0.2, 0.2)
+[node name="ParallaxLayer" type="ParallaxLayer" parent="SubViewportContainer/SKY"]
+motion_scale = Vector2(0.9, 0.9)
 
-[node name="Sprite2D" type="Sprite2D" parent="SubViewportContainer/ParallaxBackground2/ParallaxLayer"]
-position = Vector2(939.55554, 528.5)
-scale = Vector2(6.1833334, 6.1833334)
+[node name="Sprite2D" type="Sprite2D" parent="SubViewportContainer/SKY/ParallaxLayer"]
+position = Vector2(938, 316.00003)
+scale = Vector2(37.663338, 37.663338)
+texture = ExtResource("4_ded6d")
+
+[node name="CLOUDS" type="ParallaxBackground" parent="SubViewportContainer"]
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="SubViewportContainer/CLOUDS"]
+motion_scale = Vector2(0.7, 0.7)
+
+[node name="Sprite2D" type="Sprite2D" parent="SubViewportContainer/CLOUDS/ParallaxLayer"]
+position = Vector2(2872.9998, -223.99997)
+scale = Vector2(6.828289, 5.9976153)
+texture = ExtResource("5_0k8vr")
+
+[node name="Sprite2D2" type="Sprite2D" parent="SubViewportContainer/CLOUDS/ParallaxLayer"]
+position = Vector2(3985, -522)
+scale = Vector2(6.828289, 5.9976153)
+texture = ExtResource("6_ww4uj")
+
+[node name="Sprite2D3" type="Sprite2D" parent="SubViewportContainer/CLOUDS/ParallaxLayer"]
+position = Vector2(3075.9995, -771)
+scale = Vector2(6.828289, 5.9976153)
+texture = ExtResource("7_vm1nx")
+
+[node name="ParallaxLayer2" type="ParallaxLayer" parent="SubViewportContainer/CLOUDS"]
+motion_scale = Vector2(0.74, 0.74)
+
+[node name="Sprite2D" type="Sprite2D" parent="SubViewportContainer/CLOUDS/ParallaxLayer2"]
+position = Vector2(3552.9998, -20.000046)
+scale = Vector2(6.828289, 5.9976153)
+texture = ExtResource("8_tshs5")
+
+[node name="ROCK" type="ParallaxBackground" parent="SubViewportContainer"]
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="SubViewportContainer/ROCK"]
+motion_scale = Vector2(0.6, 0.6)
+
+[node name="Sprite2D" type="Sprite2D" parent="SubViewportContainer/ROCK/ParallaxLayer"]
+modulate = Color(1, 1, 1, 0.7764706)
+position = Vector2(3880, 682.99994)
+scale = Vector2(12.314367, 12.314367)
+texture = ExtResource("5_6wu0f")
+
+[node name="Sprite2D2" type="Sprite2D" parent="SubViewportContainer/ROCK/ParallaxLayer"]
+modulate = Color(1, 1, 1, 0.7764706)
+position = Vector2(2800.9998, 927)
+scale = Vector2(12.314367, 12.314367)
+texture = ExtResource("5_6wu0f")
+
+[node name="ParallaxLayer2" type="ParallaxLayer" parent="SubViewportContainer/ROCK"]
+motion_scale = Vector2(0.5, 0.5)
+
+[node name="Sprite2D3" type="Sprite2D" parent="SubViewportContainer/ROCK/ParallaxLayer2"]
+modulate = Color(1, 1, 1, 0.37254903)
+position = Vector2(2636.0002, 974.00024)
+rotation = -0.29986426
+scale = Vector2(12.314367, 12.314367)
+texture = ExtResource("6_6yi6t")
+
+[node name="TREES 1" type="ParallaxBackground" parent="SubViewportContainer"]
+
+[node name="ParallaxLayer2" type="ParallaxLayer" parent="SubViewportContainer/TREES 1"]
+motion_scale = Vector2(0.88, 0.88)
+
+[node name="Sprite2D3" type="Sprite2D" parent="SubViewportContainer/TREES 1/ParallaxLayer2"]
+modulate = Color(1, 1, 1, 0.6784314)
+position = Vector2(3731, 894)
+scale = Vector2(3.708311, 3.708311)
+texture = ExtResource("13_ahskk")
+
+[node name="Sprite2D4" type="Sprite2D" parent="SubViewportContainer/TREES 1/ParallaxLayer2"]
+modulate = Color(1, 1, 1, 0.6784314)
+position = Vector2(2838, 894)
+scale = Vector2(3.708311, 3.708311)
+texture = ExtResource("15_cxeia")
+
+[node name="SHRINE" type="ParallaxBackground" parent="SubViewportContainer"]
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="SubViewportContainer/SHRINE"]
+motion_scale = Vector2(0.87, 0.87)
+
+[node name="Sprite2D" type="Sprite2D" parent="SubViewportContainer/SHRINE/ParallaxLayer"]
+position = Vector2(2418, 819)
+scale = Vector2(9.640835, 9.640835)
+texture = ExtResource("4_4d8gl")
+
+[node name="DOJO HOUSE" type="ParallaxBackground" parent="SubViewportContainer"]
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="SubViewportContainer/DOJO HOUSE"]
+motion_scale = Vector2(0.9, 0.9)
+
+[node name="Sprite2D" type="Sprite2D" parent="SubViewportContainer/DOJO HOUSE/ParallaxLayer"]
+position = Vector2(939.55554, 315.00006)
+scale = Vector2(7.9033337, 7.9033337)
 texture = ExtResource("4_mrcx1")
 
-[node name="ParallaxBackground" type="ParallaxBackground" parent="SubViewportContainer"]
+[node name="Sprite2D2" type="Sprite2D" parent="SubViewportContainer/DOJO HOUSE/ParallaxLayer"]
+position = Vector2(939.55554, 428.03333)
+scale = Vector2(7.9033337, 7.9033337)
+texture = ExtResource("6_b4wrp")
 
-[node name="ParallaxLayer" type="ParallaxLayer" parent="SubViewportContainer/ParallaxBackground"]
+[node name="Sprite2D3" type="Sprite2D" parent="SubViewportContainer/DOJO HOUSE/ParallaxLayer"]
+position = Vector2(1846, 428.03333)
+scale = Vector2(7.9033337, 7.9033337)
+texture = ExtResource("7_vvkh1")
 
-[node name="Sprite2D" type="Sprite2D" parent="SubViewportContainer/ParallaxBackground/ParallaxLayer"]
-position = Vector2(979, 548)
-scale = Vector2(23.517273, 23.517273)
-texture = ExtResource("6_4d8gl")
+[node name="Sprite2D4" type="Sprite2D" parent="SubViewportContainer/DOJO HOUSE/ParallaxLayer"]
+position = Vector2(14.000004, 428.03333)
+scale = Vector2(7.9033337, 7.9033337)
+texture = ExtResource("8_ded6d")
+
+[node name="Sprite2D6" type="Sprite2D" parent="SubViewportContainer/DOJO HOUSE/ParallaxLayer"]
+position = Vector2(330.00003, 828.00006)
+scale = Vector2(12.823334, 12.823334)
+texture = ExtResource("10_4eqhd")
+
+[node name="Sprite2D7" type="Sprite2D" parent="SubViewportContainer/DOJO HOUSE/ParallaxLayer"]
+position = Vector2(1580, 828.00006)
+scale = Vector2(12.823334, 12.823334)
+texture = ExtResource("10_4eqhd")
+
+[node name="Sprite2D5" type="Sprite2D" parent="SubViewportContainer/DOJO HOUSE/ParallaxLayer"]
+position = Vector2(1820, 934.00006)
+scale = Vector2(18.59375, 7.9033337)
+texture = ExtResource("10_2rorf")
+
+[node name="MIST" type="ParallaxBackground" parent="SubViewportContainer"]
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="SubViewportContainer/MIST"]
+motion_scale = Vector2(0.9, 0.9)
+
+[node name="Sprite2D5" type="Sprite2D" parent="SubViewportContainer/MIST/ParallaxLayer"]
+position = Vector2(2245, 711.00006)
+scale = Vector2(18.59375, 7.9033337)
+texture = ExtResource("10_2rorf")
+
+[node name="TREES 2" type="ParallaxBackground" parent="SubViewportContainer"]
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="SubViewportContainer/TREES 2"]
+motion_scale = Vector2(0.9, 0.9)
+
+[node name="Sprite2D" type="Sprite2D" parent="SubViewportContainer/TREES 2/ParallaxLayer"]
+position = Vector2(3903, 768)
+scale = Vector2(3.708311, 3.708311)
+texture = ExtResource("5_kyc6h")
+
+[node name="Sprite2D2" type="Sprite2D" parent="SubViewportContainer/TREES 2/ParallaxLayer"]
+position = Vector2(3698, 786)
+scale = Vector2(3.708311, 3.708311)
+texture = ExtResource("14_yubga")
+
+[node name="Sprite2D4" type="Sprite2D" parent="SubViewportContainer/TREES 2/ParallaxLayer"]
+position = Vector2(4044.0002, 988.00006)
+scale = Vector2(7.4283066, 7.4283066)
+texture = ExtResource("16_vgert")
 
 [node name="TileMapLayer" type="TileMapLayer" parent="SubViewportContainer"]
 position = Vector2(10, 127)
@@ -442,12 +602,24 @@ scale = Vector2(4.8799987, 4.8799987)
 shape = SubResource("RectangleShape2D_b4wrp")
 debug_color = Color(0.68085706, 0.29902464, 1, 0.41960785)
 
+[node name="HIASAN" type="ParallaxBackground" parent="SubViewportContainer"]
+visible = false
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="SubViewportContainer/HIASAN"]
+motion_scale = Vector2(0.9, 0.9)
+
+[node name="Sprite2D3" type="Sprite2D" parent="SubViewportContainer/HIASAN/ParallaxLayer"]
+modulate = Color(1, 1, 1, 0.6784314)
+position = Vector2(3731, 894)
+scale = Vector2(3.708311, 3.708311)
+texture = ExtResource("13_ahskk")
+
 [node name="Area2D" type="StaticBody2D" parent="SubViewportContainer"]
 collision_layer = 2
 collision_mask = 5
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="SubViewportContainer/Area2D"]
-position = Vector2(3195, -186)
+position = Vector2(3195, -87)
 shape = SubResource("RectangleShape2D_gpv2w")
 
 [node name="SmartCamera" type="Camera2D" parent="." node_paths=PackedStringArray("player") groups=["Camera"]]
