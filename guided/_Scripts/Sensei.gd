@@ -13,7 +13,7 @@ func stop_running():
 	active = false
 	velocity = Vector2.ZERO
 
-func _physics_process(delta):
+func _physics_process(_delta):
 	if active and target:
 		var direction = (target.global_position - global_position).normalized()
 		velocity = direction * move_speed
