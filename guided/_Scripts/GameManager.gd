@@ -10,6 +10,7 @@ extends Node2D
 @export var camera: Camera2D
 @onready var skill_popup = $SkillPopup
 
+
 # --- STAGE 1 ---
 @export var stage1_player_spawn: Marker2D
 @export var stage1_sensei_spawn: Marker2D
@@ -24,6 +25,8 @@ extends Node2D
 @export var stage3_player_spawn: Marker2D
 @export var stage3_sensei_spawn: Marker2D
 @export var stage3_finish_line: Area2D
+@export var stage3_platform: CollisionShape2D
+
 
 # ===============================
 # 🧠 GAME STATE
@@ -54,6 +57,10 @@ var player_finished := false
 # ===============================
 func _ready():
 	print("⚙️ [READY]", name, "is inside tree?", is_inside_tree())
+	
+	if stage3_platform:
+		stage3_platform.disabled = true  # Nonaktifkan dulu di awal
+
 
 	if skill_popup:
 		skill_popup.visible = false
@@ -112,14 +119,13 @@ func _ready():
 		}
 	}
 
-	# Hubungkan semua finish line
-	for s in stages.values():
-		if s["finish"]:
-			s["finish"].body_entered.connect(_on_finish_line_entered)
-		else:
-			push_warning("⚠️ Finish line belum diassign untuk salah satu stage.")
+	# Hubungkan semua finish line, tapi kirim node stage-nya sebagai argumen tambahan
+	for stage_id in stages.keys():
+		var finish_line = stages[stage_id]["finish"]
+		finish_line.body_entered.connect(_on_finish_line_entered.bind(stage_id))
 
-	await start_stage(1, 1)
+
+		await start_stage(1, 1)
 
 
 # ===============================
@@ -183,6 +189,14 @@ func start_stage(stage_num: int, attempt_num: int):
 	else:
 		push_warning("⚠️ Spawn point tidak ditemukan untuk stage " + str(current_stage))
 
+	# ✅ Aktifkan barrier hanya saat Stage 3
+	if stage3_platform:
+		stage3_platform.disabled = (stage_num != 3)
+		print("CUKIMAYYYY")
+	else:
+		stage3_platform.disabled = (stage_num == 3)
+		print("aku waria")
+	
 	# mainkan animasi Sensei sesuai stage
 	var anim = stages[current_stage]["anim"]
 	if sensei_anim_player and sensei_anim_player.has_animation(anim):
@@ -203,44 +217,27 @@ func start_stage(stage_num: int, attempt_num: int):
 # ===============================
 # 🏁 FINISH LINE HANDLER
 # ===============================
-func _on_finish_line_entered(body):
+func _on_finish_line_entered(body: Node, stage_id: int):
 	if not race_in_progress:
 		return
 
-	# Aman gunakan perbandingan langsung
-	if body == sensei:
-		sensei_finished = true
-		player_won_race = false
-		pending_retry_dialog = true
-
-		# hentikan animasi sensei (idle/menunggu)
-		if sensei_anim_player:
-			sensei_anim_player.stop()
-			
-		fade_out_sensei()
-
-		# jangan evaluasi dulu — tunggu player
+	# --- Abaikan garis finish dari stage lain ---
+	if stage_id != current_stage:
 		return
 
-	if body == player:
-		player_finished = true
+	# --- Lanjutkan logika seperti biasa ---
+	if body.name == "Player":
+		player_won_race = true
+	elif body.name == "Sensei":
+		player_won_race = false
+	else:
+		return
 
-		# Jika Sensei sudah finish duluan dan kita menunggu player
-		if pending_retry_dialog and sensei_finished:
-			race_in_progress = false
-			if sensei_anim_player:
-				sensei_anim_player.stop()
-			_evaluate_race_result()
-			return
+	race_in_progress = false
+	sensei_anim_player.stop()
+	_evaluate_race_result()
 
-		# Jika player sampai duluan → menang
-		if not sensei_finished:
-			player_won_race = true
-			race_in_progress = false
-			if sensei_anim_player:
-				sensei_anim_player.stop()
-			_evaluate_race_result()
-			return
+
 
 
 # ===============================
@@ -293,7 +290,7 @@ func move_camera_to_stage(stage_num: int):
 			target_offset = Vector2(2355, 0)
 		3:
 			# Stage 2 → Stage 3: naik 1080px
-			target_offset = Vector2(0, -1080)
+			target_offset = Vector2(0, -930)
 		_:
 			# Default: tidak bergeser
 			target_offset = Vector2.ZERO
