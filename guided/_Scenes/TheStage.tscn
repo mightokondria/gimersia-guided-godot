@@ -228,6 +228,7 @@ stage3_sensei_spawn = NodePath("SubViewportContainer/Stage3_Sensei_Spawn")
 stage3_finish_line = NodePath("SubViewportContainer/Stage3_FinishLine")
 
 [node name="TextBox" parent="." instance=ExtResource("2_2g5u6")]
+visible = false
 offset = Vector2(80, -685.031)
 scale = Vector2(0.9, 0.9)
 transform = Transform2D(0.9, 0, 0, 0.9, 80, -685.031)
@@ -370,6 +371,7 @@ shape = SubResource("RectangleShape2D_mrcx1")
 debug_color = Color(0.68085706, 0.29902464, 1, 0.41960785)
 
 [node name="SmartCamera" type="Camera2D" parent="." node_paths=PackedStringArray("player") groups=["Camera"]]
+visible = false
 position = Vector2(943, 541)
 zoom = Vector2(0.5, 0.5)
 position_smoothing_enabled = true
@@ -378,6 +380,7 @@ script = ExtResource("5_b6ajn")
 player = NodePath("../SubViewportContainer/Player")
 
 [node name="SkillPopup" type="CanvasLayer" parent="."]
+visible = false
 script = ExtResource("7_mrcx1")
 
 [node name="ColorRect" type="ColorRect" parent="SkillPopup"]
