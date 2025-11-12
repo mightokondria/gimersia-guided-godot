@@ -37,6 +37,28 @@ tracks/1/keys = {
 "update": 1,
 "values": [false]
 }
+tracks/2/type = "bezier"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("SubViewportContainer/Sensei:position:x")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/3/type = "bezier"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("SubViewportContainer/Sensei:position:y")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
 
 [sub_resource type="Animation" id="Animation_mrcx1"]
 resource_name = "SenseiTalk"
@@ -176,6 +198,28 @@ tracks/1/keys = {
 
 [sub_resource type="Animation" id="Animation_b4wrp"]
 resource_name = "SENSEI_WALK_ST_1"
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("SubViewportContainer/Sensei:position:x")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(2, 2),
+"points": PackedFloat32Array(195, -0.24999341, 7.339295, 0.23333333, -6.850189, 394.45444, -0.099999994, -144.41324, 0, 0),
+"times": PackedFloat32Array(0, 0.36666667)
+}
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("SubViewportContainer/Sensei:position:y")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(0, 2, 1),
+"points": PackedFloat32Array(661, -0.25, 0, 0.14539722, 9.902649, 497.60675, -0.050000004, 12.715868, 0.01111111, -2.825748, 567.7503, 0, 0, 0, 0),
+"times": PackedFloat32Array(0, 0.3, 0.36666667)
+}
 
 [sub_resource type="Animation" id="Animation_gpv2w"]
 resource_name = "CUKI"
@@ -275,18 +319,18 @@ tile_map_data = PackedByteArray("AAD//wsAAQAAAAAAAAD///r/AQAAAAAAAAD///v/AQAAAAA
 tile_set = ExtResource("7_4d8gl")
 
 [node name="Sensei" parent="SubViewportContainer" instance=ExtResource("8_mrcx1")]
-position = Vector2(380, 892)
-scale = Vector2(4.3200016, 4.3200016)
+scale = Vector2(6, 6)
 
 [node name="Sprite2D" parent="SubViewportContainer/Sensei" index="0"]
-position = Vector2(10.416652, -11.805548)
+position = Vector2(-24.30555, 7.6388884)
 animation = &"sensei_idle"
+offset = Vector2(24.305546, -7.6388855)
 
 [node name="CollisionShape2D" parent="SubViewportContainer/Sensei" index="1"]
 visible = false
 
 [node name="Player" parent="SubViewportContainer" instance=ExtResource("1_kchhv")]
-position = Vector2(86, 702)
+position = Vector2(58, 692)
 scale = Vector2(6, 6)
 
 [node name="Detector" type="Node2D" parent="SubViewportContainer"]
@@ -304,7 +348,7 @@ position = Vector2(4169, 848)
 scale = Vector2(2, 2)
 
 [node name="Stage1_Sensei_Spawn" type="Marker2D" parent="SubViewportContainer/Detector"]
-position = Vector2(282, 885)
+position = Vector2(195, 661)
 scale = Vector2(2, 2)
 
 [node name="Stage2_Sensei_Spawn" type="Marker2D" parent="SubViewportContainer/Detector"]
@@ -342,13 +386,12 @@ scale = Vector2(4.8799987, 4.8799987)
 shape = SubResource("RectangleShape2D_mrcx1")
 debug_color = Color(0.68085706, 0.29902464, 1, 0.41960785)
 
-[node name="SmartCamera" type="Camera2D" parent="." node_paths=PackedStringArray("player") groups=["Camera"]]
+[node name="SmartCamera" type="Camera2D" parent="." groups=["Camera"]]
 position = Vector2(943, 541)
 scale = Vector2(1.1, 1.1)
 position_smoothing_enabled = true
 rotation_smoothing_enabled = true
 script = ExtResource("5_b6ajn")
-player = NodePath("")
 
 [node name="SkillPopup" type="CanvasLayer" parent="."]
 visible = false
