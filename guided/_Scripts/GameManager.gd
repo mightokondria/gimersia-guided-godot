@@ -7,14 +7,22 @@ extends Node2D
 @export var dialog_box: CanvasLayer
 @export var camera: Camera2D
 
-@export var stage1_spawn: Marker2D
+# --- STAGE 1 ---
+@export var stage1_player_spawn: Marker2D
+@export var stage1_sensei_spawn: Marker2D
 @export var stage1_finish_line: Area2D
-@export var stage2_spawn: Marker2D
+
+# --- STAGE 2 ---
+@export var stage2_player_spawn: Marker2D
+@export var stage2_sensei_spawn: Marker2D
 @export var stage2_finish_line: Area2D
-@export var stage3_spawn: Marker2D
+
+# --- STAGE 3 ---
+@export var stage3_player_spawn: Marker2D
+@export var stage3_sensei_spawn: Marker2D
 @export var stage3_finish_line: Area2D
 
-@onready var info: CanvasLayer = $Info
+@onready var skill_popup = $SkillPopup
 
 # --- GAME STATE ---
 var current_stage := 1
@@ -22,35 +30,40 @@ var attempt := 1
 var race_in_progress := false
 var player_won_race := false
 
-# --- STAGE DATA CONFIG ---
+
+var dash_unlocked := false
+var double_jump_unlocked := false
+var wall_grab_unlocked := false
+
+# --- STAGE CONFIG ---
 var stages := {}
 
 func _ready():
-	info.visible = false
+	skill_popup.visible = false
 
 	stages = {
 		1: {
-			"spawn": stage1_spawn,
+			"player_spawn": stage1_player_spawn,
+			"sensei_spawn": stage1_sensei_spawn,
 			"finish": stage1_finish_line,
 			"anim": "SenseiWalk_2",
 			"attempts": {
 				1: {
 					"intro": [
 						["Sensei", "Perhatikan aku baik-baik. Kejar jika bisa!", "sensei_happy"]
-					],
-					"unlock_skill": null
+					]
 				},
 				2: {
 					"intro": [
 						["Sensei", "Sekarang coba lagi! Kamu pasti bisa mengalahkanku!", "sensei_happy"]
-					],
-					"unlock_skill": "dash"
+					]
 				}
 			}
 		},
 
 		2: {
-			"spawn": stage2_spawn,
+			"player_spawn": stage2_player_spawn,
+			"sensei_spawn": stage2_sensei_spawn,
 			"finish": stage2_finish_line,
 			"anim": "SenseiWalk_3",
 			"attempts": {
@@ -58,20 +71,19 @@ func _ready():
 					"intro": [
 						["Sensei", "Selamat datang di Stage 2!", "sensei_happy"],
 						["Sensei", "Di sini aku makin cepat~", "sensei_smug"]
-					],
-					"unlock_skill": null
+					]
 				},
 				2: {
 					"intro": [
 						["Sensei", "Baik, aku akan sedikit santai. Coba kalahkan aku!", "sensei_happy"]
-					],
-					"unlock_skill": "double_jump"
+					]
 				}
 			}
 		},
 
 		3: {
-			"spawn": stage3_spawn,
+			"player_spawn": stage3_player_spawn,
+			"sensei_spawn": stage3_sensei_spawn,
 			"finish": stage3_finish_line,
 			"anim": "SenseiWalk_4",
 			"attempts": {
@@ -79,34 +91,54 @@ func _ready():
 					"intro": [
 						["Sensei", "Kamu sampai di Stage 3? Tidak buruk!", "sensei_smug"],
 						["Sensei", "Tapi ini yang tersulit! Kejar aku kalau berani!", "sensei_angry"]
-					],
-					"unlock_skill": null
+					]
 				},
 				2: {
 					"intro": [
-						["Sensei", "Aku mulai capek. Coba kalahkan aku!", "sensei_happy"]
-					],
-					"unlock_skill": "wall_grab"
+						["Sensei", "Aku mulai capek. Cobalah kalahkan aku!", "sensei_happy"]
+					]
 				}
 			}
 		}
 	}
 
-	# Hubungkan semua finish line otomatis
+	# Hubungkan semua finish line
 	for s in stages.values():
 		s["finish"].body_entered.connect(_on_finish_line_entered)
 
 	start_stage(1, 1)
 
 
-# --- DIALOG ---
+# --- DIALOG HANDLER ---
 func show_dialogs(dialogs: Array) -> void:
 	for d in dialogs:
 		dialog_box.queue_text(d[0], d[1], d[2])
 	await dialog_box.finished
 
 
-# --- START ANY STAGE & ATTEMPT ---
+# --- ABILITY UNLOCK ---
+func grant_stage_ability():
+	match current_stage:
+		1:
+			if not dash_unlocked:
+				player.enable_dash()
+				skill_popup.show_skill("Skill Unlocked: DASH!")
+				dash_unlocked = true
+
+		2:
+			if not double_jump_unlocked:
+				player.enable_double_jump()
+				skill_popup.show_skill("Skill Unlocked: DOUBLE JUMP!")
+				double_jump_unlocked = true
+
+		3:
+			if not wall_grab_unlocked:
+				player.enable_wall_grab()
+				skill_popup.show_skill("Skill Unlocked: WALL GRAB!")
+				wall_grab_unlocked = true
+
+
+# --- START STAGE ---
 func start_stage(stage_num: int, attempt_num: int):
 	current_stage = stage_num
 	attempt = attempt_num
@@ -116,25 +148,26 @@ func start_stage(stage_num: int, attempt_num: int):
 	player.set_cutscene_state(true)
 	sensei_anim_player.stop()
 
-	# --- dialog pembuka ---
 	await show_dialogs(attempt_data["intro"])
+	
 
-	# --- reset player saja (sensei sudah otomatis pindah lewat animasi) ---
-	var spawn = stages[current_stage]["spawn"]
-	player.global_position = spawn.global_position + Vector2(100, 0)
+	# ✅ spawn terpisah
+	var p_spawn = stages[current_stage]["player_spawn"]
+	var s_spawn = stages[current_stage]["sensei_spawn"]
 
-	# mulai race
+	player.global_position = p_spawn.global_position
+	sensei.global_position = s_spawn.global_position
+
 	race_in_progress = true
 
 	# ✅ animasi sensei sesuai stage
 	var anim = stages[current_stage]["anim"]
-	print("Playing anim:", anim, "on Stage:", current_stage)
 	sensei_anim_player.play(anim)
 
 	player.set_cutscene_state(false)
 
 
-# --- FINISH DETECT ---
+# --- FINISH TRIGGER ---
 func _on_finish_line_entered(body):
 	if not race_in_progress:
 		return
@@ -146,11 +179,14 @@ func _on_finish_line_entered(body):
 	_evaluate_race_result()
 
 
-# --- RESULT ---
+# --- RACE RESULT ---
 func _evaluate_race_result():
 	player.set_cutscene_state(true)
 
+	# ✅ MENANG
 	if player_won_race:
+		grant_stage_ability()
+
 		await show_dialogs([["Sensei", "Bagus! Kamu menang!", "sensei_happy"]])
 
 		if current_stage < 3:
@@ -162,39 +198,28 @@ func _evaluate_race_result():
 			])
 		return
 
-	# ---- KALAH ----
-	await show_dialogs([["Sensei", "Masih kurang cepat! Ulang lagi!", "sensei_angry"]])
+	# ✅ KALAH
+	await show_dialogs([
+		["Sensei", "Masih kurang cepat! Ulangi lagi!", "sensei_angry"]
+	])
 
-	var unlock = stages[current_stage]["attempts"][attempt]["unlock_skill"]
+	await wait_for_input("ui_accept")
+	await grant_stage_ability()
 
-	# kalah attempt pertama → unlock skill
-	if unlock != null:
-		match unlock:
-			"dash": player.enable_dash()
-			"double_jump": player.enable_double_jump()
-			"wall_grab": player.enable_wall_grab()
-
-		await show_dialogs([
-			["Sensei", "Aku bantu sedikit... aku kasih skill baru!", "sensei_happy"]
-		])
-
-		info.visible = true
-		await wait_for_input("ui_accept")
-		info.visible = false
-
-		attempt = 2
-		await start_stage(current_stage, attempt)
-	else:
-		await start_stage(current_stage, attempt)
+	attempt = 2
+	await start_stage(current_stage, attempt)
 
 
-# --- CAMERA ---
+# --- CAMERA MOVE ---
 func move_camera_to_stage(stage_num: int):
 	camera.set_follow_enabled(false)
 
 	var target = camera.global_position + Vector2(1920, 0)
 	var tween = create_tween()
-	tween.tween_property(camera, "global_position", target, 1.5).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
+	tween.tween_property(camera, "global_position", target, 1.5)\
+		.set_trans(Tween.TRANS_SINE)\
+		.set_ease(Tween.EASE_IN_OUT)
+	
 	await tween.finished
 
 	camera.update_base_position()
@@ -203,7 +228,7 @@ func move_camera_to_stage(stage_num: int):
 	await start_stage(stage_num, 1)
 
 
-# --- WAIT INPUT ---
+# --- WAIT FOR INPUT ---
 func wait_for_input(action_name: String) -> void:
 	while not Input.is_action_just_pressed(action_name):
 		await get_tree().process_frame
