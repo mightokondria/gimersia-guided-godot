@@ -1,0 +1,72 @@
+[gd_scene load_steps=5 format=3 uid="uid://cgeq1gyq1fhdl"]
+
+[ext_resource type="Script" uid="uid://deprjvkiq8hxe" path="res://UI/UI-Script/title_screen.gd" id="1_a1llf"]
+[ext_resource type="Texture2D" uid="uid://d2k6egmhw4abh" path="res://UI/UI-Assets/cuki.jpg" id="2_tuaxb"]
+
+[sub_resource type="Theme" id="Theme_0cs23"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1wnxb"]
+bg_color = Color(0.96862745, 0.8509804, 0.3882353, 1)
+
+[node name="TitleScreen" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_a1llf")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.13803378, 0.13803375, 0.13803375, 1)
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_tuaxb")
+
+[node name="CenterContainer" type="CenterContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -2.0
+offset_top = 885.0
+offset_right = -2.0
+offset_bottom = -42.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer"]
+layout_mode = 2
+
+[node name="GameLogo" type="Label" parent="CenterContainer/VBoxContainer"]
+visible = false
+layout_mode = 2
+theme_override_font_sizes/font_size = 100
+text = "GUIDED"
+horizontal_alignment = 1
+
+[node name="LoadingBar" type="ProgressBar" parent="CenterContainer/VBoxContainer"]
+custom_minimum_size = Vector2(720, 30)
+layout_mode = 2
+size_flags_vertical = 2
+theme = SubResource("Theme_0cs23")
+theme_override_styles/fill = SubResource("StyleBoxFlat_1wnxb")
+show_percentage = false
+
+[node name="PressAnyKey" type="Label" parent="CenterContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 24
+text = "Press Space to Continue"

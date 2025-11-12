@@ -1,0 +1,192 @@
+[gd_scene load_steps=13 format=3 uid="uid://biom333chcsea"]
+
+[ext_resource type="Script" uid="uid://bb8ucmigvbwch" path="res://UI/UI-Script/mainmenu2o.gd" id="1_pq0mk"]
+[ext_resource type="Texture2D" uid="uid://c3od6gux4w6sy" path="res://UI/UI-Assets/test.webp" id="2_pq0mk"]
+[ext_resource type="FontFile" uid="uid://coq0gtxpbsv4j" path="res://UII/Amburadul/Font/Jersey/Jersey25-Regular.ttf" id="3_iobxh"]
+[ext_resource type="FontFile" uid="uid://ceq88g78nn7mi" path="res://UI/UI-Assets/Font/Noto/Noto1/NotoSans-VariableFont_wdth,wght.ttf" id="4_hkou5"]
+[ext_resource type="FontFile" uid="uid://qpxnhrtofgji" path="res://UI/UI-Assets/Font/Noto/static/NotoSans-SemiBold.ttf" id="5_rv6jl"]
+[ext_resource type="Texture2D" uid="uid://ctrv6377a6aab" path="res://UII/Amburadul/image 60.png" id="6_c6psm"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_t5bve"]
+bg_color = Color(0.12156863, 0.12156863, 0.1764706, 1)
+border_color = Color(0.8, 0.8, 0.8, 0)
+corner_radius_top_left = 15
+corner_radius_top_right = 15
+corner_radius_bottom_right = 15
+corner_radius_bottom_left = 15
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7ilkj"]
+bg_color = Color(1, 0.93333334, 0.39607844, 1)
+corner_radius_top_left = 15
+corner_radius_top_right = 15
+corner_radius_bottom_right = 15
+corner_radius_bottom_left = 15
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_w2x6f"]
+bg_color = Color(0.99215686, 0.8745098, 0.40392157, 1)
+corner_radius_top_left = 15
+corner_radius_top_right = 15
+corner_radius_bottom_right = 15
+corner_radius_bottom_left = 15
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_i31io"]
+bg_color = Color(1, 0.9607843, 0.34901962, 1)
+corner_radius_top_left = 15
+corner_radius_top_right = 15
+corner_radius_bottom_right = 15
+corner_radius_bottom_left = 15
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xfb6l"]
+bg_color = Color(1, 0.9607843, 0.34901962, 1)
+corner_radius_top_left = 15
+corner_radius_top_right = 15
+corner_radius_bottom_right = 15
+corner_radius_bottom_left = 15
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_033rb"]
+bg_color = Color(1, 0.93333334, 0.39607844, 1)
+corner_radius_top_left = 15
+corner_radius_top_right = 15
+corner_radius_bottom_right = 15
+corner_radius_bottom_left = 15
+
+[node name="Mainmenu2" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_pq0mk")
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TextureRect" type="TextureRect" parent="Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -20.0
+offset_right = 35.555542
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_pq0mk")
+
+[node name="Label" type="Label" parent="Panel/TextureRect"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 143.22223
+offset_top = -379.5
+offset_right = 809.2222
+offset_bottom = -132.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("3_iobxh")
+theme_override_font_sizes/font_size = 246
+text = "GUIDED"
+horizontal_alignment = 1
+
+[node name="Label2" type="Label" parent="Panel/TextureRect"]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -847.0
+offset_top = 422.0
+offset_right = -537.0
+offset_bottom = 467.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("4_hkou5")
+theme_override_font_sizes/font_size = 32
+text = "@SulikinBlast | 2025"
+horizontal_alignment = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 257.0
+offset_top = -93.0
+offset_right = 709.0
+offset_bottom = 352.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 20
+
+[node name="Button" type="Button" parent="Panel/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_colors/font_hover_color = Color(0.12156863, 0.12156863, 0.1764706, 1)
+theme_override_fonts/font = ExtResource("5_rv6jl")
+theme_override_font_sizes/font_size = 64
+theme_override_styles/normal = SubResource("StyleBoxFlat_t5bve")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_7ilkj")
+theme_override_styles/hover = SubResource("StyleBoxFlat_w2x6f")
+text = "Start"
+
+[node name="Button2" type="Button" parent="Panel/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_colors/font_hover_color = Color(0.12156863, 0.12156863, 0.1764706, 1)
+theme_override_fonts/font = ExtResource("5_rv6jl")
+theme_override_font_sizes/font_size = 64
+theme_override_styles/normal = SubResource("StyleBoxFlat_t5bve")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_i31io")
+theme_override_styles/hover = SubResource("StyleBoxFlat_w2x6f")
+text = "Settings"
+
+[node name="Button3" type="Button" parent="Panel/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_colors/font_hover_color = Color(0.12156863, 0.12156863, 0.1764706, 1)
+theme_override_fonts/font = ExtResource("5_rv6jl")
+theme_override_font_sizes/font_size = 64
+theme_override_styles/normal = SubResource("StyleBoxFlat_t5bve")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_xfb6l")
+theme_override_styles/hover = SubResource("StyleBoxFlat_w2x6f")
+text = "Credits"
+
+[node name="Button4" type="Button" parent="Panel/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_colors/font_hover_color = Color(0.12156863, 0.12156863, 0.1764706, 1)
+theme_override_fonts/font = ExtResource("5_rv6jl")
+theme_override_font_sizes/font_size = 64
+theme_override_styles/normal = SubResource("StyleBoxFlat_t5bve")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_033rb")
+theme_override_styles/hover = SubResource("StyleBoxFlat_w2x6f")
+text = "Exit"
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+
+[node name="Image60" type="Sprite2D" parent="."]
+position = Vector2(2224.5, 696)
+scale = Vector2(4.1511626, 4.6511626)
+texture = ExtResource("6_c6psm")
+
+[connection signal="pressed" from="Panel/VBoxContainer/Button" to="." method="_on_start_pressed"]
+[connection signal="pressed" from="Panel/VBoxContainer/Button2" to="." method="_on_settings_pressed"]
+[connection signal="pressed" from="Panel/VBoxContainer/Button3" to="." method="_on_credits_pressed"]
+[connection signal="pressed" from="Panel/VBoxContainer/Button4" to="." method="_on_exit_pressed"]

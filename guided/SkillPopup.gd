@@ -1,6 +1,6 @@
 extends CanvasLayer
 
-@onready var message = $Message
+@onready var message = $HBoxContainer/Message
 var showing := false
 
 func show_skill(text: String, duration := 1.8):

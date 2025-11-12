@@ -73,7 +73,7 @@ func _ready():
 			"player_spawn": stage1_player_spawn,
 			"sensei_spawn": stage1_sensei_spawn,
 			"finish": stage1_finish_line,
-			"anim": "CUKI",
+			"anim": "SENSEI_WALK_ST_1",
 					"attempts": {
 				1: {
 					"intro": [["Sensei", "Perhatikan aku baik-baik. Kejar jika bisa!", "sensei_happy"]]
@@ -87,7 +87,7 @@ func _ready():
 			"player_spawn": stage2_player_spawn,
 			"sensei_spawn": stage2_sensei_spawn,
 			"finish": stage2_finish_line,
-			"anim": "CUKI",
+			"anim": "SENSEI_WALK_ST_2",
 			"attempts": {
 				1: {
 					"intro": [
@@ -104,7 +104,7 @@ func _ready():
 			"player_spawn": stage3_player_spawn,
 			"sensei_spawn": stage3_sensei_spawn,
 			"finish": stage3_finish_line,
-			"anim": "SenseiWalk_4",
+			"anim": "SENSEI_WALK_ST_3",
 			"attempts": {
 				1: {
 					"intro": [
@@ -145,12 +145,12 @@ func grant_stage_ability():
 		1:
 			if not dash_unlocked:
 				player.enable_dash()
-				skill_popup.show_skill("Skill Unlocked: DASH!")
+				skill_popup.show_skill("Skill Unlocked: DASH!" + "\n" + "Tekan [M] Untuk Dash!")
 				dash_unlocked = true
 		2:
 			if not double_jump_unlocked:
 				player.enable_double_jump()
-				skill_popup.show_skill("Skill Unlocked: DOUBLE JUMP!")
+				skill_popup.show_skill("Skill Unlocked: DOUBLE JUMP!"+ "\n" + "Tekan [SPACE 2x] Untuk Double Jump!")
 				double_jump_unlocked = true
 		3:
 			if not wall_grab_unlocked:
