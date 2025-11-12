@@ -26,12 +26,14 @@ extends Node2D
 @export var stage3_finish_line: Area2D
 
 # ===============================
-# 🧩 GAME STATE
+# 🧠 GAME STATE
 # ===============================
 var current_stage := 1
 var attempt := 1
 var race_in_progress := false
 var player_won_race := false
+
+var sensei_visible := true
 
 # --- Ability unlock flags ---
 var dash_unlocked := false
@@ -40,6 +42,12 @@ var wall_grab_unlocked := false
 
 # --- Stage configuration ---
 var stages := {}
+
+# --- Flags untuk logika finish ---
+var pending_retry_dialog := false
+var sensei_finished := false
+var player_finished := false
+
 
 # ===============================
 # 🚀 READY
@@ -52,7 +60,7 @@ func _ready():
 	else:
 		push_warning("⚠️ SkillPopup node tidak ditemukan!")
 
-	# Setup stage configuration
+	# --- Setup stage configuration ---
 	stages = {
 		1: {
 			"player_spawn": stage1_player_spawn,
@@ -60,8 +68,12 @@ func _ready():
 			"finish": stage1_finish_line,
 			"anim": "SENSEI_WALK_ST_1",
 			"attempts": {
-				1: { "intro": [["Sensei", "Perhatikan aku baik-baik. Kejar jika bisa!", "sensei_happy"]] },
-				2: { "intro": [["Sensei", "Sekarang coba lagi! Kamu pasti bisa mengalahkanku!", "sensei_happy"]] }
+				1: {
+					"intro": [["Sensei", "Perhatikan aku baik-baik. Kejar jika bisa!", "sensei_happy"]]
+				},
+				2: {
+					"intro": [["Sensei", "Sekarang coba lagi! Kamu pasti bisa mengalahkanku!", "sensei_happy"]]
+				}
 			}
 		},
 		2: {
@@ -70,8 +82,15 @@ func _ready():
 			"finish": stage2_finish_line,
 			"anim": "SenseiWalk_3",
 			"attempts": {
-				1: { "intro": [["Sensei", "Selamat datang di Stage 2!", "sensei_happy"], ["Sensei", "Di sini aku makin cepat~", "sensei_smug"]] },
-				2: { "intro": [["Sensei", "Baik, aku akan sedikit santai. Coba kalahkan aku!", "sensei_happy"]] }
+				1: {
+					"intro": [
+						["Sensei", "Selamat datang di Stage 2!", "sensei_happy"],
+						["Sensei", "Di sini aku makin cepat~", "sensei_smug"]
+					]
+				},
+				2: {
+					"intro": [["Sensei", "Baik, aku akan sedikit santai. Coba kalahkan aku!", "sensei_happy"]]
+				}
 			}
 		},
 		3: {
@@ -80,25 +99,31 @@ func _ready():
 			"finish": stage3_finish_line,
 			"anim": "SenseiWalk_4",
 			"attempts": {
-				1: { "intro": [["Sensei", "Kamu sampai di Stage 3? Tidak buruk!", "sensei_smug"], ["Sensei", "Tapi ini yang tersulit! Kejar aku kalau berani!", "sensei_angry"]] },
-				2: { "intro": [["Sensei", "Aku mulai capek. Cobalah kalahkan aku!", "sensei_happy"]] }
+				1: {
+					"intro": [
+						["Sensei", "Kamu sampai di Stage 3? Tidak buruk!", "sensei_smug"],
+						["Sensei", "Tapi ini yang tersulit! Kejar aku kalau berani!", "sensei_angry"]
+					]
+				},
+				2: {
+					"intro": [["Sensei", "Aku mulai capek. Cobalah kalahkan aku!", "sensei_happy"]]
+				}
 			}
 		}
 	}
 
-	# Connect all finish lines
+	# Hubungkan semua finish line
 	for s in stages.values():
 		if s["finish"]:
 			s["finish"].body_entered.connect(_on_finish_line_entered)
 		else:
 			push_warning("⚠️ Finish line belum diassign untuk salah satu stage.")
 
-	# Mulai dari Stage 1
 	await start_stage(1, 1)
 
 
 # ===============================
-# 💬 DIALOG SYSTEM
+# 💬 DIALOG HANDLER
 # ===============================
 func show_dialogs(dialogs: Array) -> void:
 	for d in dialogs:
@@ -107,7 +132,7 @@ func show_dialogs(dialogs: Array) -> void:
 
 
 # ===============================
-# 🔓 ABILITY UNLOCK LOGIC
+# 🔓 ABILITY UNLOCK
 # ===============================
 func grant_stage_ability():
 	match current_stage:
@@ -132,9 +157,15 @@ func grant_stage_ability():
 # 🏁 START STAGE
 # ===============================
 func start_stage(stage_num: int, attempt_num: int):
+	
 	current_stage = stage_num
 	attempt = attempt_num
 	race_in_progress = false
+
+	# Reset flags finish
+	pending_retry_dialog = false
+	sensei_finished = false
+	player_finished = false
 
 	var attempt_data = stages[current_stage]["attempts"][attempt]
 	player.set_cutscene_state(true)
@@ -142,22 +173,22 @@ func start_stage(stage_num: int, attempt_num: int):
 
 	await show_dialogs(attempt_data["intro"])
 
-	# Spawn posisi terpisah
 	var p_spawn = stages[current_stage]["player_spawn"]
 	var s_spawn = stages[current_stage]["sensei_spawn"]
 
 	if p_spawn and s_spawn:
 		player.global_position = p_spawn.global_position
 		sensei.global_position = s_spawn.global_position
+		restore_sensei()
 	else:
 		push_warning("⚠️ Spawn point tidak ditemukan untuk stage " + str(current_stage))
 
-	# Mainkan animasi Sensei sesuai stage
+	# mainkan animasi Sensei sesuai stage
 	var anim = stages[current_stage]["anim"]
-	if sensei_anim_player.has_animation(anim):
+	if sensei_anim_player and sensei_anim_player.has_animation(anim):
 		sensei_anim_player.play(anim)
 	else:
-		push_warning("⚠️ Animasi '" + anim + "' tidak ditemukan di Sensei.")
+		sensei_anim_player.stop()
 
 	player.set_cutscene_state(false)
 	race_in_progress = true
@@ -170,11 +201,40 @@ func _on_finish_line_entered(body):
 	if not race_in_progress:
 		return
 
-	player_won_race = (body.name == "Player")
-	race_in_progress = false
-	sensei_anim_player.stop()
+	# Aman gunakan perbandingan langsung
+	if body == sensei:
+		sensei_finished = true
+		player_won_race = false
+		pending_retry_dialog = true
 
-	_evaluate_race_result()
+		# hentikan animasi sensei (idle/menunggu)
+		if sensei_anim_player:
+			sensei_anim_player.stop()
+			
+		fade_out_sensei()
+
+		# jangan evaluasi dulu — tunggu player
+		return
+
+	if body == player:
+		player_finished = true
+
+		# Jika Sensei sudah finish duluan dan kita menunggu player
+		if pending_retry_dialog and sensei_finished:
+			race_in_progress = false
+			if sensei_anim_player:
+				sensei_anim_player.stop()
+			_evaluate_race_result()
+			return
+
+		# Jika player sampai duluan → menang
+		if not sensei_finished:
+			player_won_race = true
+			race_in_progress = false
+			if sensei_anim_player:
+				sensei_anim_player.stop()
+			_evaluate_race_result()
+			return
 
 
 # ===============================
@@ -182,6 +242,8 @@ func _on_finish_line_entered(body):
 # ===============================
 func _evaluate_race_result():
 	player.set_cutscene_state(true)
+	race_in_progress = false
+	pending_retry_dialog = false
 
 	if player_won_race:
 		grant_stage_ability()
@@ -196,7 +258,7 @@ func _evaluate_race_result():
 			])
 		return
 
-	# Kalau kalah
+	# --- KALAH (setelah player juga sampai finish) ---
 	await show_dialogs([
 		["Sensei", "Masih kurang cepat! Ulangi lagi!", "sensei_angry"]
 	])
@@ -219,13 +281,24 @@ func move_camera_to_stage(stage_num: int):
 	tween.tween_property(camera, "global_position", target, 1.5)\
 		.set_trans(Tween.TRANS_SINE)\
 		.set_ease(Tween.EASE_IN_OUT)
-
+	
 	await tween.finished
-
 	camera.update_base_position()
 	camera.set_follow_enabled(true)
 
 	await start_stage(stage_num, 1)
+	
+func fade_out_sensei():
+	if sensei:
+		sensei.visible = false
+		sensei_visible = false
+		
+func restore_sensei():
+	if sensei:
+		sensei.visible = true
+		sensei.modulate.a = 1.0
+		sensei_visible = true
+
 
 
 # ===============================
@@ -234,16 +307,3 @@ func move_camera_to_stage(stage_num: int):
 func wait_for_input(action_name: String) -> void:
 	while not Input.is_action_just_pressed(action_name):
 		await get_tree().process_frame
-
-
-# ===============================
-# 🧰 SAFE ADD CHILD (UTILITY)
-# ===============================
-func safe_add_child(parent: Node, child: Node):
-	if parent == null or child == null:
-		push_warning("⚠️ safe_add_child: Salah satu node null!")
-		return
-	if not is_instance_valid(parent):
-		push_warning("⚠️ Parent tidak valid!")
-		return
-	parent.add_child(child)

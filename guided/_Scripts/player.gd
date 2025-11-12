@@ -9,7 +9,7 @@ const FRICTION = 5000.0
 const AIR_FRICTION = 1000.0
 
 # --- KONSTANTA DASH ---
-const DASH_SPEED = 2000.0
+const DASH_SPEED = 2300.0
 const DASH_DURATION = 0.15
 var is_dashing = false
 var dash_time_left = 0.0
@@ -31,6 +31,8 @@ var can_wall_grab = false
 # --- VARIABEL STATUS LAINNYA ---
 var jumps_made = 0
 var was_on_floor = true
+
+var pending_retry_dialog := false
 
 # --- REFERENSI NODE (WAJIB SESUAI NAMA DI SCENE) ---
 @onready var coyote_timer = $CoyoteTimer
