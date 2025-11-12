@@ -123,7 +123,7 @@ func _physics_process(delta):
 		var dash_dir = -1.0 if sprite.flip_h else 1.0
 		velocity.x = dash_dir * DASH_SPEED
 		#triggershake
-		camera.start_shake(18.0, 20.0)
+		camera.trigger_shake()
 		#Vibration effect
 		Input.start_joy_vibration(0,0.5,1.0,0.3)
 		

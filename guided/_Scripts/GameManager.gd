@@ -80,7 +80,7 @@ func _ready():
 			"player_spawn": stage2_player_spawn,
 			"sensei_spawn": stage2_sensei_spawn,
 			"finish": stage2_finish_line,
-			"anim": "SenseiWalk_3",
+			"anim": "CUKI",
 			"attempts": {
 				1: {
 					"intro": [
@@ -191,6 +191,12 @@ func start_stage(stage_num: int, attempt_num: int):
 		sensei_anim_player.stop()
 
 	player.set_cutscene_state(false)
+	
+	if camera and camera.has_method("set_stage_active"):
+		camera.set_stage_active(true)
+
+		
+
 	race_in_progress = true
 
 
@@ -275,6 +281,8 @@ func _evaluate_race_result():
 # ===============================
 func move_camera_to_stage(stage_num: int):
 	camera.set_follow_enabled(false)
+	camera.set_stage_active(false)
+
 
 	var target = camera.global_position + Vector2(1920, 0)
 	var tween = create_tween()

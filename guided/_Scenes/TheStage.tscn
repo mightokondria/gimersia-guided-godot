@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=4 uid="uid://bt8pjayii3f46"]
+[gd_scene load_steps=21 format=4 uid="uid://bt8pjayii3f46"]
 
 [ext_resource type="Script" uid="uid://by3yf12ty5gjr" path="res://_Scripts/GameManager.gd" id="1_2g5u6"]
 [ext_resource type="PackedScene" uid="uid://d1g6kiifioiuw" path="res://_Scenes/Player.tscn" id="1_kchhv"]
@@ -264,6 +264,9 @@ _data = {
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_mrcx1"]
 size = Vector2(13.278687, 284.4263)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4d8gl"]
+size = Vector2(193.23773, 18.852463)
+
 [node name="TheStage" type="Node2D" node_paths=PackedStringArray("player", "sensei", "sensei_anim_player", "dialog_box", "camera", "stage1_player_spawn", "stage1_sensei_spawn", "stage1_finish_line", "stage2_player_spawn", "stage2_sensei_spawn", "stage2_finish_line", "stage3_player_spawn", "stage3_sensei_spawn", "stage3_finish_line")]
 script = ExtResource("1_2g5u6")
 player = NodePath("SubViewportContainer/Player")
@@ -355,7 +358,7 @@ position = Vector2(58, 692)
 scale = Vector2(2, 2)
 
 [node name="Stage2_Player_Spawn" type="Marker2D" parent="SubViewportContainer/Detector"]
-position = Vector2(2164, 885)
+position = Vector2(2194, 557)
 scale = Vector2(2, 2)
 
 [node name="Stage3_Player_Spawn" type="Marker2D" parent="SubViewportContainer/Detector"]
@@ -367,7 +370,7 @@ position = Vector2(195, 661)
 scale = Vector2(2, 2)
 
 [node name="Stage2_Sensei_Spawn" type="Marker2D" parent="SubViewportContainer/Detector"]
-position = Vector2(2315, 885)
+position = Vector2(2296, 560)
 scale = Vector2(2, 2)
 
 [node name="Stage3_Sensei_Spawn" type="Marker2D" parent="SubViewportContainer/Detector"]
@@ -387,9 +390,9 @@ debug_color = Color(0.68085706, 0.29902464, 1, 0.41960785)
 position = Vector2(1947, -133)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="SubViewportContainer/Detector/Stage2_FinishLine"]
-position = Vector2(1938.6, 533)
+position = Vector2(1176.5002, 69)
 scale = Vector2(4.8799987, 4.8799987)
-shape = SubResource("RectangleShape2D_mrcx1")
+shape = SubResource("RectangleShape2D_4d8gl")
 debug_color = Color(0.68085706, 0.29902464, 1, 0.41960785)
 
 [node name="Stage3_FinishLine" type="Area2D" parent="SubViewportContainer/Detector"]
@@ -401,12 +404,13 @@ scale = Vector2(4.8799987, 4.8799987)
 shape = SubResource("RectangleShape2D_mrcx1")
 debug_color = Color(0.68085706, 0.29902464, 1, 0.41960785)
 
-[node name="SmartCamera" type="Camera2D" parent="." groups=["Camera"]]
+[node name="SmartCamera" type="Camera2D" parent="." node_paths=PackedStringArray("player") groups=["Camera"]]
 position = Vector2(943, 541)
 scale = Vector2(1.1, 1.1)
 position_smoothing_enabled = true
 rotation_smoothing_enabled = true
 script = ExtResource("5_b6ajn")
+player = NodePath("../SubViewportContainer/Player")
 
 [node name="SkillPopup" type="CanvasLayer" parent="."]
 visible = false
