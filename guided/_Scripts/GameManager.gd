@@ -66,8 +66,8 @@ func _ready():
 			"player_spawn": stage1_player_spawn,
 			"sensei_spawn": stage1_sensei_spawn,
 			"finish": stage1_finish_line,
-			"anim": "SENSEI_WALK_ST_1",
-			"attempts": {
+			"anim": "CUKI",
+					"attempts": {
 				1: {
 					"intro": [["Sensei", "Perhatikan aku baik-baik. Kejar jika bisa!", "sensei_happy"]]
 				},
@@ -284,7 +284,7 @@ func move_camera_to_stage(stage_num: int):
 	camera.set_stage_active(false)
 
 
-	var target = camera.global_position + Vector2(1920, 0)
+	var target = camera.global_position + Vector2(2450.5, 0)
 	var tween = create_tween()
 	tween.tween_property(camera, "global_position", target, 1.5)\
 		.set_trans(Tween.TRANS_SINE)\
