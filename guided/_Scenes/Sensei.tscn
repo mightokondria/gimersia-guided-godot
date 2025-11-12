@@ -1,25 +1,14 @@
-[gd_scene load_steps=25 format=3 uid="uid://bu6jp2trauwtc"]
+[gd_scene load_steps=21 format=3 uid="uid://bu6jp2trauwtc"]
 
 [ext_resource type="Script" uid="uid://cipbviyoelhrb" path="res://_Scripts/Sensei.gd" id="1_jnw5l"]
 [ext_resource type="Texture2D" uid="uid://cfh1vd64732u4" path="res://Art/platformer_metroidvania asset pack v1.01/enemies sprites/goblin/goblin_idle_anim_strip_4.png" id="2_6ngeu"]
-[ext_resource type="Texture2D" uid="uid://cn58fhalin4ag" path="res://Art/platformer_metroidvania asset pack v1.01/enemies sprites/goblin/goblin_run_anim_strip_6.png" id="3_1xln8"]
+[ext_resource type="Texture2D" uid="uid://baw7b1yln20ab" path="res://Art/Characters/LAZYFISH_STATIC.png" id="2_jnw5l"]
 [ext_resource type="Texture2D" uid="uid://bss8j7gp6dawe" path="res://Art/platformer_metroidvania asset pack v1.01/hud elements/coins_hud.png" id="4_1xln8"]
+[ext_resource type="Texture2D" uid="uid://dme4w0tub08i7" path="res://Art/Characters/LAZYFISH_IDLEFLOAT.png" id="4_jnw5l"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_jnw5l"]
-atlas = ExtResource("2_6ngeu")
-region = Rect2(0, 0, 16, 16)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_67kmr"]
-atlas = ExtResource("2_6ngeu")
-region = Rect2(16, 0, 16, 16)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_j0f87"]
-atlas = ExtResource("2_6ngeu")
-region = Rect2(32, 0, 16, 16)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_clhc1"]
-atlas = ExtResource("2_6ngeu")
-region = Rect2(48, 0, 16, 16)
+atlas = ExtResource("2_jnw5l")
+region = Rect2(0, 0, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_gb1xm"]
 atlas = ExtResource("2_6ngeu")
@@ -29,44 +18,27 @@ region = Rect2(16, 0, 16, 16)
 atlas = ExtResource("2_6ngeu")
 region = Rect2(48, 0, 16, 16)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_67kmr"]
+atlas = ExtResource("4_jnw5l")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_j0f87"]
+atlas = ExtResource("4_jnw5l")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_clhc1"]
+atlas = ExtResource("4_jnw5l")
+region = Rect2(64, 0, 32, 32)
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_jxgno"]
-atlas = ExtResource("3_1xln8")
-region = Rect2(0, 0, 16, 16)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_mou0w"]
-atlas = ExtResource("3_1xln8")
-region = Rect2(16, 0, 16, 16)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_7gg87"]
-atlas = ExtResource("3_1xln8")
-region = Rect2(32, 0, 16, 16)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_5uqib"]
-atlas = ExtResource("3_1xln8")
-region = Rect2(48, 0, 16, 16)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_qhapa"]
-atlas = ExtResource("3_1xln8")
-region = Rect2(64, 0, 16, 16)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_6xna4"]
-atlas = ExtResource("3_1xln8")
-region = Rect2(80, 0, 16, 16)
+atlas = ExtResource("4_jnw5l")
+region = Rect2(96, 0, 32, 32)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_lljbj"]
 animations = [{
 "frames": [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_jnw5l")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_67kmr")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_j0f87")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_clhc1")
 }],
 "loop": true,
 "name": &"sensei_idle",
@@ -85,31 +57,24 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
+"texture": SubResource("AtlasTexture_67kmr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_j0f87")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_clhc1")
+}, {
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_jxgno")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_mou0w")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_7gg87")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_5uqib")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_qhapa")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_6xna4")
 }],
 "loop": true,
 "name": &"sensei_run",
 "speed": 5.0
 }]
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_bg8v1"]
-radius = 5.0
-height = 16.0
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_67kmr"]
+size = Vector2(8, 14)
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_1xln8"]
 
@@ -145,8 +110,8 @@ sprite_frames = SubResource("SpriteFrames_lljbj")
 animation = &"sensei_run"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(1, -2)
-shape = SubResource("CapsuleShape2D_bg8v1")
+position = Vector2(1, 6)
+shape = SubResource("RectangleShape2D_67kmr")
 
 [node name="CoyoteTimer" type="Timer" parent="."]
 wait_time = 0.15
