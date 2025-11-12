@@ -73,7 +73,8 @@ func _ready():
 			"player_spawn": stage1_player_spawn,
 			"sensei_spawn": stage1_sensei_spawn,
 			"finish": stage1_finish_line,
-			"anim": "SENSEI_WALK_ST_1",
+			#"anim": "SENSEI_WALK_ST_1",
+			"anim": "CUKI",
 					"attempts": {
 				1: {
 					"intro": [["Sensei", "Perhatikan aku baik-baik. Kejar jika bisa!", "sensei_happy"]]
@@ -87,7 +88,8 @@ func _ready():
 			"player_spawn": stage2_player_spawn,
 			"sensei_spawn": stage2_sensei_spawn,
 			"finish": stage2_finish_line,
-			"anim": "SENSEI_WALK_ST_2",
+			#"anim": "SENSEI_WALK_ST_2",
+			"anim": "CUKI",
 			"attempts": {
 				1: {
 					"intro": [
@@ -104,7 +106,8 @@ func _ready():
 			"player_spawn": stage3_player_spawn,
 			"sensei_spawn": stage3_sensei_spawn,
 			"finish": stage3_finish_line,
-			"anim": "SENSEI_WALK_ST_3",
+			#"anim": "SENSEI_WALK_ST_3",
+			"anim": "CUKI",
 			"attempts": {
 				1: {
 					"intro": [
@@ -192,10 +195,10 @@ func start_stage(stage_num: int, attempt_num: int):
 	# ✅ Aktifkan barrier hanya saat Stage 3
 	if stage3_platform:
 		stage3_platform.disabled = (stage_num != 3)
-		print("CUKIMAYYYY")
+		print("AW")
 	else:
 		stage3_platform.disabled = (stage_num == 3)
-		print("aku waria")
+		print("aku gila")
 	
 	# mainkan animasi Sensei sesuai stage
 	var anim = stages[current_stage]["anim"]
