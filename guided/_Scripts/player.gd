@@ -1,7 +1,7 @@
 extends CharacterBody2D
 
 # --- KONSTANTA GERAKAN DASAR ---
-const MAX_SPEED = 800.0
+const MAX_SPEED = 700.0
 const JUMP_VELOCITY = -1400.0
 const ACCELERATION = 8000.0
 const AIR_ACCELERATION = 6000.0 

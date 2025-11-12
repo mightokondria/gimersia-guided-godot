@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=4 uid="uid://bt8pjayii3f46"]
+[gd_scene load_steps=18 format=4 uid="uid://bt8pjayii3f46"]
 
 [ext_resource type="Script" uid="uid://by3yf12ty5gjr" path="res://_Scripts/GameManager.gd" id="1_2g5u6"]
 [ext_resource type="PackedScene" uid="uid://d1g6kiifioiuw" path="res://_Scenes/Player.tscn" id="1_kchhv"]
@@ -61,10 +61,10 @@ tracks/0/path = NodePath("SubViewportContainer/Sensei:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 1.8666667, 2.9),
+"times": PackedFloat32Array(0, 1.9666667, 2.9),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
-"values": [Vector2(390, 1022), Vector2(1310, 1022), Vector2(2020, 1022)]
+"values": [Vector2(109.598, 1022), Vector2(1310, 1022), Vector2(2020, 1022)]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -76,7 +76,7 @@ tracks/1/keys = {
 "times": PackedFloat32Array(0, 1.5, 1.8, 1.9666667),
 "transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 0,
-"values": [Vector2(400, 772), Vector2(390, 772), Vector2(390, 362), Vector2(390, 471)]
+"values": [Vector2(400, 752), Vector2(390, 752), Vector2(390, 412), Vector2(390, 497)]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
@@ -195,21 +195,6 @@ _data = {
 &"SenseiWalk_4": SubResource("Animation_4d8gl")
 }
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_vwk1b"]
-size = Vector2(5889, 149)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_rfx65"]
-size = Vector2(777, 74)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_2d4v4"]
-size = Vector2(178, 74)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_nnjwi"]
-size = Vector2(2058.25, 52)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_7017n"]
-size = Vector2(69.75, 1386)
-
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_mrcx1"]
 size = Vector2(13.278687, 284.4263)
 
@@ -267,8 +252,8 @@ scale = Vector2(6.1833334, 6.1833334)
 texture = ExtResource("4_mrcx1")
 
 [node name="Player" parent="SubViewportContainer" instance=ExtResource("1_kchhv")]
-position = Vector2(143, 786)
-scale = Vector2(7.5999975, 7.5999975)
+position = Vector2(80, 856)
+scale = Vector2(4.4399977, 4.4399977)
 is_cutscene = true
 
 [node name="CollisionShape2D" parent="SubViewportContainer/Player" index="1"]
@@ -286,66 +271,18 @@ texture = ExtResource("6_4d8gl")
 [node name="TileMapLayer" type="TileMapLayer" parent="SubViewportContainer"]
 position = Vector2(-18, 187)
 scale = Vector2(8, 8)
-tile_map_data = PackedByteArray("AAACAAQAAQABAAAAAAADAAQAAQABAAAAAAAEAAQAAQABAAAAAAAFAAQAAQABAAAAAAAGAAQAAQABAAAAAAAHAAQAAQABAAAAAAAIAAMAAQABAAAAAAAJAAMAAQABAAAAAAAKAAMAAQABAAAAAAALAAMAAQABAAAAAAAMAAMAAQABAAAAAAAAAAwAAQABAAAAAAABAAwAAQABAAAAAAACAAwAAQABAAAAAAADAAwAAQABAAAAAAAEAAwAAQABAAAAAAAFAAwAAQABAAAAAAAGAAwAAQABAAAAAAAHAAwAAQABAAAAAAAIAAwAAQABAAAAAAAJAAwAAQABAAAAAAAKAAwAAQABAAAAAAALAAwAAQABAAAAAAAMAAwAAQABAAAAAAANAAwAAQABAAAAAAAOAAwAAQABAAAAAAAPAAwAAQABAAAAAAAQAAwAAQABAAAAAAARAAwAAQABAAAAAAASAAwAAQABAAAAAAATAAwAAQABAAAAAAAUAAwAAQABAAAAAAAVAAwAAQABAAAAAAAWAAwAAQABAAAAAAAXAAwAAQABAAAAAAAYAAwAAQABAAAAAAAZAAwAAQABAAAAAAAaAAwAAQABAAAAAAAbAAwAAQABAAAAAAAcAAwAAQABAAAAAAAdAAwAAQABAAAAAAAeAAwAAQABAAAAAAAfAAwAAQABAAAAAAAUAAcAAQABAAAAAAAVAAcAAQABAAAAAAAWAAcAAQABAAAAAAAXAAcAAQABAAAAAAAYAAcAAQABAAAAAAAZAAcAAQABAAAAAAAaAAcAAQABAAAAAAAbAAcAAQABAAAAAAAgAAcAAQABAAAAAAAfAAcAAQABAAAAAAAeAAcAAQABAAAAAAAdAAcAAQABAAAAAAAcAAcAAQABAAAAAAAAAAsAAQABAAAAAAABAAsAAQABAAAAAAACAAsAAQABAAAAAAADAAsAAQABAAAAAAAEAAsAAQABAAAAAAAFAAsAAQABAAAAAAAGAAsAAQABAAAAAAAHAAsAAQABAAAAAAAIAAsAAQABAAAAAAAJAAsAAQABAAAAAAAKAAsAAQABAAAAAAALAAsAAQABAAAAAAAMAAsAAQABAAAAAAANAAsAAQABAAAAAAAOAAsAAQABAAAAAAAPAAsAAQABAAAAAAAQAAsAAQABAAAAAAARAAsAAQABAAAAAAASAAsAAQABAAAAAAATAAsAAQABAAAAAAAUAAsAAQABAAAAAAAVAAsAAQABAAAAAAAWAAsAAQABAAAAAAAXAAsAAQABAAAAAAAYAAsAAQABAAAAAAAZAAsAAQABAAAAAAAaAAsAAQABAAAAAAAbAAsAAQABAAAAAAAcAAsAAQABAAAAAAAdAAsAAQABAAAAAAAeAAsAAQABAAAAAAAfAAsAAQABAAAAAAA=")
+tile_map_data = PackedByteArray("AAACAAQAAQABAAAAAAADAAQAAQABAAAAAAAEAAQAAQABAAAAAAAFAAQAAQABAAAAAAAGAAQAAQABAAAAAAAHAAQAAQABAAAAAAAIAAMAAQABAAAAAAAJAAMAAQABAAAAAAAKAAMAAQABAAAAAAALAAMAAQABAAAAAAAMAAMAAQABAAAAAAAAAAwAAQABAAAAAAABAAwAAQABAAAAAAACAAwAAQABAAAAAAADAAwAAQABAAAAAAAEAAwAAQABAAAAAAAFAAwAAQABAAAAAAAGAAwAAQABAAAAAAAHAAwAAQABAAAAAAAIAAwAAQABAAAAAAAJAAwAAQABAAAAAAAKAAwAAQABAAAAAAALAAwAAQABAAAAAAAMAAwAAQABAAAAAAANAAwAAQABAAAAAAAOAAwAAQABAAAAAAAPAAwAAQABAAAAAAAQAAwAAQABAAAAAAARAAwAAQABAAAAAAASAAwAAQABAAAAAAATAAwAAQABAAAAAAAUAAwAAQABAAAAAAAVAAwAAQABAAAAAAAWAAwAAQABAAAAAAAXAAwAAQABAAAAAAAYAAwAAQABAAAAAAAZAAwAAQABAAAAAAAaAAwAAQABAAAAAAAbAAwAAQABAAAAAAAcAAwAAQABAAAAAAAdAAwAAQABAAAAAAAeAAwAAQABAAAAAAAfAAwAAQABAAAAAAAUAAcAAQABAAAAAAAVAAcAAQABAAAAAAAWAAcAAQABAAAAAAAXAAcAAQABAAAAAAAYAAcAAQABAAAAAAAZAAcAAQABAAAAAAAaAAcAAQABAAAAAAAbAAcAAQABAAAAAAAgAAcAAQABAAAAAAAfAAcAAQABAAAAAAAeAAcAAQABAAAAAAAdAAcAAQABAAAAAAAcAAcAAQABAAAAAAAAAAsAAQABAAAAAAABAAsAAQABAAAAAAACAAsAAQABAAAAAAADAAsAAQABAAAAAAAEAAsAAQABAAAAAAAFAAsAAQABAAAAAAAGAAsAAQABAAAAAAAHAAsAAQABAAAAAAAIAAsAAQABAAAAAAAJAAsAAQABAAAAAAAKAAsAAQABAAAAAAALAAsAAQABAAAAAAAMAAsAAQABAAAAAAANAAsAAQABAAAAAAAOAAsAAQABAAAAAAAPAAsAAQABAAAAAAAQAAsAAQABAAAAAAARAAsAAQABAAAAAAASAAsAAQABAAAAAAATAAsAAQABAAAAAAAUAAsAAQABAAAAAAAVAAsAAQABAAAAAAAWAAsAAQABAAAAAAAXAAsAAQABAAAAAAAYAAsAAQABAAAAAAAZAAsAAQABAAAAAAAaAAsAAQABAAAAAAAbAAsAAQABAAAAAAAcAAsAAQABAAAAAAAdAAsAAQABAAAAAAAeAAsAAQABAAAAAAAfAAsAAQABAAAAAAAAAPv/AgACAAEAAAAAAPz/AgACAAEAAAAAAP3/AgACAAEAAAAAAP7/AgACAAEAAAAAAP//AgACAAEAAAAAAAAAAgACAAEAAAAAAAEAAgACAAEAAAAAAAIAAgACAAEAAAAAAAMAAgACAAEAAAAAAAQAAgACAAEAAAAAAAUAAgACAAEAAAAAAAYAAgACAAEAAAAAAAcAAgACAAEAAAAAAAgAAgACAAEAAAAAAAkAAgACAAEAAAAAAAoAAgACAAEAAAABAPv/AgACAAEAAAACAPv/AgACAAEAAAADAPv/AgACAAEAAAAEAPv/AgACAAEAAAAFAPv/AgACAAEAAAAGAPv/AgACAAEAAAAHAPv/AgACAAEAAAAIAPv/AgACAAEAAAAJAPv/AgACAAEAAAAKAPv/AgACAAEAAAALAPv/AgACAAEAAAAMAPv/AgACAAEAAAANAPv/AgACAAEAAAAOAPv/AgACAAEAAAAPAPv/AgACAAEAAAAQAPv/AgACAAEAAAARAPv/AgACAAEAAAASAPv/AgACAAEAAAATAPv/AgACAAEAAAAUAPv/AgACAAEAAAAVAPv/AgACAAEAAAAWAPv/AgACAAEAAAAXAPv/AgACAAEAAAAYAPv/AgACAAEAAAAZAPv/AgACAAEAAAAaAPv/AgACAAEAAAAbAPv/AgACAAEAAAAcAPv/AgACAAEAAAAdAPv/AgACAAEAAAAeAPv/AgACAAEAAAA=")
 tile_set = ExtResource("7_4d8gl")
-
-[node name="Floor" type="StaticBody2D" parent="SubViewportContainer"]
-visible = false
-position = Vector2(798, 533)
-
-[node name="ColorRect" type="ColorRect" parent="SubViewportContainer/Floor"]
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -799.99994
-offset_top = 409.0
-offset_right = 1173.6489
-offset_bottom = 558.0
-grow_horizontal = 2
-grow_vertical = 2
-scale = Vector2(2.9599996, 1)
-size_flags_horizontal = 4
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="SubViewportContainer/Floor"]
-position = Vector2(2144.5, 483.5)
-shape = SubResource("RectangleShape2D_vwk1b")
 
 [node name="Sensei" parent="SubViewportContainer" instance=ExtResource("8_mrcx1")]
 position = Vector2(380, 892)
-scale = Vector2(6.6799994, 6.6799994)
+scale = Vector2(4.3200016, 4.3200016)
 
-[node name="StaticBody2D" type="StaticBody2D" parent="SubViewportContainer"]
-position = Vector2(798, 462)
+[node name="Sprite2D" parent="SubViewportContainer/Sensei" index="0"]
+position = Vector2(12.037032, -6.0185137)
 
-[node name="ColorRect" type="ColorRect" parent="SubViewportContainer/StaticBody2D"]
-offset_left = 496.0
-offset_top = 181.0
-offset_right = 1275.0
-offset_bottom = 254.0
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="SubViewportContainer/StaticBody2D"]
-position = Vector2(884.5, 218)
-shape = SubResource("RectangleShape2D_rfx65")
-
-[node name="ColorRect2" type="ColorRect" parent="SubViewportContainer/StaticBody2D"]
-offset_left = 158.0
-offset_top = -155.0
-offset_right = 336.0
-offset_bottom = -82.0
-
-[node name="CollisionShape2D5" type="CollisionShape2D" parent="SubViewportContainer/StaticBody2D"]
-position = Vector2(247, -118)
-shape = SubResource("RectangleShape2D_2d4v4")
-
-[node name="CollisionShape2D4" type="CollisionShape2D" parent="SubViewportContainer/StaticBody2D"]
-position = Vector2(158, -729)
-shape = SubResource("RectangleShape2D_nnjwi")
-
-[node name="CollisionShape2D3" type="CollisionShape2D" parent="SubViewportContainer/StaticBody2D"]
-position = Vector2(-835, -64)
-shape = SubResource("RectangleShape2D_7017n")
+[node name="CollisionShape2D" parent="SubViewportContainer/Sensei" index="1"]
+visible = false
 
 [node name="Detector" type="Node2D" parent="SubViewportContainer"]
 
@@ -401,8 +338,8 @@ shape = SubResource("RectangleShape2D_mrcx1")
 debug_color = Color(0.68085706, 0.29902464, 1, 0.41960785)
 
 [node name="SmartCamera" type="Camera2D" parent="." node_paths=PackedStringArray("player") groups=["Camera"]]
-visible = false
 position = Vector2(943, 541)
+scale = Vector2(1.1, 1.1)
 position_smoothing_enabled = true
 rotation_smoothing_enabled = true
 script = ExtResource("5_b6ajn")
@@ -436,3 +373,4 @@ text = "fskldjfksjldf"
 
 [editable path="TextBox"]
 [editable path="SubViewportContainer/Player"]
+[editable path="SubViewportContainer/Sensei"]
