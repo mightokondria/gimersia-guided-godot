@@ -1,8 +1,6 @@
-[gd_scene load_steps=5 format=3 uid="uid://cvx76l017jneh"]
+[gd_scene load_steps=3 format=3 uid="uid://cvx76l017jneh"]
 
-[ext_resource type="Script" uid="uid://c720veeugp70s" path="res://UII/Amburadul/UIscene/loading_1.gd" id="1_r4xg6"]
-[ext_resource type="Texture2D" uid="uid://cbo7uf6yb6hlw" path="res://UII/Amburadul/1 (1).png" id="2_l37v1"]
-[ext_resource type="FontFile" uid="uid://coq0gtxpbsv4j" path="res://UII/Amburadul/Font/Jersey/Jersey25-Regular.ttf" id="3_jl1ik"]
+[ext_resource type="Script" uid="uid://21iv4s8fcexd" path="res://Art/UI/UI-Scene/loading_1.gd" id="1_lh6ar"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_g87h0"]
 bg_color = Color(1, 1, 1, 1)
@@ -14,7 +12,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("1_r4xg6")
+script = ExtResource("1_lh6ar")
 
 [node name="TextureRect" type="TextureRect" parent="."]
 visible = false
@@ -24,7 +22,6 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("2_l37v1")
 
 [node name="Panel" type="Panel" parent="."]
 layout_mode = 1
@@ -52,7 +49,6 @@ theme_override_constants/separation = -42
 [node name="Label" type="Label" parent="Panel/MarginContainer/VBoxContainer"]
 layout_mode = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_fonts/font = ExtResource("3_jl1ik")
 theme_override_font_sizes/font_size = 128
 text = "SULIKIN"
 horizontal_alignment = 1
@@ -60,7 +56,6 @@ horizontal_alignment = 1
 [node name="Label2" type="Label" parent="Panel/MarginContainer/VBoxContainer"]
 layout_mode = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_fonts/font = ExtResource("3_jl1ik")
 theme_override_font_sizes/font_size = 128
 text = "BLAST"
 horizontal_alignment = 1

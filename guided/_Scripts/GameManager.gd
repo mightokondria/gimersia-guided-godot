@@ -262,6 +262,7 @@ func _evaluate_race_result():
 				["Sensei", "Tidak mungkin... kamu mengalahkanku!", "sensei_shock"],
 				["Sensei", "Kamu pemenang sejati!", "sensei_happy"]
 			])
+			get_tree().change_scene_to_file("res://Art/UI/UI-Scene/Mainmenu2.tscn")
 		return
 
 	# --- KALAH (setelah player juga sampai finish) ---

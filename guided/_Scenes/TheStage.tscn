@@ -1,4 +1,4 @@
-[gd_scene load_steps=51 format=4 uid="uid://bt8pjayii3f46"]
+[gd_scene load_steps=52 format=4 uid="uid://bt8pjayii3f46"]
 
 [ext_resource type="Script" uid="uid://by3yf12ty5gjr" path="res://_Scripts/GameManager.gd" id="1_2g5u6"]
 [ext_resource type="PackedScene" uid="uid://d1g6kiifioiuw" path="res://_Scenes/Player.tscn" id="1_kchhv"]
@@ -27,6 +27,7 @@
 [ext_resource type="Texture2D" uid="uid://c65hke1pwnehj" path="res://Art/falah/background/trees/sakura tree 2.png" id="14_yubga"]
 [ext_resource type="Texture2D" uid="uid://cnv1hj1r35xa1" path="res://Art/falah/background/trees/trees far 1.png" id="15_cxeia"]
 [ext_resource type="Texture2D" uid="uid://qto76l3mry0l" path="res://Art/falah/background/rock_/rock small.png" id="16_vgert"]
+[ext_resource type="PackedScene" uid="uid://xktgit4ifb2o" path="res://Art/UI/UI-Scene/GameUI.tscn" id="28_vm1nx"]
 
 [sub_resource type="Animation" id="Animation_gpv2w"]
 resource_name = "CUKI"
@@ -788,6 +789,12 @@ layout_mode = 2
 size_flags_horizontal = 6
 theme_override_font_sizes/font_size = 86
 text = "kdsflksjfdjsdlkfjksadjfkjslkdjfkjsdlkfjsk"
+
+[node name="GameUI" parent="." instance=ExtResource("28_vm1nx")]
+offset_left = 959.0
+offset_top = 563.0
+offset_right = 959.0
+offset_bottom = 563.0
 
 [editable path="TextBox"]
 [editable path="SubViewportContainer/Sensei"]

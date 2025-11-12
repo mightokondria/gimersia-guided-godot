@@ -77,7 +77,7 @@ func _on_main_menu_pressed():
 	get_tree().paused = false
 	
 	# Ganti scene ke main menu (sesuaikan path-nya)
-	get_tree().change_scene_to_file("res://UI/UI-Scene/Mainmenu2.tscn")
+	get_tree().change_scene_to_file("res://Art/UI/UI-Scene/Mainmenu2.tscn")
 	
 	print("Back to Main Menu")
 

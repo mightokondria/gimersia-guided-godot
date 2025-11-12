@@ -1,10 +1,11 @@
 [gd_scene load_steps=15 format=3 uid="uid://xktgit4ifb2o"]
 
-[ext_resource type="Script" uid="uid://cl3kyfow4lhr3" path="res://UI/UI-Script/PauseManager.gd" id="1_finl6"]
-[ext_resource type="FontFile" uid="uid://bhhofkfmkwfik" path="res://UI/UI-Assets/Font/Noto/static/NotoSans-ExtraBoldItalic.ttf" id="1_lwu4n"]
-[ext_resource type="Texture2D" uid="uid://c3od6gux4w6sy" path="res://UI/UI-Assets/test.webp" id="2_0p4ff"]
-[ext_resource type="FontFile" uid="uid://qpxnhrtofgji" path="res://UI/UI-Assets/Font/Noto/static/NotoSans-SemiBold.ttf" id="2_ygjuf"]
-[ext_resource type="Texture2D" uid="uid://c50dlgmsj0qkd" path="res://UI/UI-Assets/Rectangle 13.png" id="5_odbvr"]
+[ext_resource type="Script" uid="uid://cl3kyfow4lhr3" path="res://Art/UI/UI-Script/PauseManager.gd" id="1_finl6"]
+[ext_resource type="FontFile" uid="uid://bhhofkfmkwfik" path="res://Art/UI/UI-Assets/Font/Noto/static/NotoSans-ExtraBoldItalic.ttf" id="1_lwu4n"]
+[ext_resource type="FontFile" uid="uid://qpxnhrtofgji" path="res://Art/UI/UI-Assets/Font/Noto/static/NotoSans-SemiBold.ttf" id="2_ygjuf"]
+[ext_resource type="Texture2D" uid="uid://c50dlgmsj0qkd" path="res://Art/UI/UI-Assets/Rectangle 13.png" id="5_odbvr"]
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_ic6ib"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_finl6"]
 bg_color = Color(1, 1, 1, 1)
@@ -85,13 +86,14 @@ grow_vertical = 2
 script = ExtResource("1_finl6")
 
 [node name="TextureRect" type="TextureRect" parent="."]
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("2_0p4ff")
+texture = SubResource("ViewportTexture_ic6ib")
 
 [node name="PauseButton" type="Button" parent="."]
 layout_mode = 1
