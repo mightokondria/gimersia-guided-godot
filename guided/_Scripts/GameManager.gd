@@ -282,9 +282,23 @@ func _evaluate_race_result():
 func move_camera_to_stage(stage_num: int):
 	camera.set_follow_enabled(false)
 	camera.set_stage_active(false)
+	
+	# 🧭 Deklarasikan variabel sebelum digunakan
+	var target_offset := Vector2.ZERO
+	var target := Vector2.ZERO
+	
+	match stage_num:
+		2:
+			# Stage 1 → Stage 2: geser kanan 2355px
+			target_offset = Vector2(2355, 0)
+		3:
+			# Stage 2 → Stage 3: naik 1080px
+			target_offset = Vector2(0, -1080)
+		_:
+			# Default: tidak bergeser
+			target_offset = Vector2.ZERO
 
-
-	var target = camera.global_position + Vector2(2450.5, 0)
+	target = camera.global_position + target_offset
 	var tween = create_tween()
 	tween.tween_property(camera, "global_position", target, 1.5)\
 		.set_trans(Tween.TRANS_SINE)\
