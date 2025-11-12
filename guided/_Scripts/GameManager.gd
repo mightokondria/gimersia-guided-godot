@@ -40,13 +40,14 @@ var stages := {}
 
 func _ready():
 	skill_popup.visible = false
+	print("⚙️ [READY]", name, "is inside tree?", is_inside_tree())
 
 	stages = {
 		1: {
 			"player_spawn": stage1_player_spawn,
 			"sensei_spawn": stage1_sensei_spawn,
 			"finish": stage1_finish_line,
-			"anim": "SenseiWalk_2",
+			"anim": "CUKI",
 			"attempts": {
 				1: {
 					"intro": [
@@ -232,3 +233,13 @@ func move_camera_to_stage(stage_num: int):
 func wait_for_input(action_name: String) -> void:
 	while not Input.is_action_just_pressed(action_name):
 		await get_tree().process_frame
+		
+		
+func safe_add_child(parent: Node, child: Node):
+	if parent == null or child == null:
+		push_warning("⚠️ safe_add_child: Salah satu node null!")
+		return
+	if not is_instance_valid(parent):
+		push_warning("⚠️ Parent tidak valid!")
+		return
+	parent.add_child(child)

@@ -88,7 +88,7 @@ grip={
 
 [physics]
 
-2d/default_gravity=4500.0
+2d/default_gravity=6000.0
 
 [rendering]
 

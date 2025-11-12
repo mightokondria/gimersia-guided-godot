@@ -1,6 +1,6 @@
 [gd_scene load_steps=33 format=3 uid="uid://d1g6kiifioiuw"]
 
-[ext_resource type="Script" uid="uid://dj75b4yc4xyxo" path="res://_Scripts/Player.gd" id="1_bg8v1"]
+[ext_resource type="Script" uid="uid://dj75b4yc4xyxo" path="res://_Scripts/player.gd" id="1_bg8v1"]
 [ext_resource type="Texture2D" uid="uid://c2qntne30h8o5" path="res://Art/Characters/Player-Copycat/COPYCAT_FALL.png" id="2_uc1x7"]
 [ext_resource type="Texture2D" uid="uid://dkh7xovgotg36" path="res://Art/Characters/Player-Copycat/COPYCAT_DOUBLEJUMP.png" id="2_y6kcb"]
 [ext_resource type="Texture2D" uid="uid://dj01q81ilroqs" path="res://Art/Characters/Player-Copycat/COPYCAT_IDLE.png" id="3_y6kcb"]
@@ -204,18 +204,19 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_dx0g0"]
-size = Vector2(6, 12)
+size = Vector2(7, 12)
 
 [node name="Player" type="CharacterBody2D"]
 script = ExtResource("1_bg8v1")
 
 [node name="Sprite2D" type="AnimatedSprite2D" parent="."]
-position = Vector2(0, -4)
+position = Vector2(1, 2)
 sprite_frames = SubResource("SpriteFrames_lljbj")
 animation = &"idle"
+offset = Vector2(-1, -6)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, 2)
+position = Vector2(1, 2)
 shape = SubResource("RectangleShape2D_dx0g0")
 
 [node name="CoyoteTimer" type="Timer" parent="."]

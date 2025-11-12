@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=4 uid="uid://bt8pjayii3f46"]
+[gd_scene load_steps=20 format=4 uid="uid://bt8pjayii3f46"]
 
 [ext_resource type="Script" uid="uid://by3yf12ty5gjr" path="res://_Scripts/GameManager.gd" id="1_2g5u6"]
 [ext_resource type="PackedScene" uid="uid://d1g6kiifioiuw" path="res://_Scenes/Player.tscn" id="1_kchhv"]
@@ -16,34 +16,22 @@ length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("SubViewportContainer/Player:is_cutscene")
+tracks/0/path = NodePath("SubViewportContainer/Sensei:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [true]
+"update": 0,
+"values": [Vector2(380, 892)]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("SubViewportContainer/Sensei:position")
+tracks/1/path = NodePath("SubViewportContainer/Sensei/PathTrail:emitting")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(380, 892)]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("SubViewportContainer/Sensei/PathTrail:emitting")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
@@ -186,9 +174,29 @@ tracks/1/keys = {
 "values": [Vector2(4360, 902), Vector2(5830, 902)]
 }
 
+[sub_resource type="Animation" id="Animation_b4wrp"]
+resource_name = "SENSEI_WALK_ST_1"
+
+[sub_resource type="Animation" id="Animation_gpv2w"]
+resource_name = "CUKI"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("SubViewportContainer/Sensei:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.06666667),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(380, 892), Vector2(380, 892)]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_mrcx1"]
 _data = {
+&"CUKI": SubResource("Animation_gpv2w"),
 &"RESET": SubResource("Animation_c3oyc"),
+&"SENSEI_WALK_ST_1": SubResource("Animation_b4wrp"),
 &"SenseiWalk": SubResource("Animation_mrcx1"),
 &"SenseiWalk_2": SubResource("Animation_2g5u6"),
 &"SenseiWalk_3": SubResource("Animation_2d4v4"),
@@ -251,17 +259,6 @@ position = Vector2(939.55554, 528.5)
 scale = Vector2(6.1833334, 6.1833334)
 texture = ExtResource("4_mrcx1")
 
-[node name="Player" parent="SubViewportContainer" instance=ExtResource("1_kchhv")]
-position = Vector2(58, 702)
-scale = Vector2(4.4399977, 4.4399977)
-is_cutscene = true
-
-[node name="Sprite2D" parent="SubViewportContainer/Player" index="0"]
-position = Vector2(3.828831, -1.8017983)
-
-[node name="CollisionShape2D" parent="SubViewportContainer/Player" index="1"]
-visible = false
-
 [node name="ParallaxBackground" type="ParallaxBackground" parent="SubViewportContainer"]
 
 [node name="ParallaxLayer" type="ParallaxLayer" parent="SubViewportContainer/ParallaxBackground"]
@@ -288,10 +285,14 @@ animation = &"sensei_idle"
 [node name="CollisionShape2D" parent="SubViewportContainer/Sensei" index="1"]
 visible = false
 
+[node name="Player" parent="SubViewportContainer" instance=ExtResource("1_kchhv")]
+position = Vector2(86, 702)
+scale = Vector2(6, 6)
+
 [node name="Detector" type="Node2D" parent="SubViewportContainer"]
 
 [node name="Stage1_Player_Spawn" type="Marker2D" parent="SubViewportContainer/Detector"]
-position = Vector2(141, 885)
+position = Vector2(58, 692)
 scale = Vector2(2, 2)
 
 [node name="Stage2_Player_Spawn" type="Marker2D" parent="SubViewportContainer/Detector"]
@@ -347,7 +348,7 @@ scale = Vector2(1.1, 1.1)
 position_smoothing_enabled = true
 rotation_smoothing_enabled = true
 script = ExtResource("5_b6ajn")
-player = NodePath("../SubViewportContainer/Player")
+player = NodePath("")
 
 [node name="SkillPopup" type="CanvasLayer" parent="."]
 visible = false
@@ -376,5 +377,4 @@ scale = Vector2(4.6400003, 4.6400003)
 text = "fskldjfksjldf"
 
 [editable path="TextBox"]
-[editable path="SubViewportContainer/Player"]
 [editable path="SubViewportContainer/Sensei"]

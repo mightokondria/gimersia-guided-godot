@@ -2,7 +2,7 @@ extends CharacterBody2D
 
 # --- KONSTANTA GERAKAN DASAR ---
 const MAX_SPEED = 700.0
-const JUMP_VELOCITY = -1400.0
+const JUMP_VELOCITY = -1300.0
 const ACCELERATION = 8000.0
 const AIR_ACCELERATION = 6000.0 
 const FRICTION = 5000.0
@@ -43,6 +43,8 @@ var was_on_floor = true
 # Ambil nilai gravitasi dari Project Settings
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 @export var is_cutscene = false
+
+
 
 func _physics_process(delta):
 	
