@@ -77,7 +77,11 @@ func _ready():
 			"anim": "CUKI",
 					"attempts": {
 				1: {
-					"intro": [["Sensei", "Perhatikan aku baik-baik. Kejar jika bisa!", "sensei_happy"]]
+					"intro": [["Sensei", "Selamat datang di Pelajaran Terakhir!", "sensei_happy"],
+					["Sensei", "Kalahkan aku dn buat aku bangga", "sensei_happy"],
+					["You", "Baik Sensei", "player_happy"]
+					
+					]
 				},
 				2: {
 					"intro": [["Sensei", "Sekarang coba lagi! Kamu pasti bisa mengalahkanku!", "sensei_happy"]]
@@ -127,8 +131,8 @@ func _ready():
 		var finish_line = stages[stage_id]["finish"]
 		finish_line.body_entered.connect(_on_finish_line_entered.bind(stage_id))
 
-
-		await start_stage(1, 1)
+	# Pindahkan ke luar loop
+	await start_stage(1, 1)
 
 
 # ===============================
