@@ -6,7 +6,7 @@ extends Control
 
 @onready var pause_button = $PauseButton
 @onready var pause_menu = $PauseMenu
-@onready var game_ui = $GameUI
+@onready var game_ui = $"."
 
 var sfx_volume: float = 1.0
 var music_volume: float = 1.0

@@ -125,13 +125,6 @@ offset_bottom = 607.0
 size_flags_vertical = 1
 theme_override_styles/slider = SubResource("StyleBoxFlat_xtuik")
 
-[node name="GameUI" type="Container" parent="."]
-layout_mode = 0
-offset_left = 36.0
-offset_top = 31.0
-offset_right = 76.0
-offset_bottom = 71.0
-
 [node name="PauseMenu" type="Control" parent="."]
 layout_mode = 1
 anchors_preset = 15
@@ -177,10 +170,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -212.0
-offset_top = -154.0
-offset_right = 206.0
-offset_bottom = 258.0
+offset_left = -213.0
+offset_top = -81.0
+offset_right = 205.0
+offset_bottom = 331.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/separation = 20
@@ -241,6 +234,7 @@ theme_override_constants/margin_right = 50
 layout_mode = 2
 
 [node name="HBoxContainer2" type="HBoxContainer" parent="PauseMenu/Panel2/VBoxContainer/MarginContainer/VBoxContainer2"]
+visible = false
 custom_minimum_size = Vector2(200, 30)
 layout_mode = 2
 
@@ -253,6 +247,7 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="HSlider" type="HSlider" parent="PauseMenu/Panel2/VBoxContainer/MarginContainer/VBoxContainer2/HBoxContainer2"]
+visible = false
 custom_minimum_size = Vector2(20, 20)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -263,6 +258,7 @@ theme_override_styles/slider = SubResource("StyleBoxFlat_77u42")
 theme_override_styles/grabber_area = SubResource("StyleBoxFlat_g165g")
 
 [node name="HBoxContainer3" type="HBoxContainer" parent="PauseMenu/Panel2/VBoxContainer/MarginContainer/VBoxContainer2"]
+visible = false
 custom_minimum_size = Vector2(200, 30)
 layout_mode = 2
 
@@ -275,6 +271,7 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="HSlider" type="HSlider" parent="PauseMenu/Panel2/VBoxContainer/MarginContainer/VBoxContainer2/HBoxContainer3"]
+visible = false
 custom_minimum_size = Vector2(20, 20)
 layout_mode = 2
 size_flags_horizontal = 3
