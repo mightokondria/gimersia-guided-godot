@@ -13,8 +13,12 @@ func _ready():
 	# Load musik
 	var stream = load(MAIN_MUSIC)
 	if stream is AudioStream:
-		stream.loop = true  # looping wajib aktif
+		stream.loop = true  # supaya musik tidak berhenti
+	
 	music_player.stream = stream
 
-	# Mulai putar (hanya sekali!)
+	# Atur volume ke -6 dB (lebih pelan dan nyaman)
+	music_player.volume_db = -6
+
+	# Mulai putar (hanya sekali di awal game)
 	music_player.play()

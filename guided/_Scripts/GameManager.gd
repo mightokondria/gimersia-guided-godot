@@ -73,18 +73,21 @@ func _ready():
 			"player_spawn": stage1_player_spawn,
 			"sensei_spawn": stage1_sensei_spawn,
 			"finish": stage1_finish_line,
-			#"anim": "SENSEI_WALK_ST_1",
-			"anim": "CUKI",
+			"anim": "SENSEI_WALK_ST_1",
+			#"anim": "CUKI",
 					"attempts": {
 				1: {
 					"intro": [["Sensei", "Selamat datang di Pelajaran Terakhir!", "sensei_happy"],
-					["Sensei", "Kalahkan aku dn buat aku bangga", "sensei_happy"],
+					["Sensei", "Kalahkan aku dan buat aku bangga", "sensei_happy"],
+					["Sensei", "Amati pergerakanku dan lampaui aku", "sensei_happy"],
 					["You", "Baik Sensei", "player_happy"]
 					
 					]
 				},
 				2: {
-					"intro": [["Sensei", "Sekarang coba lagi! Kamu pasti bisa mengalahkanku!", "sensei_happy"]]
+					"intro": [["Sensei", "Sekarang coba lagi! Kamu pasti bisa mengalahkanku!", "sensei_happy"],
+					["Sensei", "Gunakan Abiliy Baru untuk mengalahkanku", "sensei_happy"]
+					]
 				}
 			}
 		},
@@ -92,8 +95,8 @@ func _ready():
 			"player_spawn": stage2_player_spawn,
 			"sensei_spawn": stage2_sensei_spawn,
 			"finish": stage2_finish_line,
-			#"anim": "SENSEI_WALK_ST_2",
-			"anim": "CUKI",
+			"anim": "SENSEI_WALK_ST_2",
+			#"anim": "CUKI",
 			"attempts": {
 				1: {
 					"intro": [
@@ -102,7 +105,8 @@ func _ready():
 					]
 				},
 				2: {
-					"intro": [["Sensei", "Baik, aku akan sedikit santai. Coba kalahkan aku!", "sensei_happy"]]
+					"intro": [["Sensei", "Baik, aku akan sedikit santai. Coba kalahkan aku!", "sensei_happy"],
+					["Sensei", "Gunakan Ability Baru untuk mengalahkanku", "sensei_happy"]]
 				}
 			}
 		},
@@ -110,17 +114,18 @@ func _ready():
 			"player_spawn": stage3_player_spawn,
 			"sensei_spawn": stage3_sensei_spawn,
 			"finish": stage3_finish_line,
-			#"anim": "SENSEI_WALK_ST_3",
-			"anim": "CUKI",
+			"anim": "SENSEI_WALK_ST_3",
+			#"anim": "CUKI",
 			"attempts": {
 				1: {
 					"intro": [
-						["Sensei", "Kamu sampai di Stage 3? Tidak buruk!", "sensei_smug"],
-						["Sensei", "Tapi ini yang tersulit! Kejar aku kalau berani!", "sensei_angry"]
+						["Sensei", "Kamu sampai di Stage 3? Tidak buruk!", "sensei_happy"],
+						["Sensei", "Tapi ini yang tersulit! Kejar aku kalau berani!", "sensei_happy"]
 					]
 				},
 				2: {
-					"intro": [["Sensei", "Aku mulai capek. Cobalah kalahkan aku!", "sensei_happy"]]
+					"intro": [["Sensei", "Aku mulai capek. Cobalah kalahkan aku!", "sensei_happy"],
+					["Sensei", "Gunakan Ability Baru untuk mengalahkanku", "sensei_happy"]]
 				}
 			}
 		}
@@ -263,7 +268,7 @@ func _evaluate_race_result():
 			await move_camera_to_stage(current_stage + 1)
 		else:
 			await show_dialogs([
-				["Sensei", "Tidak mungkin... kamu mengalahkanku!", "sensei_shock"],
+				["Sensei", "Tidak mungkin... kamu mengalahkanku!", "sensei_happy"],
 				["Sensei", "Kamu pemenang sejati!", "sensei_happy"]
 			])
 			get_tree().change_scene_to_file("res://Art/UI/UI-Scene/Mainmenu2.tscn")

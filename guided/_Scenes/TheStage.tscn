@@ -156,6 +156,18 @@ tracks/1/keys = {
 "points": PackedFloat32Array(564, -0.05000001, 0, 0.05000001, 0, 614.08203, -0.01666667, 0, 0.01666667, 0, 614.08203, -0.008333333, 0, 0.008333333, 0, 661.082, -0.008333333, 0, 0.008333333, 0, 661.082, -0.033333316, 0, 0.033333316, 0, 621.082, -0.033333316, 0, 0.033333316, 0, 661.082, -0.058333337, 0, 0.058333337, 0, 611.082, -0.06666666, 0, 0.06666666, 0, 661.082, -0.050000012, 0, 0.050000012, 0, 581.082, -0.050000012, 0, 0.050000012, 0, 613.082, -0.09166661, 0, 0.09166661, 0, 383.082, -0.07499999, 0, 0.07499999, 0, 423.082, -0.058333397, 0, 0.058333397, 0, 173.082, -0.058333337, 0, 0.058333337, 0, 228.082, -0.058333337, 0, 0.058333337, 0, 63.082, -0.10833335, 0, 0.10833335, 0, 131.082, -0.10833335, 0, 0.10833335, 0, 131.082, -0.0666666, 0, 0.0666666, 0, 91.082, -0.0666666, 0, 0.0666666, 0, -8.918, -0.0333333, 0, 0.0333333, 0, -138.918, -0.024999976, 0, 0.024999976, 0, -108.918, -0.024999976, 0, 0.024999976, 0),
 "times": PackedFloat32Array(0, 0.20000003, 0.2666667, 0.30000004, 0.83333343, 0.9666667, 1.2, 1.4666667, 1.7666668, 1.9666668, 2.3333333, 2.7333333, 3.0333333, 3.266667, 3.5000002, 4.266667, 4.7000003, 5.566667, 5.8333335, 6.1000004, 6.2333336, 6.3333335)
 }
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("SubViewportContainer/Sensei/PathTrail:emitting")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 6.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
 
 [sub_resource type="Animation" id="Animation_ww4uj"]
 resource_name = "SENSEI_WALK_ST_3"
@@ -181,6 +193,18 @@ tracks/1/keys = {
 "handle_modes": PackedInt32Array(3, 3, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
 "points": PackedFloat32Array(-383, -0.050000004, 0, 0.050000004, 0, -563, -0.04166667, 0, 0.04166667, 0, -491, -0.04166667, 0, 0.04166667, 0, -641, -0.04166667, 0, 0.04166667, 0, -583, -0.04166667, 0, 0.04166667, 0, -733, -0.04166667, 0, 0.04166667, 0, -683, -0.04166667, 0, 0.04166667, 0, -823, -0.04166667, 0, 0.04166667, 0, -773, -0.04166667, 0, 0.04166667, 0, -1013, -0.04166667, 0, 0.04166667, 0, -973, -0.04166667, 0, 0.04166667, 0, -1113, -0.04166667, 0, 0.04166667, 0, -1069, -0.04166667, 0, 0.04166667, 0, -1189, -0.04166667, 0, 0.04166667, 0, -1165, -0.04166667, 0, 0.04166667, 0, -1295, -0.04166667, 0, 0.04166667, 0, -1260, -0.04166667, 0, 0.04166667, 0, -1270, -0.04166667, 0, 0.04166667, 0, -1160, -0.04166667, 0, 0.04166667, 0),
 "times": PackedFloat32Array(0.1, 0.3, 0.4666667, 0.86666673, 1.2666668, 1.6000001, 1.9333334, 2.2333333, 2.5666668, 2.8333335, 3.1000001, 3.3333335, 3.5666668, 3.766667, 3.966667, 4.2000003, 4.366667, 4.6333337, 4.8333335)
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("SubViewportContainer/Sensei/PathTrail:emitting")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 5.85),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
 }
 
 [sub_resource type="Animation" id="Animation_mrcx1"]
@@ -661,12 +685,18 @@ scale = Vector2(6, 6)
 collision_layer = 4
 collision_mask = 10
 
-[node name="Sprite2D" parent="SubViewportContainer/Sensei" index="0"]
+[node name="PathTrail" parent="SubViewportContainer/Sensei" index="0"]
+amount = 130
+lifetime = 11.7
+speed_scale = 2.0
+trail_lifetime = 7.0
+
+[node name="Sprite2D" parent="SubViewportContainer/Sensei" index="1"]
 position = Vector2(-24.30555, 7.6388884)
 animation = &"sensei_idle"
 offset = Vector2(24.305546, -7.6388855)
 
-[node name="CollisionShape2D" parent="SubViewportContainer/Sensei" index="1"]
+[node name="CollisionShape2D" parent="SubViewportContainer/Sensei" index="2"]
 visible = false
 
 [node name="Player" parent="SubViewportContainer" instance=ExtResource("1_kchhv")]

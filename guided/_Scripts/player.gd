@@ -1,4 +1,11 @@
 extends CharacterBody2D
+@onready var sfx: AudioStreamPlayer2D = $SFX
+
+func play_sfx(file_path: String):
+	var stream = load(file_path)
+	if stream:
+		sfx.stream = stream
+		sfx.play()
 
 # --- KONSTANTA GERAKAN DASAR ---
 const MAX_SPEED = 600.0
@@ -61,6 +68,7 @@ func _physics_process(delta):
 	
 	# --- DASH LOGIC ---
 	if is_dashing:
+		play_sfx("res://Audio/SFX/sfx/dash_002.wav")
 		dash_time_left -= delta
 		if dash_time_left <= 0:
 			is_dashing = false
@@ -126,6 +134,7 @@ func _physics_process(delta):
 
 	# --- JUMP LOGIC ---
 	if Input.is_action_just_pressed("ui_accept"):
+		play_sfx("res://Audio/SFX/sfx/jump.wav")
 		if is_on_floor() or not coyote_timer.is_stopped():
 			velocity.y = JUMP_VELOCITY
 			coyote_timer.stop()
@@ -175,6 +184,7 @@ func _update_animation():
 		if velocity.y < 0:
 			if jumps_made > 1:
 				sprite.play("double_jump")
+				play_sfx("res://Audio/SFX/sfx/double jump.wav")
 			else:
 				sprite.play("jump")
 		else:
